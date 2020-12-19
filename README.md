@@ -52,3 +52,76 @@ An application in which you can get your favourite pokémon, fight against other
 ## Wireframes
 
 <a href="https://www.figma.com/file/Oazfu4RACZzBjNEfHNYbZb/Modulo-2?node-id=0%3A1" target="_blank">Link to Wireframes</a>
+
+
+## Models
+
+const UserSchema = new Schema(
+  {
+    email: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+      match: [emailRegex, "Please use a valid email address"],
+    },
+    username: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      required: true,
+    },
+    passwordHash: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    cards: [{ type: Schema.Types.ObjectId, ref: "Pokecard" }],
+    combates: [{ type: Schema.Types.ObjectId, ref: "Combate" }],
+    imgUser: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
+    Level: {
+      type: Number,
+      default: 1,
+    },
+  },
+  { timestamps: true }
+);
+
+const CardSchema = new Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
+    imgUser: {
+      type: String,
+      trim: true,
+      unique: true,
+    },
+    tipo: {
+      type: [String],
+      required: true,
+      trim: true,
+    },
+    hp: {
+      type: Number,
+      required: true,
+      trim: true,
+    },
+  },
+  { timestamps: true }
+);
+
+const Combate = new Schema({
+  user1: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  user2: { type: Schema.Types.ObjectId, ref: "User" },
+  status: { enum: ["espera", "acabado"], required: true },
+  vencedor: { type: Schema.Types.ObjectId, ref: "User" },
+});
