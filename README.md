@@ -48,3 +48,7 @@ An application in which you can get your favourite pokémon, fight against other
 | `GET`      | `/private/rankings `                   | Private route. Render the `rankings` view.                  |                                                          |
 | `DELETE`   | `/private/combats/:id            ` | Private route. Delete a combatresult or a still not accepted combat |                                                          |
 
+
+## Wireframes
+
+<a href="https://www.figma.com/file/Oazfu4RACZzBjNEfHNYbZb/Modulo-2?node-id=0%3A1" target="_blank">Link to Wireframes</a>
