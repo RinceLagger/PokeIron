@@ -56,6 +56,7 @@ An application in which you can get your favourite pokémon, fight against other
 
 ## Models
 
+```
 const UserSchema = new Schema(
   {
     email: {
@@ -125,3 +126,4 @@ const Combate = new Schema({
   status: { enum: ["espera", "acabado"], required: true },
   vencedor: { type: Schema.Types.ObjectId, ref: "User" },
 });
+```
