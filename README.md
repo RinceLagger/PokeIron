@@ -127,3 +127,7 @@ const Combate = new Schema({
   vencedor: { type: Schema.Types.ObjectId, ref: "User" },
 });
 ```
+# Link to Trello
+
+<a href="https://trello.com/b/U4Vu45tC/proyecto-modulo-2" target="_blank">Link to Trello</a>
+
