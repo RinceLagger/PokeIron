@@ -7,15 +7,15 @@ async function getInfo() {
     
     const { data:{cards} } = await axios.get(apiURL)
         const cardsFilter = cards.filter((card) => card.supertype === "Pokémon");
-        console.log(cardsFilter);
+        //console.log(cardsFilter);
         return cardsFilter;
         
     } catch (err) {
         console.error(err)
     }
 }
-
-    const cards =  getInfo();
+   const pokemons = getInfo();
+    module.exports = {pokemons};
 
     
     
