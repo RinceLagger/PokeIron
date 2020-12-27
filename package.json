@@ -1,0 +1,34 @@
+{
+  "name": "proyecto2_ironhack",
+  "version": "1.0.0",
+  "description": "## Description",
+  "main": "app.js",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "axios": "^0.21.1",
+    "connect-mongo": "^3.2.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "hbs": "^4.1.1",
+    "morgan": "^1.10.0",
+    "mongoose": "^5.11.8",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev" : "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RinceLagger/Proyecto2_Ironhack.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RinceLagger/Proyecto2_Ironhack/issues"
+  },
+  "homepage": "https://github.com/RinceLagger/Proyecto2_Ironhack#readme"
+}
