@@ -19,7 +19,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "node seed.js",
+    "seed": "node ./config/seed.js",
     "dev" : "nodemon app.js"
   },
   "repository": {
