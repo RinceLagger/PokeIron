@@ -2,7 +2,7 @@ const axios = require('axios');
 
 const apiURL="https://api.pokemontcg.io/v1/cards?setCode=base1";
 
-async function getInfo() {
+async function getPokemons() {
     try {
     
     const { data:{cards} } = await axios.get(apiURL)
@@ -14,8 +14,8 @@ async function getInfo() {
         console.error(err)
     }
 }
-   const pokemons = getInfo();
-    module.exports = {pokemons};
+   //const pokemons = getInfo();
+    module.exports = {getPokemons};
 
     
     

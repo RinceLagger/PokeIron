@@ -27,7 +27,7 @@ const UserSchema = new Schema(
       imgUser: {
         type: String,
         trim: true,
-        required: true,
+        //required: true,
         unique: true,
       },
       Level: {
