@@ -7,10 +7,11 @@ const dbOptions = {
   useUnifiedTopology: true,
 };
 
-const connectDb = async () =>{
+const connectDb = async (drop) =>{
   try{
   const self = await mongoose.connect(process.env.MONGO_URL, dbOptions);
-  await self.connection.dropDatabase();
+  if(drop)await self.connection.dropDatabase();
+  
   console.log("connected to DB and eliminated previous data in DB");
   
   

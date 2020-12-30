@@ -6,7 +6,7 @@ const Card = require("../models/Card.model");
 
 async function seedDb() {
   try {
-    await connectDb();
+    await connectDb("drop");
 
     const pokemons = await getPokemons();
 

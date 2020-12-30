@@ -4,9 +4,9 @@ const app = express();
 const logger = require("morgan");
 const hbs = require("hbs");
 const bodyParser = require("body-parser");
-const connectDb = require("./configs/db.config");
+const connectDb = require("./config/db.config");
 const router = require("./routes/routes");
-const connectSession = require("./configs/session.config");
+const connectSession = require("./config/session.config");
 
 hbs.registerPartials(__dirname + "/views/partials");
 
