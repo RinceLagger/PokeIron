@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+body {
+  font-family: "Sora", sans-serif;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 38px;
+  margin: 16px 0;
+}
+
+h4 {
+  margin: 16px 0;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.center {
+  text-align: center;
+}

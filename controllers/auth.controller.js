@@ -12,23 +12,23 @@ const isMongooseValidationError = (error) =>
 
 const isMongoError = ({ code: errorCode }) => errorCode === 11000;
 
+const renderMessage = (res, page, alert) => {
+    return res.render(page , {alert})
+}
 
 const signIn = async (req, res, next) => {
     try {
       const { username, password, email } = req.body;
       //console.log(user,password,email);
       const missingCredentials = !password || !email || !username;
-      if (missingCredentials) {
-        return res.send("missing credentials");
-      }
-      if (!hasCorrectPassword(password)) {
-        return res.send("incorrect password format");
-      }
+
+      if (missingCredentials) return res.send("missing credentials");
+    
+      if (!hasCorrectPassword(password)) return renderMessage(res, "signIn", "Incorrect password format")
   
-      const usuario = User.findOne({ username }).lean();
-      if (!usuario) {
-        return res.send("user already exist");
-      }
+      const usuario = User.findOne({ username }).lean;
+      console.log("usuario", usuario)
+      if (!usuario) return renderMessage(res, "signIn", "user already exist") //Esto no acaba de funcionar
   
       const saltRounds = 10;
       const salt = await bcrypt.genSalt(saltRounds);
@@ -44,11 +44,11 @@ const signIn = async (req, res, next) => {
     } catch (err) {
       if (isMongooseValidationError(err)) {
         console.error(err);
-        return res.send("validation error: " + err.message);
+        return renderMessage(res, "signIn", "validation error: " + err.message);
       }
   
       if (isMongoError(err)) {
-        return res.send("mongo error: " + err.message);
+        return renderMessage(res, "signIn", "mongo error: " + err.message);
       }
   
       console.error(err);
@@ -66,25 +66,23 @@ const logIn = async (req, res, next) => {
         return res.send("missing credentials");
       }
       const usuario = await User.findOne({ username }).lean();
-      if (!usuario) {
-        return res.send("user does not exist");
-      }
-
+      if (!usuario) return renderMessage(res, "login", "user does not exist");
+  
       const { passwordHash, ...user } = usuario;
   
       const verifiedPassword = await bcrypt.compare(password,passwordHash);
-      if (!verifiedPassword) {
-          return res.send("invalid credentials");
-        }
+      if (!verifiedPassword) return renderMessage(res, "login", "Wrong password")
+
         console.log(user);
         console.log(req.session);
         req.session.currentUser = user;
-        res.send(" mostrar homepage");
+        return renderMessage(res, "index", "login successfully")
   
   
       
     } catch (err) {
       console.error(err);
+      return renderMessage(res, "login", "validation error: " + err.message);
     }
   };
 

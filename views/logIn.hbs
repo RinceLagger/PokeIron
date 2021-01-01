@@ -1,9 +1,17 @@
-<form action="/logIn" method="POST">
-    <p>Introduce tus datos de usuario</p>
-    <label for="name">Nombre Usuario</label>
-    <input type="text" name="username" id="name" required>
-    <label for="password">Contraseña</label>
-    <input type="password" name="password" id="password" required>
-    <button type="submit">Submit</button>
-
-</form>
+<section id="form">
+    <form action="/logIn" method="POST">
+        <p>Introduce tus datos de usuario</p>
+        <label for="name">Nombre Usuario</label>
+        <input type="text" name="username" id="name" required>
+        <label for="password">Contraseña</label>
+        <input type="password" name="password" id="password" required>
+        <button type="submit">Submit</button>
+    </form>
+</section>
+{{#if alert}}
+<section id="alert">
+    <article>
+        <h3>{{alert}}</h3>
+    </article>
+</section>
+{{/if}}
