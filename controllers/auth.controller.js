@@ -40,7 +40,8 @@ const signIn = async (req, res, next) => {
         username,
       });
       console.log(user);
-      res.send("aquí saldrían las 6 cartas por ser el primer registro, las añadiríamos al usuario y agragaríamos el usuario a la sesión");
+      req.session.currentUser = user;
+      res.render("openingIntro");
     } catch (err) {
       if (isMongooseValidationError(err)) {
         console.error(err);

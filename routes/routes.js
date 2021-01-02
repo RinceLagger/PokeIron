@@ -14,6 +14,7 @@ router
   })
   .post("/signIn", signIn)
   .post("/logIn", logIn)
+  //.get("/openFirst", openFirst)
 
 
 module.exports = router;
