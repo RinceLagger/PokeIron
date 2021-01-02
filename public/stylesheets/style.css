@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@100;200;300;400;500;600;700;800&display=swap");
+body {
+  font-family: "Sora", sans-serif;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 38px;
+  margin: 16px 0;
+  color: #003a70;
+}
+
+h4 {
+  margin: 16px 0;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.center {
+  text-align: center;
+}
+
+/* --------- Styles ---------*/
+body {
+  /* ---- Landing ----- */
+}
+
+body .primary {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  background: #ffcb05;
+  border: 2px solid #003a70;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 1em;
+  display: block;
+  min-width: 150px;
+  width: fit-content;
+}
+
+body .secondary {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  background: #ffffff;
+  border: 2px solid #003a70;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 1em;
+  display: block;
+  min-width: 150px;
+  width: fit-content;
+}
+
+body .wrapper {
+  padding: 1em;
+}
+
+body #header {
+  background: linear-gradient(0deg, rgba(51, 51, 51, 0.56), rgba(51, 51, 51, 0.56)), url("/img/fondo.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 5em 2em;
+}
+
+body .logo {
+  width: 65%;
+  display: block;
+  margin: 0 auto;
+}
+
+body .buttons {
+  display: flex;
+  justify-content: space-around;
+  margin: 1em 0;
+}
+
+body #form form {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 4em auto;
+}
+
+body #form form form input {
+  margin: 10px 0;
+  height: 2em;
+}
+
+body #form form button {
+  width: fit-content;
+  margin-top: 20px;
+  padding: 1.25em 1.5em;
+  align-self: center;
+}
+
+body #form form .ok {
+  color: green;
+}
+
+body #form form .false {
+  color: red;
+}
+
+body section#alert {
+  text-align: center;
+  padding: 1em;
+  background-color: #003a70;
+  color: #ffffff;
+}

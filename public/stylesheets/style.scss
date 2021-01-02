@@ -1,0 +1,81 @@
+@import "./colors.scss";
+@import "./font.scss";
+@import "./mixins.scss";
+
+/* --------- Styles ---------*/
+body {
+  .primary {
+    @include btn($yellow);
+  }
+
+  .secondary {
+    @include btn($white);
+  }
+
+  .wrapper {
+    padding: 1em;
+  }
+
+  /* ---- Landing ----- */
+
+  #header {
+    background: linear-gradient(
+        0deg,
+        rgba(51, 51, 51, 0.56),
+        rgba(51, 51, 51, 0.56)
+      ),
+      url("/img/fondo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5em 2em;
+  }
+
+  .logo {
+    width: 65%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 1em 0;
+  }
+
+  #form {
+    form {
+      display: flex;
+      flex-direction: column;
+      width: fit-content;
+      margin: 4em auto;
+
+      form input {
+        margin: 10px 0;
+        height: 2em;
+      }
+
+      button {
+        width: fit-content;
+        margin-top: 20px;
+        padding: 1.25em 1.5em;
+        align-self: center;
+      }
+
+      .ok {
+        color: green;
+      }
+
+      .false {
+        color: red;
+      }
+    }
+  }
+
+  section#alert {
+    text-align: center;
+    padding: 1em;
+    background-color: $darkBlue;
+    color: $white;
+  }
+}
