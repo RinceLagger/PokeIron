@@ -113,10 +113,15 @@ const openFirst = async (req, res, next) => {
 
     //obtenemos las 6 cartas al azar
     const cards = await Card.find();
-    const finalCardsId = randomCards(cards).map((card)=> card["_id"]);
-
+    const finalCards = randomCards(cards);
+    const finalCardsId = finalCards.map((card)=> card["_id"]);
+    
     //introducimos los id de las cartas en el usuario
     const user =  await User.findOneAndUpdate({username},{$push:{cards: {$each:finalCardsId}}},{new:true});
+
+    //mostramos ahora las primeras cartas al usuario
+
+    res.render("firstCards", {finalCards});
     
     console.log(user);
 
