@@ -27,7 +27,6 @@ const signIn = async (req, res, next) => {
       if (!hasCorrectPassword(password)) return renderMessage(res, "signIn", "Incorrect password format")
   
       const usuario = User.findOne({ username }).lean;
-      console.log("usuario", usuario)
       if (!usuario) return renderMessage(res, "signIn", "user already exist") //Esto no acaba de funcionar
   
       const saltRounds = 10;

@@ -13,6 +13,7 @@ body {
   }
 
   .wrapper {
+    max-width: 1000px;
     padding: 1em;
   }
 
@@ -44,7 +45,7 @@ body {
   }
 
   #form {
-    margin: 2em 0;
+    margin: 2em auto;
     h4 {
       margin: 1.5em 0;
     }
@@ -63,9 +64,7 @@ body {
       }
 
       button {
-        width: fit-content;
         margin-top: 20px;
-        padding: 1.25em 1.5em;
         align-self: center;
       }
 
