@@ -20,7 +20,11 @@ const renderMessage = (res, page, alert) => {
 
 const getRandomArray = () => { //genera un Array de 6 números aleatorios correspondientes a 6 cartas
   const arrayRandom = [];
-  for(let i=0;i<6;i++)arrayRandom.push(Math.floor(Math.random() * 67));
+  for(let i=0;i<6;i++){
+    let numRandom = Math.floor(Math.random() * 67);
+    while(arrayRandom.includes(numRandom)) numRandom = Math.floor(Math.random() * 67); //evitamos introducir números random repetidos
+    arrayRandom.push(numRandom);
+  }
   return arrayRandom;
 }
 
