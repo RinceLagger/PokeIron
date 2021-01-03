@@ -1,11 +1,12 @@
-<section id="form">
+<section id="form" class="wrapper">
+    <img src="./img/logo.png" alt="Pokemon-logo" class="logo">
+    <h4 class="center">Lorem ipsum dolor sit.</h4>
     <form action="/logIn" method="POST">
-        <p>Introduce tus datos de usuario</p>
         <label for="name">Nombre Usuario</label>
-        <input type="text" name="username" id="name" required>
+        <input type="text" name="username" id="name" placeholder="Pikachu23" required>
         <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password" required>
-        <button type="submit">Submit</button>
+        <input type="password" name="password" id="password" placeholder="Pokemaniatico123" required>
+        <button type="submit" class="primary">Submit</button>
     </form>
 </section>
 {{#if alert}}

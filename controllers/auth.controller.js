@@ -66,6 +66,7 @@ const signIn = async (req, res, next) => {
     res.render("openingIntro");
   } catch (err) {
     if (isMongooseValidationError(err)) {
+      
       console.error(err);
       return renderMessage(res, "signIn", "validation error: " + err.message);
     }
