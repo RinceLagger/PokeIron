@@ -97,7 +97,7 @@ const logIn = async (req, res, next) => {
     console.log(user);
     console.log(req.session);
     req.session.currentUser = user;
-    return renderMessage(res, "index", "login successfully");
+    return res.redirect("/mainProfile");
   } catch (err) {
     console.error(err);
     return renderMessage(res, "login", "validation error: " + err.message);
