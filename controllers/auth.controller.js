@@ -103,7 +103,7 @@ const logIn = async (req, res, next) => {
 const openFirst = async (req, res, next) => {
   try{
     //comprobamos que estamos ya logueados
-    if(!req.session.currentUser)return res.send("Please Login first");
+    if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
     console.log(req.session.currentUser);
     const username = req.session.currentUser.username;
     
@@ -131,4 +131,17 @@ const openFirst = async (req, res, next) => {
   }
 };
 
-module.exports = { logIn, signIn, openFirst };
+const mainProfile = (req, res) => {
+  if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
+  res.render("mainProfile", req.session.currentUser);
+
+  
+};
+
+
+const logOut = (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+};
+
+module.exports = { logIn, signIn, openFirst, mainProfile, logOut };
