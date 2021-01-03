@@ -2,6 +2,7 @@
 
 body {
   font-family: "Sora", sans-serif;
+  color: $black;
 }
 
 h1 {
@@ -21,4 +22,11 @@ h4 {
 
 .center {
   text-align: center;
+}
+
+label {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 18px;
+  margin-top: 10px;
 }

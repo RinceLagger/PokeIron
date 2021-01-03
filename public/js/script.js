@@ -26,4 +26,4 @@ let num = false;
   const hasNum = (num) ? numCheck.style.color = "green" : numCheck.style.color = "red";
 }
 
-document.addEventListener("keyup", checkInput)
+passInput.addEventListener("keyup", checkInput)

@@ -44,15 +44,22 @@ body {
   }
 
   #form {
+    margin: 2em 0;
+    h4 {
+      margin: 1.5em 0;
+    }
     form {
       display: flex;
       flex-direction: column;
-      width: fit-content;
-      margin: 4em auto;
+      width: 100%;
 
-      form input {
+      input {
         margin: 10px 0;
         height: 2em;
+        border: 1px solid $darkBlue;
+        border-radius: 14px;
+        padding: 0.5em;
+        font-size: 14px;
       }
 
       button {
@@ -62,12 +69,12 @@ body {
         align-self: center;
       }
 
-      .ok {
-        color: green;
-      }
-
-      .false {
-        color: red;
+      ul {
+        font-size: 14px;
+        font-weight: 200;
+        li {
+          margin: 5px 0;
+        }
       }
     }
   }
