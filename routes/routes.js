@@ -4,12 +4,15 @@ const { signIn, logIn, openFirst, mainProfile, logOut} = require("../controllers
 
 router
   .get("/", (req, res) => {
+    if(req.session.currentUser)res.redirect("/mainProfile");
     res.render("index");
   })
   .get("/signIn", (req, res) => {
+    if(req.session.currentUser)res.redirect("/mainProfile");
     res.render("signIn");
   })
   .get("/logIn", (req, res) => {
+    if(req.session.currentUser)res.redirect("/mainProfile");
     res.render("logIn");
   })
   .post("/signIn", signIn)
