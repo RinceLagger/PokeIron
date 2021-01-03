@@ -108,17 +108,20 @@ const openFirst = async (req, res, next) => {
     const username = req.session.currentUser.username;
     
     //comprobamos a continuación que realmente sea la primera vez que entramos( no hay cartas en la DB)
-    const cartas = await User.findOne({username},{cards:1});
-    if(!cartas)return res.send("No permitido, usuario ya ha recibido su primer sobre");
+    const {cards} = await User.findOne({username},{cards:1, _id:0});
+    console.log("cartas", cards);
+    if(cards.length)return res.redirect("/mainProfile");
 
     //obtenemos las 6 cartas al azar
-    const cards = await Card.find();
-    const finalCards = randomCards(cards);
+    const cartas = await Card.find();
+    const finalCards = randomCards(cartas);
     const finalCardsId = finalCards.map((card)=> card["_id"]);
     
     //introducimos los id de las cartas en el usuario
     const user =  await User.findOneAndUpdate({username},{$push:{cards: {$each:finalCardsId}}},{new:true});
-
+    
+    //actualizo la sesión para que el usuario este actualizado con cartas
+    req.session.currentUser = user;
     //mostramos ahora las primeras cartas al usuario
 
     res.render("firstCards", {finalCards});
