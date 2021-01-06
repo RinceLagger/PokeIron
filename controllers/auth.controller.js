@@ -128,7 +128,9 @@ const openFirst = async (req, res, next) => {
     const finalCardsId = finalCards.map((card)=> card["_id"]);
     
     //introducimos los id de las cartas en el usuario
-    const user =  await User.findOneAndUpdate({username},{$push:{cards: {$each:finalCardsId}}},{new:true}).lean();
+    const usuario =  await User.findOneAndUpdate({username},{$push:{cards: {$each:finalCardsId}}},{new:true}).lean();
+
+    const { passwordHash, ...user } = usuario;
     
     //actualizo la sesión para que el usuario este actualizado con cartas
     req.session.currentUser = user;
@@ -165,7 +167,9 @@ const userData = async (req,res) =>{
       imageUrl = req.body.existingImage; //Para utilizar más adelante cuando actualicemos más datos y este no cambie
     }
 
-    const user =  await User.findOneAndUpdate({username},{imgUser:imageUrl },{new:true});
+    const usuario =  await User.findOneAndUpdate({username},{imgUser:imageUrl },{new:true});
+
+    const { passwordHash, ...user } = usuario;
     console.log(user);
     req.session.currentUser = user;
     res.redirect("/mainProfile");
