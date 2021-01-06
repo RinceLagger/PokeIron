@@ -167,7 +167,7 @@ const userData = async (req,res) =>{
       imageUrl = req.body.existingImage; //Para utilizar más adelante cuando actualicemos más datos y este no cambie
     }
 
-    const usuario =  await User.findOneAndUpdate({username},{imgUser:imageUrl },{new:true});
+    const usuario =  await User.findOneAndUpdate({username},{imgUser:imageUrl },{new:true}).lean();
 
     const { passwordHash, ...user } = usuario;
     console.log(user);
