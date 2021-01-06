@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const { Error } = require("mongoose");
 const Card = require("../models/Card.model");
 
+
 const hasCorrectPassword = (password) => {
   const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/);
   return passwordRegex.test(password);
@@ -56,10 +57,14 @@ const signIn = async (req, res, next) => {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    //añadimos foto de avatar inicial
+    const avatarImg ="/img/avatar.png";
+
     const { _doc:{passwordHash, ...user} } = await User.create({
       email,
       passwordHash: hashedPassword,
       username,
+      imgUser:avatarImg
     });
     console.log(user);
     req.session.currentUser = user;
@@ -123,7 +128,7 @@ const openFirst = async (req, res, next) => {
     const finalCardsId = finalCards.map((card)=> card["_id"]);
     
     //introducimos los id de las cartas en el usuario
-    const user =  await User.findOneAndUpdate({username},{$push:{cards: {$each:finalCardsId}}},{new:true});
+    const user =  await User.findOneAndUpdate({username},{$push:{cards: {$each:finalCardsId}}},{new:true}).lean();
     
     //actualizo la sesión para que el usuario este actualizado con cartas
     req.session.currentUser = user;
@@ -146,10 +151,37 @@ const mainProfile = (req, res) => {
   
 };
 
+const userData = async (req,res) =>{
+  try{
+    if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
+
+    const username = req.session.currentUser.username;
+
+    let imageUrl;
+    //comprobamos si se ha enviado un nuevo archivo 
+    if (req.file) {
+      imageUrl = req.file.path;
+    } else {
+      imageUrl = req.body.existingImage; //Para utilizar más adelante cuando actualicemos más datos y este no cambie
+    }
+
+    const user =  await User.findOneAndUpdate({username},{imgUser:imageUrl },{new:true});
+    console.log(user);
+    req.session.currentUser = user;
+    res.redirect("/mainProfile");
+
+  }catch(err){
+    console.error(err);
+  }
+
+
+
+}
+
 
 const logOut = (req, res) => {
   req.session.destroy();
   res.redirect("/");
 };
 
-module.exports = { logIn, signIn, openFirst, mainProfile, logOut };
+module.exports = { logIn, signIn, openFirst, mainProfile, userData, logOut };

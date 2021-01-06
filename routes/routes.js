@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const router = Router();
-const { signIn, logIn, openFirst, mainProfile, logOut} = require("../controllers/auth.controller");
+const { signIn, logIn, openFirst, mainProfile, userData, logOut} = require("../controllers/auth.controller");
+const fileUploader = require('../config/cloudinary.config');
 
 router
   .get("/", (req, res) => {
@@ -19,6 +20,7 @@ router
   .post("/logIn", logIn)
   .get("/openFirst", openFirst)
   .get("/mainProfile",mainProfile)
+  .post("/UserData", fileUploader.single('image'), userData)
   .get("/logOut", logOut);
 
 module.exports = router;
