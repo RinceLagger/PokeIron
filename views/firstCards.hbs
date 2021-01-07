@@ -1,9 +1,12 @@
-<h1>Primeras cartas</h1>
-
-{{#each finalCards}}
-
-<img src="{{this.imgUser}}" alt="pokemon-card">
-
-{{/each}}
-
-<a href="/mainProfile" class="primary">Continue to your Profile</a>
+<section id="firstCards">
+    <h1>Primeras cartas</h1>
+    <article class="cards" id="cardsContainer">
+        <div id="cardsViewport">
+            {{#each finalCards}}
+            <img class="card" src="{{this.imgUser}}" alt="pokemon-card">
+            {{/each}}
+        </div>
+        </div>
+    </article>
+    <a href="/mainProfile" class="primary">Continue to your Profile</a>
+</section>

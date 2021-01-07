@@ -33,6 +33,14 @@ label {
 /* --------- Styles ---------*/
 body {
   /* ---- Landing ----- */
+  /* ------ First Opening ------- */
+}
+
+body section#alert {
+  text-align: center;
+  padding: 1em;
+  background-color: #003a70;
+  color: #ffffff;
 }
 
 body .primary {
@@ -129,9 +137,42 @@ body #form form ul li {
   margin: 5px 0;
 }
 
-body section#alert {
-  text-align: center;
-  padding: 1em;
-  background-color: #003a70;
-  color: #ffffff;
+body #firstCards {
+  /*img.card {
+      width: 80% !important;
+      margin: 0 auto;
+      display: block;
+    }*/
+}
+
+body #firstCards .cards {
+  overflow: hidden;
+}
+
+body #firstCards #cardsViewport {
+  display: flex;
+  overflow-x: scroll;
+  justify-content: space-between;
+}
+
+body #firstCards .card {
+  width: 200px;
+  position: relative;
+}
+
+body #firstCards .cardRight {
+  right: 20px;
+  transform: scale(0.75);
+  transition: 0.5s;
+}
+
+body #firstCards .cardLeft {
+  left: 20px;
+  transform: scale(0.75);
+  transition: 0.5s;
+}
+
+body #firstCards .cardCenter {
+  transform: scale(1);
+  transition: 0.5s;
 }
