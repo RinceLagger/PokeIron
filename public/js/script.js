@@ -33,7 +33,7 @@ if(document.querySelector('#formSign')) passInput.addEventListener("keyup", chec
 
 /* ----------- CARD CAROUSEL ---------- */
 
-if (document.querySelector('#firstCards')) {
+/*if (document.querySelector('#firstCards')) {
   const cardsContainer = Array.from(document.querySelector('#cardsViewport').children);
   cardsArray = [];
   for (let i = 0; i < cardsContainer.length; i++) {
@@ -56,11 +56,23 @@ if (document.querySelector('#firstCards')) {
   }
 
   document.querySelector('#cardsViewport').addEventListener("scroll", checkCards)
+}*/
 
-
-} 
-
-  
+if (document.querySelector('#firstCards') && window.innerWidth < 500) {
+  var slider = tns({
+    container: '#cardsViewport',
+    items: 1,
+    loop: false,
+    swipeAngle: false,
+    speed: 400,
+    guter: 10,
+    controlsPosition: "bottom",
+    nav: false,
+    rewind: true,
+    mouseDrag: true,
+  }
+  );
+}
 
 
 
