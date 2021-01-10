@@ -70,6 +70,7 @@ if (document.querySelector('#firstCards') && window.innerWidth < 500) {
     nav: false,
     rewind: true,
     mouseDrag: true,
+    controlsText: ["<",">"]
   }
   );
 }
