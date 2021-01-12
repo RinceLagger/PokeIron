@@ -1,3 +1,5 @@
+
+/* ------- PASSWORD CHECKER -------- */
 const passInput = document.querySelector("#password");
 const longCheck = document.querySelector("#longitud");
 const mayusCheck = document.querySelector("#mayus");
@@ -26,4 +28,52 @@ let num = false;
   const hasNum = (num) ? numCheck.style.color = "green" : numCheck.style.color = "red";
 }
 
-passInput.addEventListener("keyup", checkInput)
+if(document.querySelector('#formSign')) passInput.addEventListener("keyup", checkInput)
+
+
+/* ----------- CARD CAROUSEL ---------- */
+
+/*if (document.querySelector('#firstCards')) {
+  const cardsContainer = Array.from(document.querySelector('#cardsViewport').children);
+  cardsArray = [];
+  for (let i = 0; i < cardsContainer.length; i++) {
+    cardsArray.push(cardsContainer[i])
+  }
+
+  console.log(cardsArray[0].offsetLeft);
+
+  const checkCards = () => {
+    var width = window.innerWidth;
+    for (let i = 0; i < cardsArray.length; i++){
+      console.log(cardsArray[i].getBoundingClientRect())
+      const position = cardsArray[i].getBoundingClientRect()
+      const x = position.left;
+      cardsArray[i].className = "card";
+      if (x < width / 10) cardsArray[i].className = "card cardLeft";
+      else if (x > width/2 + width/5) cardsArray[i].className = "card cardRight";
+      else cardsArray[i].className = "card cardCenter";
+    }
+  }
+
+  document.querySelector('#cardsViewport').addEventListener("scroll", checkCards)
+}*/
+
+if (document.querySelector('#firstCards') && window.innerWidth < 500) {
+  var slider = tns({
+    container: '#cardsViewport',
+    items: 1,
+    loop: false,
+    swipeAngle: false,
+    speed: 400,
+    guter: 10,
+    controlsPosition: "bottom",
+    nav: false,
+    rewind: true,
+    mouseDrag: true,
+    controlsText: ["<",">"]
+  }
+  );
+}
+
+
+

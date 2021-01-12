@@ -4,6 +4,14 @@
 
 /* --------- Styles ---------*/
 body {
+  overscroll-behavior-x: none;
+  section#alert {
+    text-align: center;
+    padding: 1em;
+    background-color: $darkBlue;
+    color: $white;
+  }
+
   .primary {
     @include btn($yellow);
   }
@@ -78,10 +86,38 @@ body {
     }
   }
 
-  section#alert {
-    text-align: center;
-    padding: 1em;
-    background-color: $darkBlue;
-    color: $white;
+  /* ------ First Opening ------- */
+
+  #firstOpening {
+    a {
+      margin: 0 auto;
+    }
+    img {
+      width: 100%;
+      margin: 2em auto;
+    }
+  }
+
+  #firstCards {
+    #cardsViewport-mw {
+      margin: 16px;
+      .tns-item {
+        width: calc(15.6667%);
+        margin: 10px;
+      }
+    }
+    .tns-controls {
+      width: fit-content;
+      margin: 20px auto;
+      button {
+        @include btn($white);
+        display: inline-block;
+        min-width: 50px;
+        margin: 5px;
+      }
+    }
+  }
+  a {
+    margin: 0 auto;
   }
 }
