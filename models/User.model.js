@@ -34,6 +34,14 @@ const UserSchema = new Schema(
         type: Number,
         default: 1,
       },
+      win:{
+        type: Number,
+        default:0
+      },
+      lose:{
+        type: Number,
+        default:0
+      }
     },
     { timestamps: true }
   );

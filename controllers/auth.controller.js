@@ -103,7 +103,7 @@ const logIn = async (req, res, next) => {
     console.log(user);
     console.log(req.session);
     req.session.currentUser = user;
-    return res.redirect("/mainProfile");
+    return res.redirect("/dashboard");
   } catch (err) {
     console.error(err);
     return renderMessage(res, "login", "validation error: " + err.message);
@@ -120,7 +120,7 @@ const openFirst = async (req, res, next) => {
     //comprobamos a continuación que realmente sea la primera vez que entramos( no hay cartas en la DB)
     const {cards} = await User.findOne({username},{cards:1, _id:0});
     console.log("cartas", cards);
-    if(cards.length)return res.redirect("/mainProfile");
+    if(cards.length)return res.redirect("/dashboard");
 
     //obtenemos las 6 cartas al azar
     const cartas = await Card.find();
@@ -153,7 +153,14 @@ const mainProfile = (req, res) => {
   
 };
 
-const userData = async (req,res) =>{
+const userData = (req, res) => {
+  if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
+  res.render("editProfile", req.session.currentUser);
+
+  
+};
+
+const changeUserData = async (req,res) =>{
   try{
     if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
 
@@ -172,7 +179,7 @@ const userData = async (req,res) =>{
     const { passwordHash, ...user } = usuario;
     console.log(user);
     req.session.currentUser = user;
-    res.redirect("/mainProfile");
+    res.redirect("/userdata");
 
   }catch(err){
     console.error(err);
@@ -188,4 +195,4 @@ const logOut = (req, res) => {
   res.redirect("/");
 };
 
-module.exports = { logIn, signIn, openFirst, mainProfile, userData, logOut };
+module.exports = { logIn, signIn, openFirst, mainProfile, userData,changeUserData, logOut };

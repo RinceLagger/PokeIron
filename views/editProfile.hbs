@@ -1,0 +1,13 @@
+
+
+{{> userHeader}}
+
+<form action="/UserData" method="post" enctype="multipart/form-data">
+    <label for="image-input">Select your Profile picture</label>
+    <input type="file" name="image" id="image-input" />
+    <input type="text" name="existingImage" hidden id="" value="{{imgUser}}">
+    <button type="submit" class="secondary">Save changes</button>
+
+</form>
+
+<a href="/logOut" class="secondary">logOut</a>
