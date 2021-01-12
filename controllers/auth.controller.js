@@ -164,9 +164,10 @@ const changeUserData = async (req,res) =>{
   try{
     if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
 
-    const username = req.session.currentUser.username;
+    const usernameSession = req.session.currentUser.username;
 
     let imageUrl;
+    const {username, email} = req.body;
     //comprobamos si se ha enviado un nuevo archivo 
     if (req.file) {
       imageUrl = req.file.path;
@@ -174,7 +175,7 @@ const changeUserData = async (req,res) =>{
       imageUrl = req.body.existingImage; //Para utilizar más adelante cuando actualicemos más datos y este no cambie
     }
 
-    const usuario =  await User.findOneAndUpdate({username},{imgUser:imageUrl },{new:true}).lean();
+    const usuario =  await User.findOneAndUpdate({username: usernameSession},{imgUser:imageUrl, username,email},{new:true}).lean();
 
     const { passwordHash, ...user } = usuario;
     console.log(user);
@@ -183,7 +184,7 @@ const changeUserData = async (req,res) =>{
 
   }catch(err){
     console.error(err);
-  }
+  } 
 
 
 
