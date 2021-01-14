@@ -12,6 +12,11 @@ h1 {
   color: #003a70;
 }
 
+h3 {
+  font-weight: 600;
+  font-size: 18px;
+}
+
 h4 {
   margin: 16px 0;
   font-weight: 600;
@@ -30,11 +35,17 @@ label {
   margin-top: 10px;
 }
 
+p {
+  font-weight: 400;
+}
+
 /* --------- Styles ---------*/
 body {
   overscroll-behavior-x: none;
+  /* ---- Partials ---- */
   /* ---- Landing ----- */
   /* ------ First Opening ------- */
+  /* ------- Main Profile --------- */
 }
 
 body section#alert {
@@ -79,6 +90,39 @@ body .secondary {
 body .wrapper {
   max-width: 1000px;
   padding: 1em;
+}
+
+body .header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  background-color: rgba(255, 203, 5, 0.31);
+  align-items: center;
+  gap: 1em;
+}
+
+body .header img {
+  border-radius: 100%;
+  border: 3px solid #ffcb05;
+  width: 40%;
+}
+
+body .header h3 {
+  flex-basis: 60%;
+}
+
+body nav {
+  padding: 1em;
+}
+
+body nav ul {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5em;
+}
+
+body nav ul .active {
+  color: #003a70;
 }
 
 body #header {
@@ -182,4 +226,28 @@ body #firstCards .tns-controls button {
 
 body a {
   margin: 0 auto;
+}
+
+body #mainProfile .widget {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 1em;
+}
+
+body #mainProfile .cardsWidget div {
+  display: flex;
+  margin: 10px 0;
+}
+
+body #mainProfile .cardsWidget div img {
+  flex-basis: 15%;
+}
+
+body #mainProfile .cardsWidget div p {
+  flex-basis: 70%;
+}
+
+body #mainProfile .cardsWidget div p:last-child {
+  flex-basis: 15%;
 }

@@ -13,6 +13,11 @@ h1 {
   color: $darkBlue;
 }
 
+h3 {
+  font-weight: 600;
+  font-size: 18px;
+}
+
 h4 {
   margin: 16px 0;
   font-weight: 600;
@@ -29,4 +34,8 @@ label {
   font-size: 14px;
   line-height: 18px;
   margin-top: 10px;
+}
+
+p {
+  font-weight: 400;
 }

@@ -3,7 +3,6 @@ const bcrypt = require("bcryptjs");
 const { Error } = require("mongoose");
 const Card = require("../models/Card.model");
 
-
 const hasCorrectPassword = (password) => {
   const passwordRegex = new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/);
   return passwordRegex.test(password);
@@ -18,25 +17,25 @@ const renderMessage = (res, page, alert) => {
   return res.render(page, { alert });
 };
 
-
-const getRandomArray = () => { //genera un Array de 6 números aleatorios correspondientes a 6 cartas
+const getRandomArray = () => {
+  //genera un Array de 6 números aleatorios correspondientes a 6 cartas
   const arrayRandom = [];
-  for(let i=0;i<6;i++){
+  for (let i = 0; i < 6; i++) {
     let numRandom = Math.floor(Math.random() * 67);
-    while(arrayRandom.includes(numRandom)) numRandom = Math.floor(Math.random() * 67); //evitamos introducir números random repetidos
+    while (arrayRandom.includes(numRandom))
+      numRandom = Math.floor(Math.random() * 67); //evitamos introducir números random repetidos
     arrayRandom.push(numRandom);
   }
   return arrayRandom;
-}
+};
 
-const randomCards = (arrayCards) => { //de todas las cartas devuelve un array con las coincidentes con los índices aleatorios
-  
+const randomCards = (arrayCards) => {
+  //de todas las cartas devuelve un array con las coincidentes con los índices aleatorios
+
   const arrayRandom = getRandomArray();
   console.log(arrayRandom);
-  return arrayCards.filter((card,index) => arrayRandom.includes(index));
-
-
-}
+  return arrayCards.filter((card, index) => arrayRandom.includes(index));
+};
 
 const signIn = async (req, res, next) => {
   try {
@@ -58,20 +57,21 @@ const signIn = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     //añadimos foto de avatar inicial
-    const avatarImg ="/img/avatar.png";
+    const avatarImg = "/img/avatar.png";
 
-    const { _doc:{passwordHash, ...user} } = await User.create({
+    const {
+      _doc: { passwordHash, ...user },
+    } = await User.create({
       email,
       passwordHash: hashedPassword,
       username,
-      imgUser:avatarImg
+      imgUser: avatarImg,
     });
     console.log(user);
     req.session.currentUser = user;
     res.render("openingIntro");
   } catch (err) {
     if (isMongooseValidationError(err)) {
-      
       console.error(err);
       return renderMessage(res, "signIn", "validation error: " + err.message);
     }
@@ -111,89 +111,119 @@ const logIn = async (req, res, next) => {
 };
 
 const openFirst = async (req, res, next) => {
-  try{
+  try {
     //comprobamos que estamos ya logueados
-    if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
+    if (!req.session.currentUser)
+      return renderMessage(res, "login", "Please Login first");
     console.log(req.session.currentUser);
     const username = req.session.currentUser.username;
-    
+
     //comprobamos a continuación que realmente sea la primera vez que entramos( no hay cartas en la DB)
-    const {cards} = await User.findOne({username},{cards:1, _id:0});
+    const { cards } = await User.findOne({ username }, { cards: 1, _id: 0 });
     console.log("cartas", cards);
-    if(cards.length)return res.redirect("/dashboard");
+    /*if (cards.length) return res.redirect("/dashboard");  Mirar de arreglarlo*/
 
     //obtenemos las 6 cartas al azar
     const cartas = await Card.find();
     const finalCards = randomCards(cartas);
-    const finalCardsId = finalCards.map((card)=> card["_id"]);
-    
+    const finalCardsId = finalCards.map((card) => card["_id"]);
+
     //introducimos los id de las cartas en el usuario
-    const usuario =  await User.findOneAndUpdate({username},{$push:{cards: {$each:finalCardsId}}},{new:true}).lean();
+    const usuario = await User.findOneAndUpdate(
+      { username },
+      { $push: { cards: { $each: finalCardsId } } },
+      { new: true }
+    ).lean();
 
     const { passwordHash, ...user } = usuario;
-    
+
     //actualizo la sesión para que el usuario este actualizado con cartas
     req.session.currentUser = user;
     //mostramos ahora las primeras cartas al usuario
 
-    res.render("firstCards", {finalCards});
-    
+    res.render("firstCards", { finalCards });
+
     console.log(user);
-
-
-  }catch(err){
+  } catch (err) {
     console.error(err);
   }
 };
 
-const mainProfile = (req, res) => {
-  if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
-  res.render("mainProfile", req.session.currentUser);
-
-  
+const mainProfile = async (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    const { username } = datosUsuario;
+    const { cards } = await User.findOne({ username }).populate("cards");
+    const datos = { ...datosUsuario, cards };
+    res.render("mainProfile", datos);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const userData = (req, res) => {
-  if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
+  if (!req.session.currentUser)
+    return renderMessage(res, "login", "Please Login first");
   res.render("editProfile", req.session.currentUser);
-
-  
 };
 
-const changeUserData = async (req,res) =>{
-  try{
-    if(!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
+const changeUserData = async (req, res) => {
+  try {
+    if (!req.session.currentUser)
+      return renderMessage(res, "login", "Please Login first");
 
     const usernameSession = req.session.currentUser.username;
 
     let imageUrl;
-    const {username, email} = req.body;
-    //comprobamos si se ha enviado un nuevo archivo 
+    const { username, email } = req.body;
+    //comprobamos si se ha enviado un nuevo archivo
     if (req.file) {
       imageUrl = req.file.path;
     } else {
       imageUrl = req.body.existingImage; //Para utilizar más adelante cuando actualicemos más datos y este no cambie
     }
 
-    const usuario =  await User.findOneAndUpdate({username: usernameSession},{imgUser:imageUrl, username,email},{new:true}).lean();
+    const usuario = await User.findOneAndUpdate(
+      { username: usernameSession },
+      { imgUser: imageUrl, username, email },
+      { new: true }
+    ).lean();
 
     const { passwordHash, ...user } = usuario;
     console.log(user);
     req.session.currentUser = user;
     res.redirect("/userdata");
-
-  }catch(err){
+  } catch (err) {
     console.error(err);
-  } 
+  }
+};
 
-
-
-}
-
+const cardsProfile = async (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    const { username } = datosUsuario;
+    const { cards } = await User.findOne({ username }).populate("cards");
+    const datos = { ...datosUsuario, cards };
+    res.render("cardsProfile", datos);
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const logOut = (req, res) => {
   req.session.destroy();
   res.redirect("/");
 };
 
-module.exports = { logIn, signIn, openFirst, mainProfile, userData,changeUserData, logOut };
+module.exports = {
+  logIn,
+  signIn,
+  openFirst,
+  mainProfile,
+  userData,
+  changeUserData,
+  cardsProfile,
+  logOut,
+};
