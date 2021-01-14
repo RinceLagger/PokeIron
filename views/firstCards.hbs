@@ -1,6 +1,14 @@
 <section id="firstCards" class="wrapper">
     <h1 class="center">Primeras cartas</h1>
-    <article class="cards" id="cardsContainer">
+    <article class="cards" id="cardsMobile">
+        <div id="cardsViewportMobile">
+            {{#each finalCards}}
+            <img class="card" src="{{this.imgUser}}" alt="pokemon-card">
+            {{/each}}
+        </div>
+        </div>
+    </article>
+    <article class="cards" id="cardsDesktop">
         <div id="cardsViewport">
             {{#each finalCards}}
             <img class="card" src="{{this.imgUser}}" alt="pokemon-card">
@@ -11,3 +19,4 @@
     <a href="/dashboard" class="primary">Continue to your Profile</a>
 </section>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<script src="./js/slider.script.js"></script>
