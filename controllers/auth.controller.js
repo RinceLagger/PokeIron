@@ -120,8 +120,8 @@ const openFirst = async (req, res, next) => {
 
     //comprobamos a continuación que realmente sea la primera vez que entramos( no hay cartas en la DB)
     const { cards } = await User.findOne({ username }, { cards: 1, _id: 0 });
-    console.log("cartas", cards);
-    /*if (cards.length) return res.redirect("/dashboard");  Mirar de arreglarlo*/
+    console.log("cartas", cards.length);
+    if (cards.length!=0) return res.redirect("/dashboard"); 
 
     //obtenemos las 6 cartas al azar
     const cartas = await Card.find();
