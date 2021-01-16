@@ -9,7 +9,7 @@ const dbOptions = {
 
 const connectDb = async (drop) =>{
   try{
-  const self = await mongoose.connect(process.env.MONGO_URL, dbOptions);
+  const self = await mongoose.connect(process.env.MONGODB_URI, dbOptions);
   if(drop)await self.connection.dropDatabase();
   
   console.log("connected to DB and eliminated previous data in DB");
