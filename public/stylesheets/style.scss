@@ -1,0 +1,181 @@
+@import "./colors.scss";
+@import "./font.scss";
+@import "./mixins.scss";
+
+/* --------- Styles ---------*/
+body {
+  overscroll-behavior-x: none;
+  section#alert {
+    text-align: center;
+    padding: 1em;
+    background-color: $darkBlue;
+    color: $white;
+  }
+
+  .primary {
+    @include btn($yellow);
+  }
+
+  .secondary {
+    @include btn($white);
+  }
+
+  .wrapper {
+    max-width: 1000px;
+    padding: 1em;
+  }
+
+  /* ---- Partials ---- */
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: $lightYellow;
+    align-items: center;
+    gap: 1em;
+    img {
+      border-radius: 100%;
+      border: 3px solid $yellow;
+      width: 40%;
+    }
+    h3 {
+      flex-basis: 60%;
+    }
+  }
+
+  nav {
+    padding: 1em;
+    ul {
+      display: flex;
+      justify-content: space-around;
+      gap: 0.5em;
+      .active {
+        color: $darkBlue;
+      }
+    }
+  }
+
+  /* ---- Landing ----- */
+
+  #header {
+    background: linear-gradient(
+        0deg,
+        rgba(51, 51, 51, 0.56),
+        rgba(51, 51, 51, 0.56)
+      ),
+      url("/img/fondo.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 5em 2em;
+  }
+
+  .logo {
+    width: 65%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 1em 0;
+  }
+
+  #form {
+    margin: 2em auto;
+    h4 {
+      margin: 1.5em 0;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+
+      input {
+        margin: 10px 0;
+        height: 2em;
+        border: 1px solid $darkBlue;
+        border-radius: 14px;
+        padding: 0.5em;
+        font-size: 14px;
+      }
+
+      button {
+        margin-top: 20px;
+        align-self: center;
+      }
+
+      ul {
+        font-size: 14px;
+        font-weight: 200;
+        li {
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+
+  /* ------ First Opening ------- */
+
+  #firstOpening {
+    a {
+      margin: 0 auto;
+    }
+    img {
+      width: 100%;
+      margin: 2em auto;
+    }
+  }
+
+  #firstCards {
+    #cardsViewport-mw {
+      margin: 16px;
+      .tns-item {
+        width: calc(15.6667%);
+        margin: 10px;
+      }
+    }
+    .tns-controls {
+      width: fit-content;
+      margin: 20px auto;
+      button {
+        @include btn($white);
+        display: inline-block;
+        min-width: 50px;
+        margin: 5px;
+      }
+    }
+  }
+  a {
+    margin: 0 auto;
+  }
+
+  /* ------- Main Profile --------- */
+
+  #mainProfile {
+    .widget {
+      background: $white;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px -1px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+      padding: 1em;
+    }
+    .cardsWidget {
+      div {
+        display: flex;
+        margin: 10px 0;
+        img {
+          flex-basis: 15%;
+        }
+        p {
+          flex-basis: 70%;
+        }
+        p:last-child {
+          flex-basis: 15%;
+        }
+      }
+    }
+  }
+}
