@@ -1,0 +1,23 @@
+<section id="firstCards" class="wrapper">
+    <h1 class="center">Select your Pokemon for the Battle</h1>
+    <article class="cards" id="cardsMobile">
+        <div id="cardsViewportMobile">
+            {{#each cards}}
+            <img class="card" id="{{_id}}" src="{{imgUser}}" alt="pokemon-card">
+            {{/each}}
+        </div>
+        </div>
+    </article>
+    <article class="cards" id="cardsDesktop">
+        <div id="cardsViewport">
+            {{#each cards}}
+            <img class="card" id="{{_id}}" src="{{imgUser}}" alt="pokemon-card">
+            {{/each}}
+        </div>
+        </div>
+    </article>
+    <button class="primary" id="battle-Card">Create Battle</button>
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="./js/slider.script.js"></script>

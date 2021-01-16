@@ -20,5 +20,6 @@ router
   .post("/logIn", logIn)
   .get("/openFirst", openFirst)
   .get("/logOut", logOut);
+  
 
 module.exports = router;

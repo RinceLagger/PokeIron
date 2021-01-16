@@ -47,3 +47,42 @@ const checkInput = () => {
 if (document.querySelector("#formSign"))
   passInput.addEventListener("keyup", checkInput);
 
+/*--------generación combate-----*/
+
+const buttonBattle = document.querySelector("#battle-Card");
+
+//const cardSelection = document.querySelector("#cardsViewport .card");
+
+const cardsDesktop = document.querySelectorAll("#cardsViewport .card");
+
+const createCombat = () => {
+  let id;
+  if (window.innerWidth < 768) {
+    const cardMobile = document.querySelector(".tns-slide-active"); //clase del slider activa
+    id = cardMobile.id;
+
+    
+  } else {
+    
+    const cardDesktop = document.querySelector(".card-active");
+    id = cardDesktop.id;
+  }
+
+  const apiURL = `/createBattle/${id}`;
+
+  axios.post(apiURL);
+};
+
+const markSelected = (e) => {
+  for (let i = 0; i < cardsDesktop.length; i++) {
+    cardsDesktop[i].classList.remove("card-active");
+  }
+  e.target.classList.add("card-active");
+};
+
+Array.from(cardsDesktop).forEach((card) => {
+  card.addEventListener("click", markSelected);
+});
+
+//cardSelection.addEventListener("click", markSelected);
+buttonBattle.addEventListener("click", createCombat);
