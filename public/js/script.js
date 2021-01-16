@@ -47,3 +47,43 @@ const checkInput = () => {
 if (document.querySelector("#formSign"))
   passInput.addEventListener("keyup", checkInput);
 
+
+  /*--------generación combate-----*/
+
+  
+
+ 
+
+  const buttonBattle = document.querySelector("#battle-Card");
+
+  const cardMobile = document.querySelector(".tns-slide-active"); //clase del slider activa
+
+  const cardDesktop = document.querySelector(".card-active");
+
+  const createCombat = ()=>{
+
+    let id;
+    if (window.innerWidth < 768) {
+
+      
+
+      id = cardMobile.id;
+
+      console.log(id);
+      
+    } else {
+
+      id = cardDesktop.id;
+ 
+    }
+    
+    const apiURL=`/createBattle/${id}`;
+
+    axios.post(apiURL);
+
+  }
+
+  buttonBattle.addEventListener("click",createCombat);
+
+ 
+
