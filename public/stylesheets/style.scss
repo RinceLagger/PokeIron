@@ -25,6 +25,37 @@ body {
     padding: 1em;
   }
 
+  /* ---- Partials ---- */
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background-color: $lightYellow;
+    align-items: center;
+    gap: 1em;
+    img {
+      border-radius: 100%;
+      border: 3px solid $yellow;
+      width: 40%;
+    }
+    h3 {
+      flex-basis: 60%;
+    }
+  }
+
+  nav {
+    padding: 1em;
+    ul {
+      display: flex;
+      justify-content: space-around;
+      gap: 0.5em;
+      .active {
+        color: $darkBlue;
+      }
+    }
+  }
+
   /* ---- Landing ----- */
 
   #header {
@@ -119,5 +150,32 @@ body {
   }
   a {
     margin: 0 auto;
+  }
+
+  /* ------- Main Profile --------- */
+
+  #mainProfile {
+    .widget {
+      background: $white;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px -1px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+      padding: 1em;
+    }
+    .cardsWidget {
+      div {
+        display: flex;
+        margin: 10px 0;
+        img {
+          flex-basis: 15%;
+        }
+        p {
+          flex-basis: 70%;
+        }
+        p:last-child {
+          flex-basis: 15%;
+        }
+      }
+    }
   }
 }

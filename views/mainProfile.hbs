@@ -1,7 +1,20 @@
-
-
 {{> userHeader}}
 
 {{> navbar}}
+
+<section id="mainProfile" class="wrapper">
+    <article class=" widget cardsWidget">
+        <h3>
+            {{#each cards}}
+            <div>
+                <img src="" alt="" class="{{tipo}}">
+                <p>{{name}}</p>
+                <p>{{hp}}</p>
+            </div>
+            {{/each}}
+        </h3>
+    </article>
+
+</section>
 
 <a href="/logOut" class="secondary">logOut</a>

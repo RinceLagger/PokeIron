@@ -38,7 +38,8 @@ var slider = tns({
   mouseDrag: true,
   controlsText: ["<", ">"],
 });
-
+document.querySelector("#cardsMobile").style.display = "none";
+document.querySelector("#cardsDesktop").style.display = "none";
 function placeSlider() {
   if (document.querySelector("#firstCards")) {
     console.log(window.innerWidth);
