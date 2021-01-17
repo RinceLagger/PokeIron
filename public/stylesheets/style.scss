@@ -217,6 +217,28 @@ body {
     margin: 0 auto;
   }
 
+  .cardDetail {
+    img {
+      width: 100%;
+    }
+    div {
+      margin-top: 1em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      p {
+        line-height: 25px;
+      }
+      :first-child {
+        display: flex;
+        align-items: center;
+      }
+      span {
+        margin: 0 5px;
+      }
+    }
+  }
+
   /* ------- Main Profile --------- */
 
   #mainProfile {
