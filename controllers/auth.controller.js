@@ -121,7 +121,7 @@ const openFirst = async (req, res, next) => {
     //comprobamos a continuación que realmente sea la primera vez que entramos( no hay cartas en la DB)
     const { cards } = await User.findOne({ username }, { cards: 1, _id: 0 });
     console.log("cartas", cards.length);
-    if (cards.length!=0) return res.redirect("/dashboard"); 
+    if (cards.length != 0) return res.redirect("/dashboard");
 
     //obtenemos las 6 cartas al azar
     const cartas = await Card.find();
@@ -212,6 +212,19 @@ const cardsProfile = async (req, res) => {
   }
 };
 
+const cardDetail = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    const card = await Card.findById(id);
+    console.log(card);
+    res.render("cardDetails", card);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const logOut = (req, res) => {
   req.session.destroy();
   res.redirect("/");
@@ -226,4 +239,5 @@ module.exports = {
   changeUserData,
   cardsProfile,
   logOut,
+  cardDetail,
 };

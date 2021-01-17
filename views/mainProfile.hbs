@@ -4,15 +4,16 @@
 
 <section id="mainProfile" class="wrapper">
     <article class=" widget cardsWidget">
-        <h3>
-            {{#each cards}}
+        <h3>Your Cards</h3>
+        {{#each cards}}
+        <a href="/usercards/{{_id}}">
             <div>
                 <span class="tipo {{tipo}}"></span>
                 <p>{{name}}</p>
                 <p>HP {{hp}}</p>
             </div>
-            {{/each}}
-        </h3>
+        </a>
+        {{/each}}
     </article>
 
 </section>
