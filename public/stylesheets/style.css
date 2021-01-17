@@ -162,6 +162,15 @@ body #header {
   padding: 5em 2em;
 }
 
+body .menu {
+  background-color: #003a70;
+  padding: 1em;
+}
+
+body .menu h4 {
+  color: #ffffff;
+}
+
 body .logo {
   width: 65%;
   display: block;

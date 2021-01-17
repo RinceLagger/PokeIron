@@ -94,6 +94,14 @@ body {
     padding: 5em 2em;
   }
 
+  .menu {
+    background-color: $darkBlue;
+    padding: 1em;
+    h4{
+      color: $white;
+    }
+  }
+
   .logo {
     width: 65%;
     display: block;
