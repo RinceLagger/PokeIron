@@ -25,6 +25,10 @@ body {
     padding: 1em;
   }
 
+  .logout {
+    background-color: $darkBlue;
+  }
+
   /* ---- Partials ---- */
 
   .header {
@@ -35,9 +39,9 @@ body {
     align-items: center;
     gap: 1em;
     img {
-      border-radius: 100%;
       border: 3px solid $yellow;
       width: 40%;
+      clip-path: circle(45% at center);
     }
     h3 {
       flex-basis: 60%;
@@ -117,7 +121,7 @@ body {
     }
   }
 
-  /* ------ First Opening ------- */
+  /* ------ Cards ------- */
 
   #firstOpening {
     a {
@@ -148,6 +152,47 @@ body {
       }
     }
   }
+
+  .tipo {
+    background-image: url("../img/energy-logo.png");
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    margin: 0 3px;
+  }
+
+  .Grass {
+    background-position: -25px -50px;
+  }
+
+  .Fire {
+    background-position: 0 0;
+  }
+
+  .Water {
+    background-position: -75px -50px;
+  }
+
+  .Colorless {
+    background-position: -25px 0;
+  }
+
+  .Fighting {
+    background-position: -50px -25px;
+  }
+
+  .LLightning {
+    background-position: -50px -50px;
+  }
+
+  .Psychic {
+    background-position: -75px -25px;
+  }
+
+  .metal {
+    background-position: -75px 0;
+  }
+
   a {
     margin: 0 auto;
   }
@@ -165,15 +210,17 @@ body {
     .cardsWidget {
       div {
         display: flex;
-        margin: 10px 0;
-        img {
-          flex-basis: 15%;
+        margin: 20px 0;
+        align-items: center;
+        span {
+          margin-right: 0.5em;
         }
         p {
-          flex-basis: 70%;
+          flex-basis: 65%;
         }
         p:last-child {
-          flex-basis: 15%;
+          flex-basis: 20%;
+          text-align: right;
         }
       }
     }

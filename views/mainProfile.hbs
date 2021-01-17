@@ -7,14 +7,15 @@
         <h3>
             {{#each cards}}
             <div>
-                <img src="" alt="" class="{{tipo}}">
+                <span class="tipo {{tipo}}"></span>
                 <p>{{name}}</p>
-                <p>{{hp}}</p>
+                <p>HP {{hp}}</p>
             </div>
             {{/each}}
         </h3>
     </article>
 
 </section>
-
-<a href="/logOut" class="secondary">logOut</a>
+<section class="logout wrapper">
+    <a href="/logOut" class="secondary">Log Out</a>
+</section>

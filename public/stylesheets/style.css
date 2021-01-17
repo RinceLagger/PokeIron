@@ -12,6 +12,12 @@ h1 {
   color: #003a70;
 }
 
+h2 {
+  font-weight: 600;
+  font-size: 22px;
+  margin: 16px 0;
+}
+
 h3 {
   font-weight: 600;
   font-size: 18px;
@@ -44,7 +50,7 @@ body {
   overscroll-behavior-x: none;
   /* ---- Partials ---- */
   /* ---- Landing ----- */
-  /* ------ First Opening ------- */
+  /* ------ Cards ------- */
   /* ------- Main Profile --------- */
 }
 
@@ -92,6 +98,10 @@ body .wrapper {
   padding: 1em;
 }
 
+body .logout {
+  background-color: #003a70;
+}
+
 body .header {
   display: flex;
   justify-content: space-between;
@@ -102,9 +112,9 @@ body .header {
 }
 
 body .header img {
-  border-radius: 100%;
   border: 3px solid #ffcb05;
   width: 40%;
+  clip-path: circle(45% at center);
 }
 
 body .header h3 {
@@ -224,6 +234,46 @@ body #firstCards .tns-controls button {
   margin: 5px;
 }
 
+body .tipo {
+  background-image: url("../img/energy-logo.png");
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin: 0 3px;
+}
+
+body .Grass {
+  background-position: -25px -50px;
+}
+
+body .Fire {
+  background-position: 0 0;
+}
+
+body .Water {
+  background-position: -75px -50px;
+}
+
+body .Colorless {
+  background-position: -25px 0;
+}
+
+body .Fighting {
+  background-position: -50px -25px;
+}
+
+body .LLightning {
+  background-position: -50px -50px;
+}
+
+body .Psychic {
+  background-position: -75px -25px;
+}
+
+body .metal {
+  background-position: -75px 0;
+}
+
 body a {
   margin: 0 auto;
 }
@@ -237,17 +287,19 @@ body #mainProfile .widget {
 
 body #mainProfile .cardsWidget div {
   display: flex;
-  margin: 10px 0;
+  margin: 20px 0;
+  align-items: center;
 }
 
-body #mainProfile .cardsWidget div img {
-  flex-basis: 15%;
+body #mainProfile .cardsWidget div span {
+  margin-right: 0.5em;
 }
 
 body #mainProfile .cardsWidget div p {
-  flex-basis: 70%;
+  flex-basis: 65%;
 }
 
 body #mainProfile .cardsWidget div p:last-child {
-  flex-basis: 15%;
+  flex-basis: 20%;
+  text-align: right;
 }
