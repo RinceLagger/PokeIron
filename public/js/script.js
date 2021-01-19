@@ -60,10 +60,7 @@ const createCombat = () => {
   if (window.innerWidth < 768) {
     const cardMobile = document.querySelector(".tns-slide-active"); //clase del slider activa
     id = cardMobile.id;
-
-    
   } else {
-    
     const cardDesktop = document.querySelector(".card-active");
     id = cardDesktop.id;
   }
@@ -85,4 +82,13 @@ Array.from(cardsDesktop).forEach((card) => {
 });
 
 //cardSelection.addEventListener("click", markSelected);
-buttonBattle.addEventListener("click", createCombat);
+if (document.querySelector("#newBattle"))
+  buttonBattle.addEventListener("click", createCombat);
+
+if (document.querySelector("#navbar")) {
+  const currentPage = location.href;
+  const navItem = document.querySelectorAll("#navbar a");
+  for (let i = 0; i < navItem.length; i++) {
+    if (navItem[i].href === currentPage) navItem[i].classList.add("nav-active");
+  }
+}

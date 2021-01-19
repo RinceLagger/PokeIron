@@ -41,19 +41,13 @@ var slider = tns({
 document.querySelector("#cardsMobile").style.display = "none";
 document.querySelector("#cardsDesktop").style.display = "none";
 function placeSlider() {
-  if (document.querySelector("#firstCards")) {
-    console.log(window.innerWidth);
-    console.log("hola");
-    if (window.innerWidth < 768) {
-      console.log("slider");
-      document.querySelector("#cardsMobile").style.display = "block";
-      document.querySelector("#cardsDesktop").style.display = "none";
-    } else {
-      document.querySelector("#cardsMobile").style.display = "none";
-      document.querySelector("#cardsDesktop").style.display = "block";
-
-    console.log("página cargada")
-    }
+  if (window.innerWidth < 768) {
+    console.log("slider");
+    document.querySelector("#cardsMobile").style.display = "block";
+    document.querySelector("#cardsDesktop").style.display = "none";
+  } else {
+    document.querySelector("#cardsMobile").style.display = "none";
+    document.querySelector("#cardsDesktop").style.display = "block";
   }
 }
 

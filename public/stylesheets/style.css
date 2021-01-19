@@ -12,6 +12,12 @@ h1 {
   color: #003a70;
 }
 
+h2 {
+  font-weight: 600;
+  font-size: 22px;
+  margin: 16px 0;
+}
+
 h3 {
   font-weight: 600;
   font-size: 18px;
@@ -44,7 +50,7 @@ body {
   overscroll-behavior-x: none;
   /* ---- Partials ---- */
   /* ---- Landing ----- */
-  /* ------ First Opening ------- */
+  /* ------ Cards ------- */
   /* ------- Main Profile --------- */
 }
 
@@ -92,6 +98,16 @@ body .wrapper {
   padding: 1em;
 }
 
+body .logout {
+  background-color: #003a70;
+}
+
+body .nav-active {
+  color: #003a70;
+  font-weight: 600;
+  padding-bottom: 5px;
+}
+
 body .header {
   display: flex;
   justify-content: space-between;
@@ -102,13 +118,14 @@ body .header {
 }
 
 body .header img {
-  border-radius: 100%;
   border: 3px solid #ffcb05;
   width: 40%;
+  clip-path: circle(45% at center);
 }
 
 body .header h3 {
   flex-basis: 60%;
+  text-transform: capitalize;
 }
 
 body nav {
@@ -121,8 +138,20 @@ body nav ul {
   gap: 0.5em;
 }
 
-body nav ul .active {
-  color: #003a70;
+body nav ul .nav-active::after {
+  content: " ";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 40%;
+  border: 2px solid #003a70;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  transform: translateX(-50%);
+}
+
+body nav ul a {
+  position: relative;
 }
 
 body #header {
@@ -131,6 +160,15 @@ body #header {
   background-repeat: no-repeat;
   background-size: cover;
   padding: 5em 2em;
+}
+
+body .menu {
+  background-color: #003a70;
+  padding: 1em;
+}
+
+body .menu h4 {
+  color: #ffffff;
 }
 
 body .logo {
@@ -199,17 +237,20 @@ body #firstCards #cardsViewport-mw {
   margin: 16px;
 }
 
-body #firstCards #cardsViewport-mw .tns-item {
+body #firstCards #cardsViewport-mw .tns-item,
+body #newBattle #cardsViewport-mw .tns-item {
   width: calc(15.6667%);
   margin: 10px;
 }
 
-body #firstCards .tns-controls {
+body #firstCards .tns-controls,
+body #newBattle .tns-controls {
   width: fit-content;
   margin: 20px auto;
 }
 
-body #firstCards .tns-controls button {
+body #firstCards .tns-controls button,
+body #newBattle .tns-controls button {
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
@@ -228,8 +269,76 @@ body #firstCards .tns-controls button {
   margin: 5px;
 }
 
+body .pokeName {
+  background-color: rgba(255, 203, 5, 0.31);
+}
+
+body .tipo {
+  background-image: url("../img/energy-logo.png");
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  margin: 0 3px;
+}
+
+body .Grass {
+  background-position: -25px -50px;
+}
+
+body .Fire {
+  background-position: 0 0;
+}
+
+body .Water {
+  background-position: -75px -50px;
+}
+
+body .Colorless {
+  background-position: -25px 0;
+}
+
+body .Fighting {
+  background-position: -50px -25px;
+}
+
+body .LLightning {
+  background-position: -50px -50px;
+}
+
+body .Psychic {
+  background-position: -75px -25px;
+}
+
+body .metal {
+  background-position: -75px 0;
+}
+
 body a {
   margin: 0 auto;
+}
+
+body .cardDetail img {
+  width: 100%;
+}
+
+body .cardDetail div {
+  margin-top: 1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+body .cardDetail div p {
+  line-height: 25px;
+}
+
+body .cardDetail div :first-child {
+  display: flex;
+  align-items: center;
+}
+
+body .cardDetail div span {
+  margin: 0 5px;
 }
 
 body #mainProfile .widget {
@@ -241,19 +350,21 @@ body #mainProfile .widget {
 
 body #mainProfile .cardsWidget div {
   display: flex;
-  margin: 10px 0;
+  margin: 20px 0;
+  align-items: center;
 }
 
-body #mainProfile .cardsWidget div img {
-  flex-basis: 15%;
+body #mainProfile .cardsWidget div span {
+  margin-right: 0.5em;
 }
 
 body #mainProfile .cardsWidget div p {
-  flex-basis: 70%;
+  flex-basis: 65%;
 }
 
 body #mainProfile .cardsWidget div p:last-child {
-  flex-basis: 15%;
+  flex-basis: 20%;
+  text-align: right;
 }
 
 /*-----------Loading Page-------*/
