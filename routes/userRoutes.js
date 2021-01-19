@@ -14,7 +14,7 @@ userRouter
   .get("/dashboard", mainProfile)
   .get("/userdata", userData)
   .get("/usercards", cardsProfile)
-  .get("/:id", cardDetail)
+  .get("/usercards/:id", cardDetail)
   .post("/userdata", fileUploader.single("image"), changeUserData);
 
 module.exports = userRouter;

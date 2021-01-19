@@ -61,6 +61,13 @@ body section#alert {
   color: #ffffff;
 }
 
+body .widget {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -1px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  padding: 1em;
+}
+
 body .primary {
   font-weight: 600;
   font-size: 14px;
@@ -237,20 +244,17 @@ body #firstCards #cardsViewport-mw {
   margin: 16px;
 }
 
-body #firstCards #cardsViewport-mw .tns-item,
-body #newBattle #cardsViewport-mw .tns-item {
+body #firstCards #cardsViewport-mw .tns-item {
   width: calc(15.6667%);
   margin: 10px;
 }
 
-body #firstCards .tns-controls,
-body #newBattle .tns-controls {
+body #firstCards .tns-controls {
   width: fit-content;
   margin: 20px auto;
 }
 
-body #firstCards .tns-controls button,
-body #newBattle .tns-controls button {
+body #firstCards .tns-controls button {
   font-weight: 600;
   font-size: 14px;
   line-height: 14px;
@@ -341,13 +345,6 @@ body .cardDetail div span {
   margin: 0 5px;
 }
 
-body #mainProfile .widget {
-  background: #ffffff;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -1px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
-  padding: 1em;
-}
-
 body #mainProfile .cardsWidget div {
   display: flex;
   margin: 20px 0;
@@ -383,11 +380,11 @@ body #mainProfile .cardsWidget div p:last-child {
   position: relative;
   overflow: hidden;
   border: 3px solid;
-  animation: frames .8s  linear 0s infinite;
+  animation: frames 0.8s linear 0s infinite;
 }
 
 #loading .pokeball:after {
-  content: '';
+  content: "";
   position: absolute;
   width: 60px;
   height: 30px;
@@ -397,7 +394,7 @@ body #mainProfile .cardsWidget div p:last-child {
 }
 
 #loading .pokeball:before {
-  content: '';
+  content: "";
   position: absolute;
   background-color: #fff;
   width: 10px;

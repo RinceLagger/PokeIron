@@ -1,0 +1,10 @@
+<section id="battlesList" class="wrapper">
+    {{#each combatesOponente}}
+    <div class="battle widget">
+        <img src="{{this.user1.imgUser}}" alt="">
+        <h3>Pokemon Trainer: {{this.user1.username}}</h3>
+        <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
+        <a href="" class="primary">Join Battle</a>
+    </div>
+    {{/each}}
+</section>

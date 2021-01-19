@@ -1,0 +1,13 @@
+<section id="battlesList" class="wrapper">
+    {{#each combatesMostrar}}
+    <div class="battle widget">
+        <h3>Oponent: {{this.user2}}</h3>
+        <p>Type: <span class="tipo {{this.card2.tipo}}"></span> {{this.card2.tipo}}</p>
+        <hr>
+        <h4>Your Pokemon: {{this.card1.username}}</h4>
+        <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
+        <p>HP {{this.card1.hp}}</p>
+        <a href="" class="primary">Show Result</a>
+    </div>
+    {{/each}}
+</section>

@@ -1,0 +1,10 @@
+<section id="battlesList" class="wrapper">
+    {{#each combatesPropios}}
+    <div class="battle widget">
+        <h4>Pokemon: {{this.card1.name}}</h4>
+        <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
+        <p>HP {{this.card1.hp}}</p>
+        <a href="" class="primary">Delete</a>
+    </div>
+    {{/each}}
+</section>
