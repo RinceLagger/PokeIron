@@ -51,6 +51,8 @@ function placeSlider() {
     } else {
       document.querySelector("#cardsMobile").style.display = "none";
       document.querySelector("#cardsDesktop").style.display = "block";
+
+    console.log("página cargada")
     }
   }
 }
