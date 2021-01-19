@@ -282,7 +282,7 @@ body #mainProfile .cardsWidget div p:last-child {
   height: 30px;
   background-color: red;
   border-bottom: 4px solid;
-  top: -4px;
+  top: -2px;
 }
 
 #loading .pokeball:before {
@@ -293,8 +293,8 @@ body #mainProfile .cardsWidget div p:last-child {
   height: 10px;
   border: 4px solid;
   border-radius: 50%;
-  bottom: 18px;
-  right: 18px;
+  bottom: 21px;
+  right: 21px;
   z-index: 1;
 }
 
