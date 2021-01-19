@@ -266,6 +266,10 @@ body #newBattle .tns-controls button {
   margin: 5px;
 }
 
+body .pokeName {
+  background-color: rgba(255, 203, 5, 0.31);
+}
+
 body .tipo {
   background-image: url("../img/energy-logo.png");
   width: 25px;

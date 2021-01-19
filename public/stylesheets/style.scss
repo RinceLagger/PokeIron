@@ -97,7 +97,7 @@ body {
   .menu {
     background-color: $darkBlue;
     padding: 1em;
-    h4{
+    h4 {
       color: $white;
     }
   }
@@ -179,6 +179,10 @@ body {
         margin: 5px;
       }
     }
+  }
+
+  .pokeName {
+    background-color: $lightYellow;
   }
 
   .tipo {

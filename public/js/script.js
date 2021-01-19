@@ -86,7 +86,6 @@ if (document.querySelector("#newBattle"))
   buttonBattle.addEventListener("click", createCombat);
 
 if (document.querySelector("#navbar")) {
-  console.log("funciona");
   const currentPage = location.href;
   const navItem = document.querySelectorAll("#navbar a");
   for (let i = 0; i < navItem.length; i++) {
