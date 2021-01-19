@@ -6,6 +6,7 @@ const {
   ownBattlesPage,
   activesBattlePage,
   preFinishBattlePage,
+  battleMain,
 } = require("../controllers/battle.controller");
 
 battleRouter
@@ -13,6 +14,7 @@ battleRouter
   .get("/createBattle", battlePage)
   .get("/my-battles", ownBattlesPage)
   .get("/active-battles", activesBattlePage)
-  .get("/show-battles", preFinishBattlePage);
+  .get("/show-battles", preFinishBattlePage)
+  .get("/battles", battleMain);
 
 module.exports = battleRouter;

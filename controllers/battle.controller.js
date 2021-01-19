@@ -7,15 +7,15 @@ const renderMessage = (res, page, alert) => {
   return res.render(page, { alert });
 };
 
-const battleMain = (res, req) => {
+const battleMain = (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
-    res.render("battleMain")
+    res.render("battleMain");
   } catch (e) {
-    console.error(e)
+    console.error(e);
   }
-}
+};
 
 const ownBattlesPage = async (req, res) => {
   // mis combates creados no iniciados
@@ -120,4 +120,5 @@ module.exports = {
   ownBattlesPage,
   activesBattlePage,
   preFinishBattlePage,
+  battleMain,
 };
