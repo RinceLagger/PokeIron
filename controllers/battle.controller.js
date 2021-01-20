@@ -13,6 +13,8 @@ const battleAction = async (req, res) => {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
 
+    const {battleId, pokemonSelection} = req.body;
+
     console.log("parametro enviados body",req.body);
     console.log("usuario",req.session.currentUser);
 
