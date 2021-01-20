@@ -9,7 +9,7 @@
         
         <input type="text" name="battleId" id="battleId" value="{{this._id}}" hidden>
        <label for="pokemonSelection">Choose a Pokemon:</label>
-        <select name="pokemonSelection" id="pokemonSelection" >
+        <select name="pokemonSelection" id="pokemonSelection" required >
             <option disabled selected>Your Pokemon</option>
              {{#each ../this.datos.cards}}   
             <option value="pokemonChoise">{{this.name}}</option>

@@ -16,6 +16,6 @@ battleRouter
   .get("/active-battles", activesBattlePage)
   .get("/show-battles", preFinishBattlePage)
   .get("/battles", battleMain)
-  .get("/battle-action", battleAction);
+  .post("/battle-action", battleAction);
 
 module.exports = battleRouter;
