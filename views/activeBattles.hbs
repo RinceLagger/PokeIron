@@ -4,7 +4,23 @@
         <img src="{{this.user1.imgUser}}" alt="">
         <h3>Pokemon Trainer: {{this.user1.username}}</h3>
         <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
-        <a href="" class="primary">Join Battle</a>
+
+        <form action="/battle-action" method="post" >
+        
+        <input type="text" name="battleId" id="battleId" value="{{this._id}}" hidden>
+       <label for="pokemonSelection">Choose a Pokemon:</label>
+        <select name="pokemonSelection" id="pokemonSelection" >
+            <option disabled selected>Your Pokemon</option>
+             {{#each ../this.datos.cards}}   
+            <option value="pokemonChoise">{{this.name}}</option>
+
+            {{/each}}
+        </select>
+
+        <button type="submit" class="primary">Join Battle</button>
+
+    </form>
+
     </div>
     {{/each}}
 </section>

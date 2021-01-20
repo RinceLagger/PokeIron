@@ -7,6 +7,21 @@ const renderMessage = (res, page, alert) => {
   return res.render(page, { alert });
 };
 
+const battleAction = async (req, res) => {
+  // llamada cuando te unes a un combate creado por otra persona
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+
+    console.log("parametro enviados body",req.body);
+    console.log("usuario",req.session.currentUser);
+
+
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 const battleMain = (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
@@ -38,6 +53,8 @@ const activesBattlePage = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+
+    //obtenemos los combates en espera que no sean propios
     const combatesOponente = await Battle.find({
       user1: { $ne: datosUsuario["_id"] },
       status1: "espera",
@@ -45,7 +62,13 @@ const activesBattlePage = async (req, res) => {
       .populate("card1")
       .populate("user1");
     console.log(combatesOponente);
-    res.render("activeBattles", { combatesOponente });
+    //obtenemos las cartas del usuario para que pueda elegir con que pokemon combatir
+    const { cards } = await User.findOne({ username: datosUsuario.username }).populate("cards");
+    const datos = { ...datosUsuario, cards};
+
+    console.log("todos datos active battles",datos, combatesOponente)
+
+    res.render("activeBattles", {datos, combatesOponente});
   } catch (e) {
     console.error(e);
   }
@@ -121,4 +144,5 @@ module.exports = {
   activesBattlePage,
   preFinishBattlePage,
   battleMain,
+  battleAction
 };
