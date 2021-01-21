@@ -71,13 +71,13 @@ const createCombat = async () => {
     apiURL = `/fight-battle/${id}/${combatID}`;
     const { data: winner } = await axios.post(apiURL);
 
-    window.location.href = `/battleAnimation/${winner}`;
+    window.location.replace(`/battleAnimation/${winner}`);
   } else {
     apiURL = `/createBattle/${id}`;
     console.log(apiURL);
     await axios.post(apiURL);
 
-    window.location.href = `/dashboard`;
+    window.location.replace(`/dashboard`);
   }
 };
 
