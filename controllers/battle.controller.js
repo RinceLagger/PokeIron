@@ -7,6 +7,126 @@ const renderMessage = (res, page, alert) => {
   return res.render(page, { alert });
 };
 
+const findWinner = (hp1, hp2) => {
+  if (hp1 > hp2) return "user1";
+  else if (hp2 > hp1) return "user2";
+  else return "empate";
+};
+
+const winnerAnimation = (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+
+    res.send("winnerAnimation");
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const fightBattle = async (req, res) => {
+  try {
+    //comprobamos que estamos ya logueados
+    const datosUsuario = req.session.currentUser;
+    if (!req.session.currentUser)
+      return renderMessage(res, "login", "Please Login first");
+
+    const { id, battleID } = req.params;
+    const { username } = datosUsuario;
+
+    const { card1, user1: usuario1 } = await Battle.findOne({
+      _id: battleID,
+    }).populate("card1");
+
+    const { hp: hpCard2 } = await Card.findOne({ _id: id });
+
+    const winner = findWinner(card1.hp, hpCard2);
+
+    if (winner === "user1") {
+      const combate = await Battle.findOneAndUpdate(
+        { _id: battleID },
+        {
+          user2: datosUsuario["_id"],
+          status1: "mostrar",
+          status2: "acabado",
+          card2: id,
+          vencedor: usuario1,
+        },
+        { new: true }
+      ).lean();
+      console.log(combate);
+    } else if (winner === "user2") {
+      const combate = await Battle.findOneAndUpdate(
+        { _id: battleID},
+        {
+          user2: datosUsuario["_id"],
+          status1: "mostrar",
+          status2: "acabado",
+          card2: id,
+          vencedor: datosUsuario["_id"],
+        },
+        { new: true }
+      ).lean();
+      console.log(combate);
+    } else {
+      const numRandom = Math.floor(Math.random() * 2);
+
+      if (numRandom) {
+        //numRandom =1 gana user2
+
+        const combate = await Battle.findOneAndUpdate(
+          { _id: battleID },
+          {
+            user2: datosUsuario["_id"],
+            status1: "mostrar",
+            status2: "acabado",
+            card2: id,
+            vencedor: datosUsuario["_id"],
+          },
+          { new: true }
+        ).lean();
+        console.log(combate);
+      } else {
+        //numRandom = 0  gana user1
+
+        const combate = await Battle.findOneAndUpdate(
+          {  _id: battleID },
+          {
+            user2: datosUsuario["_id"],
+            status1: "mostrar",
+            status2: "acabado",
+            card2: id,
+            vencedor: usuario1,
+          },
+          { new: true }
+        ).lean();
+        console.log(combate);
+      }
+    }
+
+    res.send(`${battleID}`);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const joinBattle = async (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    console.log(req.params);
+    const { id: battleID } = req.params;
+    console.log("id de batalla en join battle", battleID);
+    const { username } = datosUsuario;
+    const { cards } = await User.findOne({ username }).populate("cards");
+    const datos = { ...datosUsuario, cards, battleID };
+    console.log(datos);
+    res.render("newBattle", datos);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 const battleMain = (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
@@ -107,7 +227,7 @@ const createBattle = async (req, res) => {
     //actualizo datos session con el combate añadido
     const { passwordHash, ...user } = usuario;
     req.session.currentUser = user;
-
+    res.send("combate creado");
     console.log(battleId, usuario);
   } catch (e) {
     console.log(e);
@@ -121,4 +241,7 @@ module.exports = {
   activesBattlePage,
   preFinishBattlePage,
   battleMain,
+  joinBattle,
+  fightBattle,
+  winnerAnimation,
 };

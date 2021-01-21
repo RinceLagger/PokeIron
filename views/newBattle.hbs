@@ -16,8 +16,16 @@
         </div>
         </div>
     </article>
+    <input type="hidden" id="battleID" value="{{battleID}}">
     <button class="primary" id="battle-Card">Create Battle</button>
 </section>
+{{#if alert}}
+<section id="alert">
+    <article>
+        <h3>{{alert}}</h3>
+    </article>
+</section>
+{{/if}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="./js/slider.script.js"></script>
+<script src="/js/slider.script.js"></script>

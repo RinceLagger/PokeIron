@@ -240,4 +240,5 @@ module.exports = {
   cardsProfile,
   logOut,
   cardDetail,
+  
 };
