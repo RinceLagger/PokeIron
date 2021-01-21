@@ -51,11 +51,9 @@ if (document.querySelector("#formSign"))
 
 const buttonBattle = document.querySelector("#battle-Card");
 
-//const cardSelection = document.querySelector("#cardsViewport .card");
-
 const cardsDesktop = document.querySelectorAll("#cardsViewport .card");
 
-const createCombat = () => {
+const createCombat = async () => {
   let id;
   if (window.innerWidth < 768) {
     const cardMobile = document.querySelector(".tns-slide-active"); //clase del slider activa
@@ -65,9 +63,22 @@ const createCombat = () => {
     id = cardDesktop.id;
   }
 
-  const apiURL = `/createBattle/${id}`;
+  const combatID = document.querySelector("#battleID").value;
 
-  axios.post(apiURL);
+  let apiURL;
+
+  if (combatID) {
+    apiURL = `/fight-battle/${id}/${combatID}`;
+    const { data: winner } = await axios.post(apiURL);
+
+    window.location.href = `/battleAnimation/${winner}`;
+  } else {
+    apiURL = `/createBattle/${id}`;
+    console.log(apiURL);
+    await axios.post(apiURL);
+
+    window.location.href = `/dashboard`;
+  }
 };
 
 const markSelected = (e) => {
@@ -81,7 +92,6 @@ Array.from(cardsDesktop).forEach((card) => {
   card.addEventListener("click", markSelected);
 });
 
-//cardSelection.addEventListener("click", markSelected);
 if (document.querySelector("#newBattle"))
   buttonBattle.addEventListener("click", createCombat);
 

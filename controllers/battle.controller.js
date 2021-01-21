@@ -5,7 +5,73 @@ const Battle = require("../models/Battle.model");
 
 const renderMessage = (res, page, alert) => {
   return res.render(page, { alert });
+
 };
+
+const findWinner = (hp1, hp2) => {
+  if(hp1>hp2)return "user1";
+  else if(hp2>hp1) return "user2";
+  else return "empate";
+}
+
+
+const winnerAnimation = (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    
+    res.send("winnerAnimation");
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+
+const fightBattle = async (req, res) => {
+  try {
+    //comprobamos que estamos ya logueados
+    const datosUsuario = req.session.currentUser;
+    if (!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
+      
+      console.log("entro en fightBattle",req.params)
+      const {id,battleID} = req.params;
+      const { username } = datosUsuario;
+     
+
+      const {card1} = await Battle.findOne(
+      { _id:battleID }).populate("card1");
+      console.log(card1.hp);
+
+      const {hp: hpCard2} = await Card.findOne(
+        { _id:id });
+        console.log(hpCard2);
+
+      console.log(findWinner(card1.hp, hpCard2));  
+       res.send(`${battleID}`);
+
+    
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const joinBattle = async (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    console.log(req.params);
+    const {id: battleID} = req.params;
+    console.log("id de batalla en join battle", battleID);
+    const { username } = datosUsuario;
+    const { cards } = await User.findOne({ username }).populate("cards");
+    const datos = { ...datosUsuario, cards, battleID };
+    console.log(datos);
+    res.render("newBattle", datos);
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 
 const battleMain = (req, res) => {
   try {
@@ -107,7 +173,7 @@ const createBattle = async (req, res) => {
     //actualizo datos session con el combate añadido
     const { passwordHash, ...user } = usuario;
     req.session.currentUser = user;
-
+    res.send("combate creado");
     console.log(battleId, usuario);
   } catch (e) {
     console.log(e);
@@ -121,4 +187,7 @@ module.exports = {
   activesBattlePage,
   preFinishBattlePage,
   battleMain,
+  joinBattle,
+  fightBattle,
+  winnerAnimation
 };
