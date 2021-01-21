@@ -5,51 +5,106 @@ const Battle = require("../models/Battle.model");
 
 const renderMessage = (res, page, alert) => {
   return res.render(page, { alert });
-
 };
 
 const findWinner = (hp1, hp2) => {
-  if(hp1>hp2)return "user1";
-  else if(hp2>hp1) return "user2";
+  if (hp1 > hp2) return "user1";
+  else if (hp2 > hp1) return "user2";
   else return "empate";
-}
-
+};
 
 const winnerAnimation = (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
-    
+
     res.send("winnerAnimation");
   } catch (e) {
     console.error(e);
   }
 };
 
-
 const fightBattle = async (req, res) => {
   try {
     //comprobamos que estamos ya logueados
     const datosUsuario = req.session.currentUser;
-    if (!req.session.currentUser)return renderMessage(res, "login", "Please Login first");
-      
-      console.log("entro en fightBattle",req.params)
-      const {id,battleID} = req.params;
-      const { username } = datosUsuario;
-     
+    if (!req.session.currentUser)
+      return renderMessage(res, "login", "Please Login first");
 
-      const {card1} = await Battle.findOne(
-      { _id:battleID }).populate("card1");
-      console.log(card1.hp);
+    const { id, battleID } = req.params;
+    const { username } = datosUsuario;
 
-      const {hp: hpCard2} = await Card.findOne(
-        { _id:id });
-        console.log(hpCard2);
+    const { card1, user1: usuario1 } = await Battle.findOne({
+      _id: battleID,
+    }).populate("card1");
 
-      console.log(findWinner(card1.hp, hpCard2));  
-       res.send(`${battleID}`);
+    const { hp: hpCard2 } = await Card.findOne({ _id: id });
 
-    
+    const winner = findWinner(card1.hp, hpCard2);
+
+    if (winner === "user1") {
+      const combate = await Battle.findOneAndUpdate(
+        { _id: battleID },
+        {
+          user2: datosUsuario["_id"],
+          status1: "mostrar",
+          status2: "acabado",
+          card2: id,
+          vencedor: usuario1,
+        },
+        { new: true }
+      ).lean();
+      console.log(combate);
+    } else if (winner === "user2") {
+      const combate = await Battle.findOneAndUpdate(
+        { _id: battleID},
+        {
+          user2: datosUsuario["_id"],
+          status1: "mostrar",
+          status2: "acabado",
+          card2: id,
+          vencedor: datosUsuario["_id"],
+        },
+        { new: true }
+      ).lean();
+      console.log(combate);
+    } else {
+      const numRandom = Math.floor(Math.random() * 2);
+
+      if (numRandom) {
+        //numRandom =1 gana user2
+
+        const combate = await Battle.findOneAndUpdate(
+          { _id: battleID },
+          {
+            user2: datosUsuario["_id"],
+            status1: "mostrar",
+            status2: "acabado",
+            card2: id,
+            vencedor: datosUsuario["_id"],
+          },
+          { new: true }
+        ).lean();
+        console.log(combate);
+      } else {
+        //numRandom = 0  gana user1
+
+        const combate = await Battle.findOneAndUpdate(
+          {  _id: battleID },
+          {
+            user2: datosUsuario["_id"],
+            status1: "mostrar",
+            status2: "acabado",
+            card2: id,
+            vencedor: usuario1,
+          },
+          { new: true }
+        ).lean();
+        console.log(combate);
+      }
+    }
+
+    res.send(`${battleID}`);
   } catch (err) {
     console.error(err);
   }
@@ -60,7 +115,7 @@ const joinBattle = async (req, res) => {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
     console.log(req.params);
-    const {id: battleID} = req.params;
+    const { id: battleID } = req.params;
     console.log("id de batalla en join battle", battleID);
     const { username } = datosUsuario;
     const { cards } = await User.findOne({ username }).populate("cards");
@@ -71,7 +126,6 @@ const joinBattle = async (req, res) => {
     console.error(e);
   }
 };
-
 
 const battleMain = (req, res) => {
   try {
@@ -189,5 +243,5 @@ module.exports = {
   battleMain,
   joinBattle,
   fightBattle,
-  winnerAnimation
+  winnerAnimation,
 };
