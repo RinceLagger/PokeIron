@@ -25,6 +25,9 @@ class Game1 {
       this.initialTime = Date.now();
       this.playerAtack = [true,false];
       this.oponentAtack = [false,false];
+      this.cardWidth = this.canvas.height/5;
+      this.cardLarge = this.canvas.height/3;
+      this.cond = true;
      }
   
     startLoop() {
@@ -73,7 +76,7 @@ class Game1 {
   
  
     atackPlayer(time){
-      console.log("tiempo",time)
+     // esperamos 6 segundos aprox antes de iniciar animación de ataques --> time >6000
 
       if(time>6000 && this.yCardPlayer>this.canvas.height/2 && this.playerAtack[0]){
         this.yCardPlayer-=5;
@@ -85,20 +88,50 @@ class Game1 {
         }
       }
       if( this.yCardPlayer < 2*this.canvas.height/3 && this.playerAtack[1]){
-        console.log("dentro!!!")
+        //console.log("dentro!!!")
         this.yCardPlayer+=5;
+      }else{
+        if(!this.playerAtack[0] && this.playerAtack[1] && this.cond){//cuando termina nuestro ataque empieza el del oponente
+          this.oponentAtack[0]=true;
+          console.log("condicion bucle dos")
+        }
       }
-      console.log("this.yCardPlayer",this.yCardPlayer)
-      console.log("segunda condicion",2*this.canvas.height/3 )
+      // console.log("this.yCardPlayer",this.yCardPlayer)
+      // console.log("segunda condicion",2*this.canvas.height/3 )
     }
 
-    atackOponent(time){
+    atackOponent(){
+      console.log(this.yCardOponent+this.cardLarge)
+      console.log(this.canvas.height/2)
+      if( (this.yCardOponent+this.cardLarge)<this.canvas.height/2 && this.oponentAtack[0]){
+        console.log("dentro11111!!!")
+        this.yCardOponent+=5;
+        this.playerAtack[1] = false;
+      }
+        
+      else{
+        if(this.oponentAtack[0]){
+          this.oponentAtack[0] =false;
+          this.oponentAtack[1] =true; 
+        }
+          
+      }
+      if( this.yCardOponent> 0 && this.oponentAtack[1]){
+        console.log("dentro!!!")
+        this.cond = false;
+        this.yCardOponent-=5;
+      }
+      // else{
+      //   if(!this.oponentAtack[0]){//cuando termina nuestro ataque empieza el del oponente
+      //     //terminar loop
+      //   }
+      // }
     }
   
     updateCanvas() {
 
       this.atackPlayer(Date.now()-this.initialTime);
-      this.atackOponent(Date.now()-this.initialTime);
+      this.atackOponent();
     
       //Pintar fondo
   
@@ -110,8 +143,8 @@ class Game1 {
   
     drawCanvas() {
   
-        this.ctx.drawImage(cardPlayer,30, this.yCardPlayer, this.canvas.height/5, this.canvas.height/3);
-        this.ctx.drawImage(cardOponent,this.canvas.width-this.canvas.height/5-30, this.yCardOponent, this.canvas.height/5, this.canvas.height/3);
+        this.ctx.drawImage(cardPlayer,30, this.yCardPlayer, this.cardWidth, this.cardLarge);
+        this.ctx.drawImage(cardOponent,this.canvas.width-this.cardWidth-30, this.yCardOponent, this.cardWidth, this.cardLarge);
       
 
   
