@@ -1,0 +1,20 @@
+<section class="fight-animation">
+    <canvas></canvas>
+    Tu pokemon <span>{{cardPlayer.name}}</span> <span>{{cardPlayer.hp}}</span>
+    <img src="{{cardPlayer.imgUser}}" alt="">
+
+    Tu oponente <span>{{cardOponent.name}}</span> <span>{{cardOponent.hp}}</span>
+    <img src="{{cardOponent.imgUser}}" alt="">
+
+
+
+    <div id="dialogs">
+        <p>Te enfrentas {{nameOponent}}a un rival de nivel XXX</p>
+    </div>
+</section>
+
+{{#if vencedor}}
+<h1>Has ganado</h1>
+{{else}}
+<h1>Has perdido</h1>
+{{/if}}
