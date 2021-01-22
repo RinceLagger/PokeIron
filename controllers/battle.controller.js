@@ -62,13 +62,13 @@ const winnerAnimation = async (req, res) => {
     //comprobamos si el jugador actual es el vencedor para pasarlo como parámetro
 
     if(datosUsuario["_id"]==vencedor){
-      console.log("VICTORIAAAA")
+      //console.log("VICTORIAAAA")
       datosCombate.vencedor = "jugador";}
-    console.log("usuario ID", datosUsuario["_id"]);
-    console.log("vencedor ID", vencedor);
+    //console.log("usuario ID", datosUsuario["_id"]);
+    //console.log("vencedor ID", vencedor);
     
     
-    console.log(datosCombate);
+    //console.log(datosCombate);
 
 
     res.render("animation",datosCombate);

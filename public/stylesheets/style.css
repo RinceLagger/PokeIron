@@ -249,6 +249,10 @@ body #firstCards #cardsViewport-mw .tns-item {
   margin: 10px;
 }
 
+body #firstCards .tns-liveregion.tns-visually-hidden {
+  display: none;
+}
+
 body #firstCards .tns-controls {
   width: fit-content;
   margin: 20px auto;
@@ -414,4 +418,9 @@ body #mainProfile .cardsWidget div p:last-child {
   100% {
     transform: rotate(360deg);
   }
+}
+
+/******Fight Animation ***/
+canvas {
+  border: 1px solid #003a70;
 }
