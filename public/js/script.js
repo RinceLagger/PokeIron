@@ -71,7 +71,7 @@ const createCombat = async () => {
     apiURL = `/fight-battle/${id}/${combatID}`;
     const { data: winner } = await axios.post(apiURL);
 
-    window.location.replace(`/battleAnimation/${winner}`);
+    window.location.replace(`/battleAnimation/${combatID}`);
   } else {
     apiURL = `/createBattle/${id}`;
     console.log(apiURL);

@@ -13,12 +13,65 @@ const findWinner = (hp1, hp2) => {
   else return "empate";
 };
 
-const winnerAnimation = (req, res) => {
+const winnerAnimation = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    const {battleID} = req.params;
+    console.log("datos usuario", datosUsuario);
 
-    res.send("winnerAnimation");
+
+    //obtenemos el combate que hay que animar mediante el id enviado por parámetro
+
+    const { user1, user2,card1,card2,vencedor} = await Battle.findOne({
+      _id: battleID,
+    }).populate("user1").populate("user2").populate("card1").populate("card2");
+
+    //si quién hace la llamada corresponde al user1 tendremos que actualizar el status del combate de mostrar a acabado
+    //además determinará qué carta corresponde al usuario y cuál al oponente
+    let namePlayer;
+    let cardPlayer ;
+    let cardOponent ;
+    let nameOponent ;
+    
+
+    if(datosUsuario.username===user1.username){
+      const combate = await Battle.findOneAndUpdate( //mostrar --> acabado - actualizamos el status del combate a acabado del user1
+        { _id: battleID },
+        { status1: "acabado"},
+        { new: true }
+      ).lean();
+      //console.log(combate);
+        namePlayer = user1.username;
+        cardPlayer = card1;
+        cardOponent = card2;
+        nameOponent = user2.username;
+ 
+    }
+    else if(datosUsuario.username===user2.username){//en este caso estamos mostrando directamente (el jugador se une a combate) y no hay que actualizar status
+        namePlayer = user2.username;
+        cardPlayer = card2;
+        cardOponent = card1;
+        nameOponent = user1.username;
+
+        /******AQUÍ HABRÍA QUE ENVIAR EL CORREO DE AVISO AL CREADOR DEL COMBATE ********/
+    }
+
+    const datosCombate = {namePlayer,cardPlayer,cardOponent,nameOponent};
+
+    //comprobamos si el jugador actual es el vencedor para pasarlo como parámetro
+
+    if(datosUsuario["_id"]==vencedor){
+      //console.log("VICTORIAAAA")
+      datosCombate.vencedor = "jugador";}
+    //console.log("usuario ID", datosUsuario["_id"]);
+    //console.log("vencedor ID", vencedor);
+    
+    
+    //console.log(datosCombate);
+
+
+    res.render("animation",datosCombate);
   } catch (e) {
     console.error(e);
   }
@@ -54,7 +107,7 @@ const fightBattle = async (req, res) => {
         },
         { new: true }
       ).lean();
-      console.log(combate);
+      //console.log(combate);
     } else if (winner === "user2") {
       const combate = await Battle.findOneAndUpdate(
         { _id: battleID},
@@ -67,7 +120,7 @@ const fightBattle = async (req, res) => {
         },
         { new: true }
       ).lean();
-      console.log(combate);
+      //console.log(combate);
     } else {
       const numRandom = Math.floor(Math.random() * 2);
 
@@ -85,7 +138,7 @@ const fightBattle = async (req, res) => {
           },
           { new: true }
         ).lean();
-        console.log(combate);
+        //console.log(combate);
       } else {
         //numRandom = 0  gana user1
 
@@ -100,7 +153,7 @@ const fightBattle = async (req, res) => {
           },
           { new: true }
         ).lean();
-        console.log(combate);
+        //console.log(combate);
       }
     }
 
@@ -114,13 +167,13 @@ const joinBattle = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
-    console.log(req.params);
+    //console.log(req.params);
     const { id: battleID } = req.params;
-    console.log("id de batalla en join battle", battleID);
+    //console.log("id de batalla en join battle", battleID);
     const { username } = datosUsuario;
     const { cards } = await User.findOne({ username }).populate("cards");
     const datos = { ...datosUsuario, cards, battleID };
-    console.log(datos);
+    //console.log(datos);
     res.render("newBattle", datos);
   } catch (e) {
     console.error(e);
@@ -146,7 +199,7 @@ const ownBattlesPage = async (req, res) => {
       user1: datosUsuario["_id"],
       status1: "espera",
     }).populate("card1");
-    console.log(combatesPropios);
+    //console.log(combatesPropios);
     res.render("myBattles", { combatesPropios });
   } catch (e) {
     console.error(e);
@@ -164,7 +217,7 @@ const activesBattlePage = async (req, res) => {
     })
       .populate("card1")
       .populate("user1");
-    console.log(combatesOponente);
+    //console.log(combatesOponente);
     res.render("activeBattles", { combatesOponente });
   } catch (e) {
     console.error(e);
