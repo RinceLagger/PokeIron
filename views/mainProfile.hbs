@@ -1,20 +1,23 @@
+{{> menu}}
 {{> userHeader}}
 
 {{> navbar}}
 
 <section id="mainProfile" class="wrapper">
     <article class=" widget cardsWidget">
-        <h3>
-            {{#each cards}}
+        <h3>Your Cards</h3>
+        {{#each cards}}
+        <a href="/usercards/{{_id}}">
             <div>
-                <img src="" alt="" class="{{tipo}}">
+                <span class="tipo {{tipo}}"></span>
                 <p>{{name}}</p>
-                <p>{{hp}}</p>
+                <p>HP {{hp}}</p>
             </div>
-            {{/each}}
-        </h3>
+        </a>
+        {{/each}}
     </article>
 
 </section>
-
-<a href="/logOut" class="secondary">logOut</a>
+<section class="logout wrapper">
+    <a href="/logOut" class="secondary">Log Out</a>
+</section>

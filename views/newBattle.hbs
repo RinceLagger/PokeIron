@@ -1,13 +1,9 @@
-{{> menu}}
-{{> userHeader}}
-{{> navbar}}
-
-<section id="firstCards" class="wrapper">
-    <h2 class="center">Your Cards</h2>
+<section id="firstCards" class=" newBattle wrapper">
+    <h1 class="center">Select your Pokemon for the Battle</h1>
     <article class="cards" id="cardsMobile">
         <div id="cardsViewportMobile">
             {{#each cards}}
-            <img class="card" src="{{imgUser}}" alt="pokemon-card">
+            <img class="card" id="{{_id}}" src="{{imgUser}}" alt="pokemon-card">
             {{/each}}
         </div>
         </div>
@@ -15,16 +11,26 @@
     <article class="cards" id="cardsDesktop">
         <div id="cardsViewport">
             {{#each cards}}
-            <img class="card" src="{{imgUser}}" alt="pokemon-card">
+            <img class="card" id="{{_id}}" src="{{imgUser}}" alt="pokemon-card">
             {{/each}}
         </div>
         </div>
     </article>
+    <input type="hidden" id="battleID" value="{{battleID}}">
+    <button class="primary" id="battle-Card">Create Battle</button>
 </section>
 <section id="loading">
     <div class="pokeball">
     </div>
 </section>
+{{#if alert}}
+<section id="alert">
+    <article>
+        <h3>{{alert}}</h3>
+    </article>
+</section>
+{{/if}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.2/min/tiny-slider.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script src="/js/slider.script.js"></script>
 <script src="/js/loading.script.js"></script>

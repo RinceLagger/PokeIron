@@ -1,19 +1,22 @@
-
-
+{{> menu}}
 {{> userHeader}}
 
 {{> navbar}}
 
-<form action="/UserData" method="post" enctype="multipart/form-data" id="formSign">
-    <label for="name">Nombre Usuario</label>
-    <input type="text" name="username" id="name" value="{{username}}" required>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" value="{{email}}" required>
-    <label for="image-input">Select your Profile picture</label>
-    <input type="file" name="image" id="image-input" />
-    <input type="text" name="existingImage" hidden id="" value="{{imgUser}}">
-    <button type="submit" class="secondary">Save changes</button>
+<section id="form" class="wrapper">
+    <h2 class="center">Edit your profile information</h2>
+    <form action="/UserData" method="post" enctype="multipart/form-data">
+        <label for="name">Username</label>
+        <input type="text" name="username" id="name" value="{{username}}" required>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="{{email}}" required>
+        <label for="image-input">Select your Profile picture</label>
+        <input type="file" name="image" id="image-input" class="custom-file-input" />
+        <input type="text" name="existingImage" hidden id="" value="{{imgUser}}">
+        <button type="submit" class="primary">Save changes</button>
 
-</form>
-
-<a href="/logOut" class="secondary">logOut</a>
+    </form>
+</section>
+<section class="logout wrapper">
+    <a href="/logOut" class="secondary">Log Out</a>
+</section>
