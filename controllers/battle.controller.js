@@ -77,6 +77,22 @@ const winnerAnimation = async (req, res) => {
   }
 };
 
+const updateWinLose = async (winner,loser) => {
+
+  try{
+
+    await User.findOneAndUpdate({username: winner}, {$inc: {win: +1}});
+   await User.findOneAndUpdate({username: loser}, {$inc: {lose: +1}});
+
+  }catch (e) {
+    console.error(e);
+  }
+
+   
+
+
+}
+
 const fightBattle = async (req, res) => {
   try {
     //comprobamos que estamos ya logueados
@@ -87,12 +103,15 @@ const fightBattle = async (req, res) => {
     const { id, battleID } = req.params;
     const { username } = datosUsuario;
 
+    //carta del creador del combate y id del creador
     const { card1, user1: usuario1 } = await Battle.findOne({
       _id: battleID,
-    }).populate("card1");
+    }).populate("card1").populate("user1");
 
+    //hp de la carta del que se une al combate
     const { hp: hpCard2 } = await Card.findOne({ _id: id });
 
+    //comprobamos ganador y nos devuelve user1 o user2 en String
     const winner = findWinner(card1.hp, hpCard2);
 
     if (winner === "user1") {
@@ -103,10 +122,15 @@ const fightBattle = async (req, res) => {
           status1: "mostrar",
           status2: "acabado",
           card2: id,
-          vencedor: usuario1,
+          vencedor: usuario1["_id"],
         },
         { new: true }
       ).lean();
+
+      //actualizamos victorias y derrotas (winner,Loser)
+      updateWinLose(usuario1.username,datosUsuario.username );
+      
+
       //console.log(combate);
     } else if (winner === "user2") {
       const combate = await Battle.findOneAndUpdate(
@@ -120,7 +144,11 @@ const fightBattle = async (req, res) => {
         },
         { new: true }
       ).lean();
-      //console.log(combate);
+      
+      //actualizamos victorias y derrotas (winner,Loser)
+
+      updateWinLose(datosUsuario.username,usuario1.username );
+
     } else {
       const numRandom = Math.floor(Math.random() * 2);
 
@@ -138,7 +166,12 @@ const fightBattle = async (req, res) => {
           },
           { new: true }
         ).lean();
-        //console.log(combate);
+        
+         //actualizamos victorias y derrotas (winner,Loser)
+
+         
+         updateWinLose(datosUsuario.username,usuario1.username );
+
       } else {
         //numRandom = 0  gana user1
 
@@ -149,11 +182,14 @@ const fightBattle = async (req, res) => {
             status1: "mostrar",
             status2: "acabado",
             card2: id,
-            vencedor: usuario1,
+            vencedor: usuario1["_id"],
           },
           { new: true }
         ).lean();
-        //console.log(combate);
+        
+        //actualizamos victorias y derrotas (winner,Loser)
+
+        updateWinLose(usuario1.username,datosUsuario.username );
       }
     }
 
