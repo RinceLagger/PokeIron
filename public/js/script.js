@@ -77,7 +77,7 @@ const createCombat = async () => {
     console.log(apiURL);
     await axios.post(apiURL);
 
-    window.location.replace(`/dashboard`);
+    window.location.replace(`/battle-created`);
   }
 };
 

@@ -1,24 +1,35 @@
+{{> menu}}
+{{> userHeader}}
+{{> navbar}}
 <section id="battlesList" class="wrapper">
 
-{{#if combates1}}
+    {{#if combates1}}
     {{#each combates1}}
     <div class="battle widget">
-        <img src="{{this.user2.imgUser}}" alt="">
-        <h3>Pokemon Trainer: {{this.user2.username}}</h3>
-        <p>Type: <span class="tipo {{this.card2.tipo}}"></span> {{this.card2.tipo}}</p>
-        <p>Winner: {{this.vencedor.username}}</p>
+        <div class="widgetContent">
+            <img src="{{this.user2.imgUser}}" alt="">
+            <div>
+                <h3>Pokemon Trainer: <span>{{this.user2.username}}</span></h3>
+                <p>Type: <span class="tipo {{this.card2.tipo}}"></span> {{this.card2.tipo}}</p>
+                <p>Winner: {{this.vencedor.username}}</p>
+            </div>
+        </div>
     </div>
-{{/each}}
-{{/if}}
-{{#if combates2}}
+    {{/each}}
+    {{/if}}
+    {{#if combates2}}
     {{#each combates2}}
     <div class="battle widget">
-        <img src="{{this.user1.imgUser}}" alt="">
-        <h3>Pokemon Trainer: {{this.user1.username}}</h3>
-        <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
-        <p>Winner: {{this.vencedor.username}}</p>
+        <div class="widgetContent">
+            <img src="{{this.user1.imgUser}}" alt="">
+            <div>
+                <h3>Pokemon Trainer: <span>{{this.user1.username}}</span></h3>
+                <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
+                <p>Winner: {{this.vencedor.username}}</p>
+            </div>
+        </div>
     </div>
-{{/each}}
-{{/if}}
+    {{/each}}
+    {{/if}}
 
 </section>

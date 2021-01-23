@@ -5,13 +5,24 @@
 <section id="battlesList" class="wrapper">
     {{#each combatesMostrar}}
     <div class="battle widget">
-
-        <h3>Oponent: {{this.user2.username}}</h3>
-        <p>Type: <span class="tipo {{this.card2.tipo}}"></span> {{this.card2.tipo}}</p>
+        <div class="widgetContent">
+            <img src="{{this.user2.imgUser}}" alt="">
+            <div>
+                <h3>Oponent:</h3>
+                <p><span>{{this.user2.username}}</span></p>
+                <p>Type: <span class="tipo {{this.card2.tipo}}"></span> {{this.card2.tipo}}</p>
+            </div>
+        </div>
         <hr>
-        <h4>Your Pokemon: {{this.card1.username}}</h4>
-        <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
-        <p>HP {{this.card1.hp}}</p>
+        <div class="widgetContent">
+            <img src="{{this.card1.imgUser}}" alt="">
+            <div>
+                <h4>Your Pokemon:</h4>
+                <p><span>{{this.card1.name}}</span></p>
+                <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
+                <p>HP {{this.card1.hp}}</p>
+            </div>
+        </div>
         <a href="/battleAnimation/{{_id}}" class="primary">Show Result</a>
     </div>
     {{/each}}
