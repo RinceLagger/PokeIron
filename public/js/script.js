@@ -92,7 +92,7 @@ Array.from(cardsDesktop).forEach((card) => {
   card.addEventListener("click", markSelected);
 });
 
-if (document.querySelector("#newBattle"))
+if (document.querySelector(".newBattle"))
   buttonBattle.addEventListener("click", createCombat);
 
 if (document.querySelector("#navbar")) {
@@ -101,4 +101,33 @@ if (document.querySelector("#navbar")) {
   for (let i = 0; i < navItem.length; i++) {
     if (navItem[i].href === currentPage) navItem[i].classList.add("nav-active");
   }
+}
+
+// -------- Menu ------- //
+
+const menuDisplay = () => {
+  const content = document.querySelector(".hamburger");
+  if (content.style.display === "none") {
+    content.style.display = "flex";
+  } else {
+    content.style.display = "none";
+  }
+};
+
+const battlesDisplay = () => {
+  const content = document.querySelector("#battlesList");
+  if (content.style.display === "none") {
+    content.style.display = "block";
+  } else {
+    content.style.display = "none";
+  }
+};
+
+if (document.querySelector("#menuMobile")) {
+  const menuTrigger = document.querySelector("#menuTrigger");
+  const closeTrigger = document.querySelector("#closeTrigger");
+  const battlesTrigger = document.querySelector("#battlesTrigger");
+  menuTrigger.addEventListener("click", menuDisplay);
+  closeTrigger.addEventListener("click", menuDisplay);
+  battlesTrigger.addEventListener("click", battlesDisplay);
 }

@@ -1,7 +1,11 @@
+{{> menu}}
+<section class="header">
+    <h1 class="center">Finished Battles</h1>
+</section>
 <section id="battlesList" class="wrapper">
     {{#each combatesMostrar}}
     <div class="battle widget">
-        <h3>Oponent: {{this.user2}}</h3>
+        <h3>Oponent: {{this.user2.username}}</h3>
         <p>Type: <span class="tipo {{this.card2.tipo}}"></span> {{this.card2.tipo}}</p>
         <hr>
         <h4>Your Pokemon: {{this.card1.username}}</h4>

@@ -1,3 +1,4 @@
+{{> menu}}
 {{> userHeader}}
 
 {{> navbar}}
@@ -10,7 +11,7 @@
         <label for="email">Email</label>
         <input type="email" name="email" id="email" value="{{email}}" required>
         <label for="image-input">Select your Profile picture</label>
-        <input type="file" name="image" id="image-input" />
+        <input type="file" name="image" id="image-input" class="custom-file-input" />
         <input type="text" name="existingImage" hidden id="" value="{{imgUser}}">
         <button type="submit" class="primary">Save changes</button>
 
