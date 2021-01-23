@@ -5,6 +5,7 @@
 <section id="battlesList" class="wrapper">
     {{#each combatesPropios}}
     <div class="battle widget">
+
         <div class="widgetContent">
             <img src="{{this.card1.imgUser}}" alt="">
             <div>
@@ -13,7 +14,8 @@
                 <p>HP {{this.card1.hp}}</p>
             </div>
         </div>
-        <a href="" class="primary">Delete</a>
+        <a href="/deletecombat/{{_id}}" class="primary">Delete</a>
+
     </div>
     {{/each}}
 </section>

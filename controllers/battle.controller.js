@@ -77,6 +77,22 @@ const winnerAnimation = async (req, res) => {
   }
 };
 
+const updateWinLose = async (winner,loser) => {
+
+  try{
+
+    await User.findOneAndUpdate({username: winner}, {$inc: {win: +1}});
+   await User.findOneAndUpdate({username: loser}, {$inc: {lose: +1}});
+
+  }catch (e) {
+    console.error(e);
+  }
+
+   
+
+
+}
+
 const fightBattle = async (req, res) => {
   try {
     //comprobamos que estamos ya logueados
@@ -87,12 +103,15 @@ const fightBattle = async (req, res) => {
     const { id, battleID } = req.params;
     const { username } = datosUsuario;
 
+    //carta del creador del combate y id del creador
     const { card1, user1: usuario1 } = await Battle.findOne({
       _id: battleID,
-    }).populate("card1");
+    }).populate("card1").populate("user1");
 
+    //hp de la carta del que se une al combate
     const { hp: hpCard2 } = await Card.findOne({ _id: id });
 
+    //comprobamos ganador y nos devuelve user1 o user2 en String
     const winner = findWinner(card1.hp, hpCard2);
 
     if (winner === "user1") {
@@ -103,10 +122,15 @@ const fightBattle = async (req, res) => {
           status1: "mostrar",
           status2: "acabado",
           card2: id,
-          vencedor: usuario1,
+          vencedor: usuario1["_id"],
         },
         { new: true }
       ).lean();
+
+      //actualizamos victorias y derrotas (winner,Loser)
+      updateWinLose(usuario1.username,datosUsuario.username );
+      
+
       //console.log(combate);
     } else if (winner === "user2") {
       const combate = await Battle.findOneAndUpdate(
@@ -120,7 +144,11 @@ const fightBattle = async (req, res) => {
         },
         { new: true }
       ).lean();
-      //console.log(combate);
+      
+      //actualizamos victorias y derrotas (winner,Loser)
+
+      updateWinLose(datosUsuario.username,usuario1.username );
+
     } else {
       const numRandom = Math.floor(Math.random() * 2);
 
@@ -138,7 +166,12 @@ const fightBattle = async (req, res) => {
           },
           { new: true }
         ).lean();
-        //console.log(combate);
+        
+         //actualizamos victorias y derrotas (winner,Loser)
+
+         
+         updateWinLose(datosUsuario.username,usuario1.username );
+
       } else {
         //numRandom = 0  gana user1
 
@@ -149,11 +182,14 @@ const fightBattle = async (req, res) => {
             status1: "mostrar",
             status2: "acabado",
             card2: id,
-            vencedor: usuario1,
+            vencedor: usuario1["_id"],
           },
           { new: true }
         ).lean();
-        //console.log(combate);
+        
+        //actualizamos victorias y derrotas (winner,Loser)
+
+        updateWinLose(usuario1.username,datosUsuario.username );
       }
     }
 
@@ -201,6 +237,62 @@ const ownBattlesPage = async (req, res) => {
     }).populate("card1");
     //console.log(combatesPropios);
     res.render("myBattles", { combatesPropios });
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+const showHistory = async (req, res) => {
+  //combates a los que puedo unir
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+   // {user2, card2, vencedor}
+    const combates1  = await Battle.find({
+      user1:  datosUsuario["_id"] ,
+      status1: "acabado",
+    })
+      .populate("user2")
+      .populate("card2").populate("vencedor");
+
+      const combates2  = await Battle.find({
+        user2:  datosUsuario["_id"] ,
+        status2: "acabado",
+      })
+        .populate("user1")
+        .populate("card1").populate("vencedor");
+
+
+
+      console.log("combates1",combates1);
+      console.log("combates2",combates2);
+
+      const combates ={combates1, combates2};
+      
+      res.render("finishBattles", combates )
+      // const combates ={
+      //   oponentImg: user2[imgUser],
+      //   oponentName: user2[username],
+      //   oponentPokemon: card2[name],
+      //   oponentType: card2[tipo],
+
+      // }
+      //si ganaste
+
+      // if(datosUsuario.username===vencedor){
+
+      //   combates.result ="Win"
+
+      // }else{ //si perdiste
+
+      //   combates.result ="Lose"
+      // }
+
+
+     
+
+
+    // res.render("finishBattles", combates );
   } catch (e) {
     console.error(e);
   }
@@ -287,6 +379,23 @@ const createBattle = async (req, res) => {
   }
 };
 
+const deleteBattle = async (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+
+    const { battleID } = req.params;
+
+    const eliminadoComb = await Battle.findByIdAndDelete({_id: battleID });
+    const eliminado = await User.findOneAndUpdate({combates: {$in: [battleID]}}, {$pull: {combates: battleID}})
+
+    res.redirect("/my-battles");
+    //console.log("eliminado", eliminadoComb, eliminado);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 module.exports = {
   battlePage,
   createBattle,
@@ -297,4 +406,6 @@ module.exports = {
   joinBattle,
   fightBattle,
   winnerAnimation,
+  deleteBattle,
+  showHistory
 };
