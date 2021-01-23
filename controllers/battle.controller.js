@@ -297,8 +297,8 @@ const deleteBattle = async (req, res) => {
     const eliminadoComb = await Battle.findByIdAndDelete({_id: battleID });
     const eliminado = await User.findOneAndUpdate({combates: {$in: [battleID]}}, {$pull: {combates: battleID}})
 
-   
-    console.log("eliminado", eliminadoComb, eliminado);
+    res.redirect("/my-battles");
+    //console.log("eliminado", eliminadoComb, eliminado);
   } catch (e) {
     console.log(e);
   }
