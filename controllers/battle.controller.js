@@ -287,6 +287,23 @@ const createBattle = async (req, res) => {
   }
 };
 
+const deleteBattle = async (req, res) => {
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+
+    const { battleID } = req.params;
+
+    const eliminadoComb = await Battle.findByIdAndDelete({_id: battleID });
+    const eliminado = await User.findOneAndUpdate({combates: {$in: [battleID]}}, {$pull: {combates: battleID}})
+
+   
+    console.log("eliminado", eliminadoComb, eliminado);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 module.exports = {
   battlePage,
   createBattle,
@@ -297,4 +314,5 @@ module.exports = {
   joinBattle,
   fightBattle,
   winnerAnimation,
+  deleteBattle
 };
