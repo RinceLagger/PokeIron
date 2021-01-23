@@ -66,6 +66,7 @@ body .widget {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   padding: 1em;
+  margin: 20px 0;
 }
 
 body .primary {
@@ -113,6 +114,53 @@ body .nav-active {
   color: #003a70;
   font-weight: 600;
   padding-bottom: 5px;
+}
+
+body #menuDesktop {
+  display: none;
+}
+
+body #menuMobile {
+  background-color: #003a70;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+body #menuMobile img {
+  float: right;
+  width: 1.5em;
+}
+
+body #menuMobile .hamburger {
+  background-color: #003a70;
+  padding: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 100;
+  height: 100vh;
+  color: #ffffff;
+  flex-direction: column;
+  width: 50%;
+  box-shadow: -9px 2px 11px 2px rgba(0, 0, 0, 0.38);
+  transition: dispLay 0.5s;
+}
+
+body #menuMobile .hamburger ul {
+  margin-top: 1em;
+  display: unset;
+}
+
+body #menuMobile .hamburger ul p img {
+  width: 16px;
+  float: unset;
+}
+
+body #menuMobile .hamburger ul li {
+  margin: 15px 0;
+}
+
+body #menuMobile .hamburger ul li ul li {
+  margin-left: 10px;
 }
 
 body .header {
@@ -191,11 +239,15 @@ body .buttons {
 }
 
 body #form {
-  margin: 2em auto;
+  margin: 1em auto;
+}
+
+body #form h2 {
+  margin: 0 0 1em 0;
 }
 
 body #form h4 {
-  margin: 1.5em 0;
+  margin: 0 0 1em 0;
 }
 
 body #form form {
@@ -309,7 +361,7 @@ body .Fighting {
   background-position: -50px -25px;
 }
 
-body .LLightning {
+body .Lightning {
   background-position: -50px -50px;
 }
 
@@ -410,6 +462,36 @@ body #mainProfile .cardsWidget div p:last-child {
   z-index: 1;
 }
 
+/* ----- Config -------- */
+#form .custom-file-input {
+  border: none;
+  height: unset;
+  color: #ffffff;
+}
+
+#form .custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+#form .custom-file-input::before {
+  content: "Select image";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 14px;
+  text-align: center;
+  background: #ffffff;
+  border: 2px solid #003a70;
+  box-sizing: border-box;
+  border-radius: 20px;
+  padding: 1em;
+  display: block;
+  min-width: 150px;
+  width: fit-content;
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+  color: #003a70;
+  margin: 0 auto;
+}
+
 /* AnimationFrames */
 @keyframes frames {
   0% {
@@ -423,4 +505,29 @@ body #mainProfile .cardsWidget div p:last-child {
 /******Fight Animation ***/
 canvas {
   border: 1px solid #003a70;
+}
+
+/* ----- Battles Activas ------- */
+#battlesList .widget .widgetContent {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 1em;
+}
+
+#battlesList .widget .widgetContent span {
+  font-weight: 400;
+  text-transform: capitalize;
+  line-height: 1.5em;
+}
+
+#battlesList .widget .widgetContent p {
+  margin: 10px 0;
+}
+
+#battlesList .widget .widgetContent img {
+  border: 3px solid #ffcb05;
+  width: 30%;
+  clip-path: circle(45% at center);
+  float: left;
 }

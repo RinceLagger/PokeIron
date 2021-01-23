@@ -1,0 +1,32 @@
+<nav id="menuDesktop">
+    <ul>
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="#">Battles <img src="/img/chevron.svg" alt=""></a>
+            <ul>
+                <li><a href="/my-battles" class="insideLink">My Battles</a></li>
+                <li><a href="/active-battles" class="insideLink">Active Battles</a></li>
+                <li><a href="/show-battles" class="insideLink">Check Results</a></li>
+                <li><a href="/createBattle" class="insideLink">Create New Battle</a></li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+
+<nav id="menuMobile">
+    <span><img id="menuTrigger" src="/img/menu.svg" alt=""></span>
+    <article class="hamburger" style="display: none;">
+        <span><img id="closeTrigger" src="/img/close.svg" alt=""></span>
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li>
+                <p id="battlesTrigger">Battles <img src="/img/chevron.svg" alt=""></p>
+                <ul id="battlesList" style="display: none;">
+                    <li><a href="/my-battles" class="insideLink">My Battles</a></li>
+                    <li><a href="/active-battles" class="insideLink">Active Battles</a></li>
+                    <li><a href="/show-battles" class="insideLink">Check Results</a></li>
+                    <li><a href="/createBattle" class="insideLink">Create New Battle</a></li>
+                </ul>
+            </li>
+        </ul>
+    </article>
+</nav>

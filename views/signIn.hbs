@@ -1,20 +1,20 @@
 <section id="form" class="wrapper">
     <img src="/img/logo.png" alt="Pokemon-logo" class="logo">
-    <h4 class="center">Lorem ipsum dolor sit.</h4>
+    <h4 class="center">Fill in the information and start your pokemon adventure.</h4>
     <form action="/signIn" method="POST" id="formSign">
-        <label for="name">Nombre Usuario</label>
+        <label for="name">Username</label>
         <input type="text" name="username" id="name" placeholder="Pikachu23" required>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" placeholder="team@rocket.com" required>
-        <label for="password">Contraseña</label>
+        <label for="password">Psssword</label>
         <input type="password" name="password" id="password" placeholder="Pokemaniatico123" required>
         <ul class="rules">
-            <li id="longitud">Debe tener al menos 6 caracteres</li>
-            <li id="mayus">Debe de incluir una mayúscula</li>
-            <li id="minus">Debe incluir una minúscula</li>
-            <li id="num">Debe incluir un número</li>
+            <li id="longitud">Must be at least 6 characters long</li>
+            <li id="mayus">Must include a capital letter</li>
+            <li id="minus">Must include a lower case letter</li>
+            <li id="num">Must include a number</li>
         </ul>
-        <button type="submit" class="primary">Submit</button>
+        <button type="submit" class="primary">Let's go!</button>
     </form>
 </section>
 {{#if alert}}

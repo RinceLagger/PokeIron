@@ -18,6 +18,7 @@ body {
       0px -1px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     padding: 1em;
+    margin: 20px 0;
   }
 
   .primary {
@@ -44,6 +45,50 @@ body {
   }
 
   /* ---- Partials ---- */
+
+  #menuDesktop {
+    display: none;
+  }
+  #menuMobile {
+    background-color: $darkBlue;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    img {
+      float: right;
+      width: 1.5em;
+    }
+    .hamburger {
+      background-color: $darkBlue;
+      padding: 1em;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 100;
+      height: 100vh;
+      color: $white;
+      flex-direction: column;
+      width: 50%;
+      box-shadow: -9px 2px 11px 2px rgba(0, 0, 0, 0.38);
+      transition: dispLay 0.5s;
+      ul {
+        margin-top: 1em;
+        display: unset;
+        p {
+          img {
+            width: 16px;
+            float: unset;
+          }
+        }
+        li {
+          margin: 15px 0;
+          ul {
+            li {
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
 
   .header {
     display: flex;
@@ -123,9 +168,12 @@ body {
   }
 
   #form {
-    margin: 2em auto;
+    margin: 1em auto;
+    h2 {
+      margin: 0 0 1em 0;
+    }
     h4 {
-      margin: 1.5em 0;
+      margin: 0 0 1em 0;
     }
     form {
       display: flex;
@@ -224,7 +272,7 @@ body {
     background-position: -50px -25px;
   }
 
-  .LLightning {
+  .Lightning {
     background-position: -50px -50px;
   }
 
@@ -327,6 +375,26 @@ body {
     }
   }
 }
+
+/* ----- Config -------- */
+
+#form {
+  .custom-file-input {
+    border: none;
+    height: unset;
+    color: $white;
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+    &::before {
+      content: "Select image";
+      @include btn($white);
+      color: $darkBlue;
+      margin: 0 auto;
+    }
+  }
+}
+
 /* AnimationFrames */
 @keyframes frames {
   0% {
@@ -339,6 +407,34 @@ body {
 
 /******Fight Animation ***/
 
-canvas{
+canvas {
   border: 1px solid $darkBlue;
+}
+
+/* ----- Battles Activas ------- */
+
+#battlesList {
+  .widget {
+    .widgetContent {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 1em;
+
+      span {
+        font-weight: 400;
+        text-transform: capitalize;
+        line-height: 1.5em;
+      }
+      p {
+        margin: 10px 0;
+      }
+      img {
+        border: 3px solid $yellow;
+        width: 30%;
+        clip-path: circle(45% at center);
+        float: left;
+      }
+    }
+  }
 }

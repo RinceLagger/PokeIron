@@ -1,9 +1,18 @@
+{{> menu}}
+<section class="header">
+    <h1 class="center">Created Battles</h1>
+</section>
 <section id="battlesList" class="wrapper">
     {{#each combatesPropios}}
     <div class="battle widget">
-        <h4>Pokemon: {{this.card1.name}}</h4>
-        <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
-        <p>HP {{this.card1.hp}}</p>
+        <div class="widgetContent">
+            <img src="{{this.card1.imgUser}}" alt="">
+            <div>
+                <h4>Pokemon: {{this.card1.name}}</h4>
+                <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
+                <p>HP {{this.card1.hp}}</p>
+            </div>
+        </div>
         <a href="" class="primary">Delete</a>
     </div>
     {{/each}}
