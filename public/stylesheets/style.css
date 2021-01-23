@@ -329,6 +329,10 @@ body #firstCards .tns-controls button {
   margin: 5px;
 }
 
+body #firstCards button {
+  margin: 0 auto;
+}
+
 body .pokeName {
   background-color: rgba(255, 203, 5, 0.31);
 }
