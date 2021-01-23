@@ -242,6 +242,62 @@ const ownBattlesPage = async (req, res) => {
   }
 };
 
+const showHistory = async (req, res) => {
+  //combates a los que puedo unir
+  try {
+    const datosUsuario = req.session.currentUser;
+    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+   // {user2, card2, vencedor}
+    const combates1  = await Battle.find({
+      user1:  datosUsuario["_id"] ,
+      status1: "acabado",
+    })
+      .populate("user2")
+      .populate("card2").populate("vencedor");
+
+      const combates2  = await Battle.find({
+        user2:  datosUsuario["_id"] ,
+        status2: "acabado",
+      })
+        .populate("user1")
+        .populate("card1").populate("vencedor");
+
+
+
+      console.log("combates1",combates1);
+      console.log("combates2",combates2);
+
+      const combates ={combates1, combates2};
+      
+      res.render("finishBattles", combates )
+      // const combates ={
+      //   oponentImg: user2[imgUser],
+      //   oponentName: user2[username],
+      //   oponentPokemon: card2[name],
+      //   oponentType: card2[tipo],
+
+      // }
+      //si ganaste
+
+      // if(datosUsuario.username===vencedor){
+
+      //   combates.result ="Win"
+
+      // }else{ //si perdiste
+
+      //   combates.result ="Lose"
+      // }
+
+
+     
+
+
+    // res.render("finishBattles", combates );
+  } catch (e) {
+    console.error(e);
+  }
+};
+
 const activesBattlePage = async (req, res) => {
   //combates a los que puedo unir
   try {
@@ -350,5 +406,6 @@ module.exports = {
   joinBattle,
   fightBattle,
   winnerAnimation,
-  deleteBattle
+  deleteBattle,
+  showHistory
 };

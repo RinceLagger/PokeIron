@@ -10,7 +10,8 @@ const {
   joinBattle,
   fightBattle,
   winnerAnimation,
-  deleteBattle
+  deleteBattle,
+  showHistory
 } = require("../controllers/battle.controller");
 
 battleRouter
@@ -23,6 +24,7 @@ battleRouter
   .get("/join-battle/:id", joinBattle)
   .post("/fight-battle/:id/:battleID", fightBattle)
   .get("/battleAnimation/:battleID", winnerAnimation)
-  .get("/deletecombat/:battleID", deleteBattle);
+  .get("/deletecombat/:battleID", deleteBattle)
+  .get("/history", showHistory);
 
 module.exports = battleRouter;
