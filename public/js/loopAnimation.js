@@ -28,6 +28,10 @@ class Game1 {
       this.cardWidth = this.canvas.height/5;
       this.cardLarge = this.canvas.height/3;
       this.cond = true;
+      this.atackPlayerCond = false;
+      this.atackOponentCond = false;
+      this.condGolpePlayer = true;
+      this.condGolpeOponent = true;
      }
   
     startLoop() {
@@ -68,15 +72,20 @@ class Game1 {
 
       this.ctx.fillStyle="#371482"; //fondo morado para las zonas no cubiertas
       this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
-      this.ctx.drawImage(portada,this.canvas.width/2-this.canvas.height/4, 0, this.canvas.height/2, this.canvas.height);
+      this.ctx.drawImage(portada,this.canvas.width/2-2*this.canvas.height/6, 0, 2*this.canvas.height/3, this.canvas.height);
 
     }
   
-
+    borrarGolpes(){
+      this.atackPlayerCond = false;
+      this.atackOponentCond = false;
+    }
   
  
     atackPlayer(time){
      // esperamos 6 segundos aprox antes de iniciar animación de ataques --> time >6000
+      
+      
 
       if(time>6000 && this.yCardPlayer>this.canvas.height/2 && this.playerAtack[0]){
         this.yCardPlayer-=5;
@@ -88,12 +97,19 @@ class Game1 {
         }
       }
       if( this.yCardPlayer < 2*this.canvas.height/3 && this.playerAtack[1]){
-        //console.log("dentro!!!")
+
+        if(this.condGolpePlayer){ //mostramos golpe sobre el oponente una vez
+          this.condGolpePlayer = false;
+          this.atackPlayerCond = true;
+          setTimeout(()=>{ this.borrarGolpes(); }, 300);
+          
+        }
+
         this.yCardPlayer+=5;
       }else{
         if(!this.playerAtack[0] && this.playerAtack[1] && this.cond){//cuando termina nuestro ataque empieza el del oponente
           this.oponentAtack[0]=true;
-          console.log("condicion bucle dos")
+          //console.log("condicion bucle dos")
         }
       }
       // console.log("this.yCardPlayer",this.yCardPlayer)
@@ -101,10 +117,10 @@ class Game1 {
     }
 
     atackOponent(){
-      console.log(this.yCardOponent+this.cardLarge)
-      console.log(this.canvas.height/2)
+      // console.log(this.yCardOponent+this.cardLarge)
+      // console.log(this.canvas.height/2)
       if( (this.yCardOponent+this.cardLarge)<this.canvas.height/2 && this.oponentAtack[0]){
-        console.log("dentro11111!!!")
+        //console.log("dentro11111!!!")
         this.yCardOponent+=5;
         this.playerAtack[1] = false;
       }
@@ -117,7 +133,13 @@ class Game1 {
           
       }
       if( this.yCardOponent> 0 && this.oponentAtack[1]){
-        console.log("dentro!!!")
+        
+        if(this.condGolpeOponent){ //mostramos golpe sobre el jugador una vez
+          this.condGolpeOponent = false;
+          this.atackOponentCond = true;
+          setTimeout(()=>{ this.borrarGolpes(); }, 300);
+        }
+
         this.cond = false;
         this.yCardOponent-=5;
       }
@@ -143,9 +165,19 @@ class Game1 {
   
     drawCanvas() {
   
-        this.ctx.drawImage(cardPlayer,30, this.yCardPlayer, this.cardWidth, this.cardLarge);
-        this.ctx.drawImage(cardOponent,this.canvas.width-this.cardWidth-30, this.yCardOponent, this.cardWidth, this.cardLarge);
+        //dibujo cartas de jugador y de advesario     
+        this.ctx.drawImage(cardPlayer,0.1*this.canvas.width, this.yCardPlayer, this.cardWidth, this.cardLarge);
+        this.ctx.drawImage(cardOponent,this.canvas.width-this.cardWidth-0.1*this.canvas.width, this.yCardOponent, this.cardWidth, this.cardLarge);
       
+        //muestro golpeos de jugador y adversario
+
+        if(this.atackOponentCond){
+          this.ctx.drawImage(golpe,0.1*this.canvas.width+this.cardWidth/4, 5*this.yCardPlayer/4, this.cardWidth/2, this.cardWidth/2);
+        }
+
+        if(this.atackPlayerCond){
+          this.ctx.drawImage(golpe,this.canvas.width-3*this.cardWidth/4-0.1*this.canvas.width, this.yCardPlayer/4, this.cardWidth/2, this.cardWidth/2);
+        }
 
   
     }
