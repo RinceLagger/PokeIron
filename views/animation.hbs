@@ -17,9 +17,14 @@
 </section>
 
 {{#if vencedor}}
-<h1>Has ganado</h1>
+<div class="result"><h1 >YOU WIN!</h1></div>
+
 {{else}}
-<h1>Has perdido</h1>
+<div class="result"><h1> YOU LOSE!</h1></div>
+
 {{/if}}
+<section class="logout wrapper">
+    <a href="/dashboard" class="secondary">Back to Dashboard</a>
+</section>
 <script src="/js/loopAnimation.js"></script>
 <script src="/js/mainAnimation.js"></script>

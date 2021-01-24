@@ -5,6 +5,8 @@ const tipoPlayer = document.querySelector("#playerTipo").value;
 const imgCardOponent = document.querySelector("#cardOponentImg").value;
 const tipoOponent = document.querySelector("#oponentTipo").value;
 
+const resultText = document.querySelector(".result");
+
 
 const positionTipoGolpe = {
   Grass: [25,50,50,75],
@@ -76,7 +78,6 @@ class Game1 {
       }
       };
 
-      //this.printIntro();
 
       setTimeout(()=>{ this.printIntro(); }, 500);//retraso de medio segundo para que cargua la imagen de portada
       
@@ -127,18 +128,16 @@ class Game1 {
       }else{
         if(!this.playerAtack[0] && this.playerAtack[1] && this.cond){//cuando termina nuestro ataque empieza el del oponente
           this.oponentAtack[0]=true;
-          //console.log("condicion bucle dos")
+          
         }
       }
-      // console.log("this.yCardPlayer",this.yCardPlayer)
-      // console.log("segunda condicion",2*this.canvas.height/3 )
+      
     }
 
     atackOponent(){
-      // console.log(this.yCardOponent+this.cardLarge)
-      // console.log(this.canvas.height/2)
+      
       if( (this.yCardOponent+this.cardLarge)<this.canvas.height/2 && this.oponentAtack[0]){
-        //console.log("dentro11111!!!")
+        
         this.yCardOponent+=5;
         this.playerAtack[1] = false;
       }
@@ -160,12 +159,17 @@ class Game1 {
 
         this.cond = false;
         this.yCardOponent-=5;
+
+        if(this.yCardOponent<= 0){ //terminamos loop y mostramos ganador
+
+          setTimeout(()=>{ this.isGameOver = true; 
+            resultText.style.display = "flex";
+          
+          }, 500);
+
+        }
       }
-      // else{
-      //   if(!this.oponentAtack[0]){//cuando termina nuestro ataque empieza el del oponente
-      //     //terminar loop
-      //   }
-      // }
+     
     }
   
     updateCanvas() {
@@ -173,7 +177,6 @@ class Game1 {
       this.atackPlayer(Date.now()-this.initialTime);
       this.atackOponent();
     
-      //Pintar fondo
   
     }
   
@@ -217,12 +220,12 @@ class Game1 {
         //muestro golpeos de jugador y adversario
 
         if(this.atackOponentCond){
-          //console.log(this.tipoGolpeOponent )
+          
           this.ctx.drawImage(golpe,this.tipoGolpeOponent[0],this.tipoGolpeOponent[1],25,25,0.1*this.canvas.width+this.cardWidth/4, 5*this.yCardPlayer/4, this.cardWidth/2, this.cardWidth/2);
         }
 
         if(this.atackPlayerCond){
-          //console.log(this.tipoGolpePlayer )
+          
           this.ctx.drawImage(golpe,this.tipoGolpePlayer[0],this.tipoGolpePlayer[1],25,25,this.canvas.width-3*this.cardWidth/4-0.1*this.canvas.width, this.cardLarge/4, this.cardWidth/2, this.cardWidth/2);
         }
 
