@@ -48,6 +48,8 @@ class Game1 {
       this.condGolpeOponent = true;
       this.tipoGolpePlayer = positionTipoGolpe[tipoPlayer];
       this.tipoGolpeOponent = positionTipoGolpe[tipoOponent];
+      this.ctx.imageSmoothingEnabled = true;
+      this.ctx.imageSmoothingQuality = 'high';
      }
   
     startLoop() {
@@ -117,7 +119,7 @@ class Game1 {
         if(this.condGolpePlayer){ //mostramos golpe sobre el oponente una vez
           this.condGolpePlayer = false;
           this.atackPlayerCond = true;
-          setTimeout(()=>{ this.borrarGolpes(); }, 200);
+          setTimeout(()=>{ this.borrarGolpes(); }, 300);
           
         }
 
@@ -153,7 +155,7 @@ class Game1 {
         if(this.condGolpeOponent){ //mostramos golpe sobre el jugador una vez
           this.condGolpeOponent = false;
           this.atackOponentCond = true;
-          setTimeout(()=>{ this.borrarGolpes(); }, 200);
+          setTimeout(()=>{ this.borrarGolpes(); }, 300);
         }
 
         this.cond = false;
@@ -185,19 +187,28 @@ class Game1 {
         
         this.ctx.fillStyle="rgb(242, 153, 74)";; //fondo naranja
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+        this.ctx.fill();
 
         this.ctx.strokeStyle= "#fff";
         this.ctx.lineWidth = 2;
         this.ctx.beginPath();
         this.ctx.moveTo(0,this.canvas.height/2);
-        this.ctx.lineTo(this.canvas.width/2-this.canvas.width/12,this.canvas.height/2);
-        this.ctx.moveTo(this.canvas.width/2+this.canvas.width/12,this.canvas.height/2);
+        this.ctx.lineTo(this.canvas.width/2-this.cardWidth/4,this.canvas.height/2);
+        this.ctx.moveTo(this.canvas.width/2+this.cardWidth/4,this.canvas.height/2);
         this.ctx.lineTo(this.canvas.width,this.canvas.height/2);
-        this.ctx.arc(this.canvas.width/2, this.canvas.height/2,this.canvas.width/6, 0, 2*Math.PI, true);
-        this.ctx.closePath();
         this.ctx.stroke();
-        this.ctx.fill();
-
+        
+        this.ctx.closePath();
+        
+        this.ctx.beginPath();
+        this.ctx.arc(this.canvas.width/2, this.canvas.height/2,this.cardWidth/2, 0, 2*Math.PI, true);
+        this.ctx.stroke();
+        this.ctx.closePath();
+        
+        this.ctx.beginPath();
+        this.ctx.arc(this.canvas.width/2, this.canvas.height/2,this.cardWidth/4, 0, 2*Math.PI, true);
+        this.ctx.stroke();
+        this.ctx.closePath();
   
         //dibujo cartas de jugador y de advesario     
         this.ctx.drawImage(cardPlayer,0.1*this.canvas.width, this.yCardPlayer, this.cardWidth, this.cardLarge);
@@ -206,12 +217,12 @@ class Game1 {
         //muestro golpeos de jugador y adversario
 
         if(this.atackOponentCond){
-          console.log(this.tipoGolpeOponent )
+          //console.log(this.tipoGolpeOponent )
           this.ctx.drawImage(golpe,this.tipoGolpeOponent[0],this.tipoGolpeOponent[1],25,25,0.1*this.canvas.width+this.cardWidth/4, 5*this.yCardPlayer/4, this.cardWidth/2, this.cardWidth/2);
         }
 
         if(this.atackPlayerCond){
-          console.log(this.tipoGolpePlayer )
+          //console.log(this.tipoGolpePlayer )
           this.ctx.drawImage(golpe,this.tipoGolpePlayer[0],this.tipoGolpePlayer[1],25,25,this.canvas.width-3*this.cardWidth/4-0.1*this.canvas.width, this.cardLarge/4, this.cardWidth/2, this.cardWidth/2);
         }
 
