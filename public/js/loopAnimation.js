@@ -180,6 +180,24 @@ class Game1 {
     }
   
     drawCanvas() {
+
+        //dibujo fondo del estadio y lineas
+        
+        this.ctx.fillStyle="rgb(242, 153, 74)";; //fondo naranja
+        this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+
+        this.ctx.strokeStyle= "#fff";
+        this.ctx.lineWidth = 2;
+        this.ctx.beginPath();
+        this.ctx.moveTo(0,this.canvas.height/2);
+        this.ctx.lineTo(this.canvas.width/2-this.canvas.width/12,this.canvas.height/2);
+        this.ctx.moveTo(this.canvas.width/2+this.canvas.width/12,this.canvas.height/2);
+        this.ctx.lineTo(this.canvas.width,this.canvas.height/2);
+        this.ctx.arc(this.canvas.width/2, this.canvas.height/2,this.canvas.width/6, 0, 2*Math.PI, true);
+        this.ctx.closePath();
+        this.ctx.stroke();
+        this.ctx.fill();
+
   
         //dibujo cartas de jugador y de advesario     
         this.ctx.drawImage(cardPlayer,0.1*this.canvas.width, this.yCardPlayer, this.cardWidth, this.cardLarge);
