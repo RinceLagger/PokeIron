@@ -8,6 +8,7 @@ const tipoOponent = document.querySelector("#oponentTipo").value;
 const resultText = document.querySelector(".result");
 
 
+
 const positionTipoGolpe = {
   Grass: [25,50,50,75],
   Fire: [0,0,25,25],
@@ -52,11 +53,18 @@ class Game1 {
       this.tipoGolpeOponent = positionTipoGolpe[tipoOponent];
       this.ctx.imageSmoothingEnabled = true;
       this.ctx.imageSmoothingQuality = 'high';
+      this.audioBattle = new Audio("/sounds/battle.mp3");
+      this.audioWin = new Audio("/sounds/victory.mp3");
+      this.audioLose = new Audio("/sounds/lose.mp3");
+      this.audioHit1 = new Audio("/sounds/smash.mp3");
+      this.audioHit2 = new Audio("/sounds/smash.mp3");
+    
      }
   
     startLoop() {
       let timeReal = Date.now();
-      
+      this.audioBattle.volume = 0.06;
+      this.audioBattle.play();
     
   
       const loop = () => {
@@ -98,6 +106,7 @@ class Game1 {
     borrarGolpes(){
       this.atackPlayerCond = false;
       this.atackOponentCond = false;
+      
     }
   
  
@@ -121,6 +130,10 @@ class Game1 {
           this.condGolpePlayer = false;
           this.atackPlayerCond = true;
           setTimeout(()=>{ this.borrarGolpes(); }, 300);
+
+          //sonido golpe
+          this.audioHit1.volume = 0.08;
+          this.audioHit1.play();
           
         }
 
@@ -155,6 +168,8 @@ class Game1 {
           this.condGolpeOponent = false;
           this.atackOponentCond = true;
           setTimeout(()=>{ this.borrarGolpes(); }, 300);
+
+         
         }
 
         this.cond = false;
@@ -162,14 +177,41 @@ class Game1 {
 
         if(this.yCardOponent<= 0){ //terminamos loop y mostramos ganador
 
+           //sonido golpe
+           
+           this.audioHit2.volume = 0.08;
+           this.audioHit2.play();
+
           setTimeout(()=>{ this.isGameOver = true; 
+            this.audioBattle.pause();
             resultText.style.display = "flex";
+
+            this.sonidoFinal();//lanzamos sonidos finales de victoria o derrota
+
           
-          }, 500);
+          }, 1000);
 
         }
       }
      
+    }
+
+    sonidoFinal(){
+      
+      if(resultText.getAttribute("id")==="win"){//sonido de victoria
+
+        this.audioWin.volume = 0.05;
+        this.audioWin.play();
+        setTimeout(()=>{ this.audioWin.pause(); }, 12000);
+
+      }else{//sonido de derrota
+        this.audioLose.volume = 0.05;
+        this.audioLose.play();
+        setTimeout(()=>{ this.audioLose.pause(); }, 12000);
+
+      }
+
+
     }
   
     updateCanvas() {
