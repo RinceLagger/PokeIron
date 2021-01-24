@@ -1,7 +1,21 @@
 
 const imgCardPlayer = document.querySelector("#cardPlayerImg").value;
+const tipoPlayer = document.querySelector("#playerTipo").value;
 
 const imgCardOponent = document.querySelector("#cardOponentImg").value;
+const tipoOponent = document.querySelector("#oponentTipo").value;
+
+
+const positionTipoGolpe = {
+  Grass: [25,50,50,75],
+  Fire: [0,0,25,25],
+  Water: [75,50,100,75],
+  Colorless: [25,0,50,25],
+  Fighting: [50,25,75,50],
+  Lightning: [50,50,75,75],
+  Psychic: [75,25,100,50],
+  metal: [75,0,100,25],
+}
 
 /*******Carga de imágenes ****/
 var cardPlayer = new Image(); 
@@ -11,7 +25,7 @@ cardOponent.src = `${imgCardOponent}`;
 var portada= new Image(); 
 portada.src = `/img/portada_fight.jpg`;
 var golpe= new Image(); 
-golpe.src = `/img/golpe.png`;
+golpe.src = `/img/energy-logo.png`;
 
 /********************************/
 
@@ -32,6 +46,8 @@ class Game1 {
       this.atackOponentCond = false;
       this.condGolpePlayer = true;
       this.condGolpeOponent = true;
+      this.tipoGolpePlayer = positionTipoGolpe[tipoPlayer];
+      this.tipoGolpeOponent = positionTipoGolpe[tipoOponent];
      }
   
     startLoop() {
@@ -101,7 +117,7 @@ class Game1 {
         if(this.condGolpePlayer){ //mostramos golpe sobre el oponente una vez
           this.condGolpePlayer = false;
           this.atackPlayerCond = true;
-          setTimeout(()=>{ this.borrarGolpes(); }, 300);
+          setTimeout(()=>{ this.borrarGolpes(); }, 200);
           
         }
 
@@ -137,7 +153,7 @@ class Game1 {
         if(this.condGolpeOponent){ //mostramos golpe sobre el jugador una vez
           this.condGolpeOponent = false;
           this.atackOponentCond = true;
-          setTimeout(()=>{ this.borrarGolpes(); }, 300);
+          setTimeout(()=>{ this.borrarGolpes(); }, 200);
         }
 
         this.cond = false;
@@ -172,11 +188,13 @@ class Game1 {
         //muestro golpeos de jugador y adversario
 
         if(this.atackOponentCond){
-          this.ctx.drawImage(golpe,0.1*this.canvas.width+this.cardWidth/4, 5*this.yCardPlayer/4, this.cardWidth/2, this.cardWidth/2);
+          console.log(this.tipoGolpeOponent )
+          this.ctx.drawImage(golpe,this.tipoGolpeOponent[0],this.tipoGolpeOponent[1],25,25,0.1*this.canvas.width+this.cardWidth/4, 5*this.yCardPlayer/4, this.cardWidth/2, this.cardWidth/2);
         }
 
         if(this.atackPlayerCond){
-          this.ctx.drawImage(golpe,this.canvas.width-3*this.cardWidth/4-0.1*this.canvas.width, this.yCardPlayer/4, this.cardWidth/2, this.cardWidth/2);
+          console.log(this.tipoGolpePlayer )
+          this.ctx.drawImage(golpe,this.tipoGolpePlayer[0],this.tipoGolpePlayer[1],25,25,this.canvas.width-3*this.cardWidth/4-0.1*this.canvas.width, this.cardLarge/4, this.cardWidth/2, this.cardWidth/2);
         }
 
   
