@@ -136,3 +136,8 @@ if (
     battlesTrigger.addEventListener("click", battlesDisplay);
   }
 }
+
+
+
+
+

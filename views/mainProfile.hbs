@@ -2,6 +2,15 @@
 {{> userHeader}}
 
 {{> navbar}}
+<section  class="wrapper">
+    <article class=" widget" id="chart">
+        <canvas id ="my-chart"></canvas>
+        <p>{{win}} wins</p>
+        <p>{{lose}} losses</p>
+      
+    </article>
+
+</section>
 
 <section id="mainProfile" class="wrapper">
     <article class=" widget cardsWidget">
@@ -17,4 +26,6 @@
         {{/each}}
     </article>
 
+
 </section>
+

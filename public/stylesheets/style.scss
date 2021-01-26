@@ -208,6 +208,8 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     padding: 5em 2em;
+
+    
   }
 
   .menu {
@@ -666,5 +668,16 @@ body {
   .primary {
     margin: 2em auto;
     bottom: 1em;
+  }
+}
+
+//-----------chart --------//
+
+#chart{
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  p{
+    padding: 0.2em;
   }
 }
