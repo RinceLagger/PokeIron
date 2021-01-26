@@ -29,6 +29,12 @@ var portada= new Image();
 portada.src = `/img/portada_fight.jpg`;
 var golpe= new Image(); 
 golpe.src = `/img/energy-logo.png`;
+var lifeBarFull= new Image(); 
+lifeBarFull.src = `/img/lifebarfull.png`;
+var lifeBarMedium= new Image(); 
+lifeBarMedium.src = `/img/lifebarmedium.png`;
+var lifeBarEmpty= new Image(); 
+lifeBarEmpty.src = `/img/lifebarempty.png`;
 
 /********************************/
 
@@ -58,6 +64,9 @@ class Game1 {
       this.audioLose = new Audio("/sounds/lose.mp3");
       this.audioHit1 = new Audio("/sounds/smash.mp3");
       this.audioHit2 = new Audio("/sounds/smash.mp3");
+      this.lifeBarPlayer = [0];
+      this.lifeBarOponent = [0];
+
     
      }
   
@@ -108,6 +117,19 @@ class Game1 {
       this.atackOponentCond = false;
       
     }
+
+    changeLifeBar(identifier, result){
+
+      if(identifier==="player"){
+        if(result==="win")this.lifeBarPlayer[0]=1;//si ganamos el golpe del oponente nos baja solo la mitad de vida
+        else this.lifeBarPlayer[0]=2; //si perdemos nos baja la vida entera
+      }
+      else if(identifier==="oponent"){
+        if(result==="win")this.lifeBarOponent[0]=2;
+        else this.lifeBarOponent[0]=1; 
+      }
+
+    }
   
  
     atackPlayer(time){
@@ -130,6 +152,8 @@ class Game1 {
           this.condGolpePlayer = false;
           this.atackPlayerCond = true;
           setTimeout(()=>{ this.borrarGolpes(); }, 300);
+
+          this.changeLifeBar("oponent",resultText.getAttribute("id"));
 
           //sonido golpe
           this.audioHit1.volume = 0.08;
@@ -167,6 +191,8 @@ class Game1 {
         if(this.condGolpeOponent){ //mostramos golpe sobre el jugador una vez
           this.condGolpeOponent = false;
           this.atackOponentCond = true;
+
+          this.changeLifeBar("player",resultText.getAttribute("id"));
           setTimeout(()=>{ this.borrarGolpes(); }, 300);
 
          
@@ -269,6 +295,32 @@ class Game1 {
         if(this.atackPlayerCond){
           
           this.ctx.drawImage(golpe,this.tipoGolpePlayer[0],this.tipoGolpePlayer[1],25,25,this.canvas.width-3*this.cardWidth/4-0.1*this.canvas.width, this.cardLarge/4, this.cardWidth/2, this.cardWidth/2);
+        }
+
+        //dibujamos barras enteras de vida
+        this.ctx.drawImage(lifeBarFull,0.1*this.canvas.width + this.cardWidth+ this.cardWidth/3, this.canvas.height - 20, this.cardWidth, this.cardWidth/13);
+        this.ctx.drawImage(lifeBarFull,this.canvas.width-2*this.cardWidth-0.1*this.canvas.width -this.cardWidth/3, 20-this.cardWidth/13, this.cardWidth, this.cardWidth/13);
+
+        //sobreponemor cambios en la barra de vida
+
+        if(this.lifeBarPlayer[0]!=0){
+          if(this.lifeBarPlayer[0]===1){//media vida
+            this.ctx.drawImage(lifeBarMedium,0.1*this.canvas.width + this.cardWidth+ this.cardWidth/3, this.canvas.height - 20, this.cardWidth, this.cardWidth/13);
+
+          }else{//sin vida
+            this.ctx.drawImage(lifeBarEmpty,0.1*this.canvas.width + this.cardWidth+ this.cardWidth/3, this.canvas.height - 20, this.cardWidth, this.cardWidth/13);
+          }
+
+        }
+
+        if(this.lifeBarOponent[0]!=0){
+          if(this.lifeBarOponent[0]===1){//media vida
+            this.ctx.drawImage(lifeBarMedium,this.canvas.width-2*this.cardWidth-0.1*this.canvas.width -this.cardWidth/3, 20-this.cardWidth/13, this.cardWidth, this.cardWidth/13);
+
+          }else{//sin vida
+            this.ctx.drawImage(lifeBarEmpty,this.canvas.width-2*this.cardWidth-0.1*this.canvas.width -this.cardWidth/3, 20-this.cardWidth/13, this.cardWidth, this.cardWidth/13);
+          }
+
         }
 
   
