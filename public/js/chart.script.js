@@ -43,3 +43,19 @@ function printChart(){
 }
 
 printChart();
+
+
+//------gráfico rank ----------//
+
+
+let points = playerWins-playerLosses;
+
+if(points<0)points=0;
+
+const rank= document.querySelector("#puntos");
+
+
+rank.style.width = `${points}%`
+
+
+
