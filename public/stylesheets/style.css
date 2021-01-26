@@ -4,6 +4,13 @@ body {
   color: #000000;
 }
 
+@media only screen and (min-width: 768px) {
+  body {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 h1 {
   font-weight: 600;
   font-size: 30px;
@@ -12,10 +19,24 @@ h1 {
   color: #003a70;
 }
 
+@media only screen and (min-width: 768px) {
+  h1 {
+    font-size: 34px;
+    line-height: 38px;
+  }
+}
+
 h2 {
   font-weight: 600;
   font-size: 22px;
   margin: 16px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  h2 {
+    font-size: 26px;
+    line-height: 30px;
+  }
 }
 
 h3 {
@@ -23,11 +44,25 @@ h3 {
   font-size: 18px;
 }
 
+@media only screen and (min-width: 768px) {
+  h3 {
+    font-size: 22px;
+    line-height: 26px;
+  }
+}
+
 h4 {
   margin: 16px 0;
   font-weight: 600;
   font-size: 16px;
   line-height: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  h4 {
+    font-size: 20px;
+    line-height: 24px;
+  }
 }
 
 .center {
@@ -69,6 +104,12 @@ body .widget {
   margin: 20px 0;
 }
 
+@media only screen and (min-width: 768px) {
+  body .widget {
+    padding: 2em;
+  }
+}
+
 body .primary {
   font-weight: 600;
   font-size: 14px;
@@ -83,6 +124,13 @@ body .primary {
   min-width: 150px;
   width: fit-content;
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
+}
+
+@media only screen and (min-width: 768px) {
+  body .primary {
+    font-size: 18px;
+    line-height: 20px;
+  }
 }
 
 body .secondary {
@@ -101,9 +149,23 @@ body .secondary {
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 0.25));
 }
 
+@media only screen and (min-width: 768px) {
+  body .secondary {
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
 body .wrapper {
   max-width: 1000px;
   padding: 1em;
+  margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  body .wrapper {
+    padding: 1em 3em;
+  }
 }
 
 body .logout {
@@ -118,9 +180,39 @@ body .nav-active {
 
 body #menuDesktop {
   display: none;
+  padding: 1em 1em;
+  background-color: #003a70;
+}
+
+body #menuDesktop ul {
+  float: right;
+}
+
+body #menuDesktop ul li {
+  margin: 10px;
+  display: inline-block;
+}
+
+body #menuDesktop ul li:hover ul {
+  display: block;
+}
+
+body #menuDesktop ul li ul {
+  display: none;
+}
+
+body #menuDesktop ul li a {
+  color: #ffffff;
+}
+
+@media only screen and (min-width: 992px) {
+  body #menuDesktop {
+    display: block;
+  }
 }
 
 body #menuMobile {
+  padding: 1em;
   background-color: #003a70;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -128,6 +220,12 @@ body #menuMobile {
 body #menuMobile img {
   float: right;
   width: 1.5em;
+}
+
+@media only screen and (min-width: 768px) {
+  body #menuMobile img {
+    width: 2em;
+  }
 }
 
 body #menuMobile .hamburger {
@@ -163,50 +261,103 @@ body #menuMobile .hamburger ul li ul li {
   margin-left: 10px;
 }
 
+@media only screen and (min-width: 768px) {
+  body #menuMobile {
+    padding: 1.5em;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  body #menuMobile {
+    display: none;
+  }
+}
+
 body .header {
+  background-color: rgba(255, 203, 5, 0.31);
+}
+
+body .header .content {
   display: flex;
   justify-content: space-between;
-  padding: 1em;
-  background-color: rgba(255, 203, 5, 0.31);
+  padding: 2em;
   align-items: center;
   gap: 1em;
 }
 
-body .header img {
-  border: 3px solid #ffcb05;
-  width: 40%;
-  clip-path: circle(45% at center);
+body .header .content .userImg {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+  border: 2px solid #003a70;
 }
 
-body .header h3 {
+@media only screen and (min-width: 768px) {
+  body .header .content .userImg {
+    width: 130px;
+    height: 100px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  body .header .content .userImg {
+    width: 200px;
+    height: 150px;
+  }
+}
+
+body .header .content h3 {
   flex-basis: 60%;
   text-transform: capitalize;
 }
 
-body nav {
-  padding: 1em;
+@media only screen and (min-width: 768px) {
+  body .header .content h3 {
+    font-size: 30px;
+  }
 }
 
-body nav ul {
+@media only screen and (min-width: 768px) {
+  body .header .content {
+    width: fit-content;
+    margin: 0 auto;
+  }
+}
+
+body #navbar {
+  padding: 2em 0 1em 0;
+}
+
+body #navbar ul {
   display: flex;
   justify-content: space-around;
   gap: 0.5em;
 }
 
-body nav ul .nav-active::after {
+body #navbar ul .nav-active::after {
   content: " ";
   position: absolute;
   top: 100%;
   left: 50%;
   width: 40%;
   border: 2px solid #003a70;
+  background-color: #003a70;
   border-radius: 4px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   transform: translateX(-50%);
 }
 
-body nav ul a {
+body #navbar ul a {
   position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  body #navbar {
+    width: 50%;
+    margin: 0 auto;
+  }
 }
 
 body #header {
@@ -232,10 +383,23 @@ body .logo {
   margin: 0 auto;
 }
 
+@media only screen and (min-width: 768px) {
+  body .logo {
+    width: 40%;
+  }
+}
+
 body .buttons {
   display: flex;
   justify-content: space-around;
   margin: 1em 0;
+}
+
+@media only screen and (min-width: 768px) {
+  body .buttons {
+    margin: 2em auto;
+    width: 50%;
+  }
 }
 
 body #form {
@@ -250,10 +414,23 @@ body #form h4 {
   margin: 1em 0;
 }
 
+@media only screen and (min-width: 768px) {
+  body #form h4 {
+    margin: 2em 0 1em 0;
+  }
+}
+
 body #form form {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+@media only screen and (min-width: 992px) {
+  body #form form {
+    width: 50%;
+    margin: 0 auto;
+  }
 }
 
 body #form form input {
@@ -263,6 +440,15 @@ body #form form input {
   border-radius: 14px;
   padding: 0.5em;
   font-size: 14px;
+}
+
+@media only screen and (min-width: 768px) {
+  body #form form input {
+    font-size: 18px;
+    line-height: 22px;
+    border-radius: 18px;
+    padding: 0.5em 1em;
+  }
 }
 
 body #form form button {
@@ -275,8 +461,22 @@ body #form form ul {
   font-weight: 200;
 }
 
+@media only screen and (min-width: 768px) {
+  body #form form ul {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}
+
 body #form form ul li {
   margin: 5px 0;
+}
+
+@media only screen and (min-width: 768px) {
+  body #firstOpening {
+    width: 60%;
+    text-align: center;
+  }
 }
 
 body #firstOpening a {
@@ -288,8 +488,33 @@ body #firstOpening img {
   margin: 2em auto;
 }
 
+@media only screen and (min-width: 768px) {
+  body #firstOpening img {
+    width: unset;
+    height: 60vh;
+  }
+}
+
 body #firstCards {
   display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  body #firstCards #cardsMobile {
+    width: 70%;
+    margin: 0 auto;
+  }
+}
+
+body #firstCards #cardsDesktop #cardsViewport {
+  margin: 2em 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2em;
+}
+
+body #firstCards #cardsDesktop #cardsViewport .card {
+  width: 29%;
 }
 
 body #firstCards #cardsViewport-mw {
@@ -299,6 +524,12 @@ body #firstCards #cardsViewport-mw {
 body #firstCards #cardsViewport-mw .tns-item {
   width: calc(15.6667%);
   margin: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  body #firstCards #cardsViewport-mw .tns-item {
+    margin-top: 1em;
+  }
 }
 
 body #firstCards .tns-liveregion.tns-visually-hidden {
@@ -329,12 +560,33 @@ body #firstCards .tns-controls button {
   margin: 5px;
 }
 
+@media only screen and (min-width: 768px) {
+  body #firstCards .tns-controls button {
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
 body #firstCards button {
   margin: 0 auto;
 }
 
+@media only screen and (min-width: 768px) {
+  body #firstCards button {
+    width: 60px;
+    height: 60px;
+  }
+}
+
 body .pokeName {
   background-color: rgba(255, 203, 5, 0.31);
+}
+
+@media only screen and (min-width: 768px) {
+  body .pokeName h2 {
+    padding: 1em;
+    font-size: 40px;
+  }
 }
 
 body .tipo {
@@ -385,6 +637,12 @@ body .cardDetail img {
   width: 100%;
 }
 
+@media only screen and (min-width: 992px) {
+  body .cardDetail img {
+    width: 50%;
+  }
+}
+
 body .cardDetail div {
   margin-top: 1em;
   display: flex;
@@ -392,8 +650,24 @@ body .cardDetail div {
   align-items: center;
 }
 
+@media only screen and (min-width: 992px) {
+  body .cardDetail div {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1em;
+  }
+}
+
 body .cardDetail div p {
   line-height: 25px;
+}
+
+@media only screen and (min-width: 768px) {
+  body .cardDetail div p {
+    font-size: 30px;
+    line-height: 30px;
+  }
 }
 
 body .cardDetail div :first-child {
@@ -403,6 +677,20 @@ body .cardDetail div :first-child {
 
 body .cardDetail div span {
   margin: 0 5px;
+}
+
+@media only screen and (min-width: 768px) {
+  body .cardDetail {
+    width: 60%;
+    margin: 3em auto;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  body .cardDetail {
+    display: flex;
+    gap: 2em;
+  }
 }
 
 body #mainProfile .cardsWidget div {
@@ -419,6 +707,12 @@ body #mainProfile .cardsWidget div p {
   flex-basis: 65%;
 }
 
+@media only screen and (min-width: 768px) {
+  body #mainProfile .cardsWidget div p {
+    flex-basis: 76%;
+  }
+}
+
 body #mainProfile .cardsWidget div p:last-child {
   flex-basis: 20%;
   text-align: right;
@@ -430,6 +724,12 @@ body #mainProfile .cardsWidget div p:last-child {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media only screen and (min-width: 768px) {
+  #loading {
+    top: 75%;
+  }
 }
 
 #loading .pokeball {
@@ -496,6 +796,13 @@ body #mainProfile .cardsWidget div p:last-child {
   margin: 0 auto;
 }
 
+@media only screen and (min-width: 768px) {
+  #form .custom-file-input::before {
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
 /* AnimationFrames */
 @keyframes frames {
   0% {
@@ -549,30 +856,68 @@ body #mainProfile .cardsWidget div p:last-child {
 #battlesList .widget .widgetContent {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
   gap: 1em;
+}
+
+#battlesList .widget .widgetContent .userImg {
+  width: 110px;
+  height: 100px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 100%;
+  border: 2px solid #003a70;
+}
+
+@media only screen and (min-width: 768px) {
+  #battlesList .widget .widgetContent .userImg {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #battlesList .widget .widgetContent .userImg {
+    width: 50%;
+    height: 160px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  #battlesList .widget .widgetContent .userImg {
+    width: 50%;
+    height: 163px;
+  }
 }
 
 #battlesList .widget .widgetContent span {
   font-weight: 400;
   text-transform: capitalize;
   line-height: 1.5em;
+  text-transform: capitalize;
 }
 
 #battlesList .widget .widgetContent p {
   margin: 10px 0;
 }
 
-#battlesList .widget .widgetContent img {
-  border: 3px solid #ffcb05;
-  width: 30%;
-  clip-path: circle(45% at center);
-  float: left;
-}
-
 #battlesList .widget hr {
   border: 1px solid #003a70;
   border-radius: 50px;
+}
+
+@media only screen and (min-width: 992px) {
+  #battlesList .widget {
+    width: 40%;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  #battlesList {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
 }
 
 /* --------------- Confirm ------------- */

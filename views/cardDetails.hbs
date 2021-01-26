@@ -1,13 +1,14 @@
-<section class="menu">
-    <h4 class="center"><a href="/dashboard">Go back</a></h4>
-</section>
-<section class="pokeName wrapper">
-    <h2 class="center">{{name}}</h2>
+{{> menu}}
+<section class="pokeName ">
+    <article class="wrapper">
+        <h2 class="center">{{name}}</h2>
+    </article>
+
 </section>
 <section class="cardDetail wrapper">
     <img class="card" src="{{imgUser}}" alt="pokemon-card">
     <div>
         <p>Type: <span class="tipo {{tipo}}"></span> {{tipo}}
-        <p>HP {{hp}}</p>
+        <p>HP: {{hp}}</p>
     </div>
 </section>
