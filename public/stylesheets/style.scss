@@ -19,6 +19,9 @@ body {
     border-radius: 20px;
     padding: 1em;
     margin: 20px 0;
+    @include tablet {
+      padding: 2em;
+    }
   }
 
   .primary {
@@ -32,6 +35,10 @@ body {
   .wrapper {
     max-width: 1000px;
     padding: 1em;
+    margin: 0 auto;
+    @include tablet {
+      padding: 1em 3em;
+    }
   }
 
   .logout {
@@ -48,13 +55,39 @@ body {
 
   #menuDesktop {
     display: none;
+    padding: 1em 1em;
+    background-color: $darkBlue;
+    ul {
+      float: right;
+      li {
+        margin: 10px;
+        display: inline-block;
+        &:hover ul {
+          display: block;
+        }
+        ul {
+          display: none;
+        }
+        a {
+          color: $white;
+        }
+      }
+    }
+
+    @include desktop {
+      display: block;
+    }
   }
   #menuMobile {
+    padding: 1em;
     background-color: $darkBlue;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     img {
       float: right;
       width: 1.5em;
+      @include tablet {
+        width: 2em;
+      }
     }
     .hamburger {
       background-color: $darkBlue;
@@ -88,28 +121,53 @@ body {
         }
       }
     }
+    @include tablet {
+      padding: 1.5em;
+    }
+    @include desktop {
+      display: none;
+    }
   }
 
   .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
     background-color: $lightYellow;
-    align-items: center;
-    gap: 1em;
-    img {
-      border: 3px solid $yellow;
-      width: 40%;
-      clip-path: circle(45% at center);
-    }
-    h3 {
-      flex-basis: 60%;
-      text-transform: capitalize;
+    .content {
+      display: flex;
+      justify-content: space-between;
+      padding: 2em;
+      align-items: center;
+      gap: 1em;
+      .userImg {
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 100%;
+        border: 2px solid $darkBlue;
+        @include tablet {
+          width: 130px;
+          height: 100px;
+        }
+        @include desktop {
+          width: 200px;
+          height: 150px;
+        }
+      }
+      h3 {
+        flex-basis: 60%;
+        text-transform: capitalize;
+        @include tablet {
+          font-size: 30px;
+        }
+      }
+      @include tablet {
+        width: fit-content;
+        margin: 0 auto;
+      }
     }
   }
-
-  nav {
-    padding: 1em;
+  #navbar {
+    padding: 2em 0 1em 0;
     ul {
       display: flex;
       justify-content: space-around;
@@ -121,6 +179,7 @@ body {
         left: 50%;
         width: 40%;
         border: 2px solid $darkBlue;
+        background-color: $darkBlue;
         border-radius: 4px;
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
         transform: translateX(-50%);
@@ -129,6 +188,10 @@ body {
       a {
         position: relative;
       }
+    }
+    @include tablet {
+      width: 50%;
+      margin: 0 auto;
     }
   }
 
@@ -159,12 +222,19 @@ body {
     width: 65%;
     display: block;
     margin: 0 auto;
+    @include tablet {
+      width: 40%;
+    }
   }
 
   .buttons {
     display: flex;
     justify-content: space-around;
     margin: 1em 0;
+    @include tablet {
+      margin: 2em auto;
+      width: 50%;
+    }
   }
 
   #form {
@@ -174,11 +244,18 @@ body {
     }
     h4 {
       margin: 1em 0;
+      @include tablet {
+        margin: 2em 0 1em 0;
+      }
     }
     form {
       display: flex;
       flex-direction: column;
       width: 100%;
+      @include desktop {
+        width: 50%;
+        margin: 0 auto;
+      }
 
       input {
         margin: 10px 0;
@@ -187,6 +264,12 @@ body {
         border-radius: 14px;
         padding: 0.5em;
         font-size: 14px;
+        @include tablet {
+          font-size: 18px;
+          line-height: 22px;
+          border-radius: 18px;
+          padding: 0.5em 1em;
+        }
       }
 
       button {
@@ -197,6 +280,10 @@ body {
       ul {
         font-size: 14px;
         font-weight: 200;
+        @include tablet {
+          font-size: 18px;
+          line-height: 22px;
+        }
         li {
           margin: 5px 0;
         }
@@ -207,22 +294,51 @@ body {
   /* ------ Cards ------- */
 
   #firstOpening {
+    @include tablet {
+      width: 60%;
+      text-align: center;
+    }
     a {
       margin: 0 auto;
     }
     img {
       width: 100%;
       margin: 2em auto;
+      @include tablet {
+        width: unset;
+        height: 60vh;
+      }
     }
   }
 
   #firstCards {
     display: none;
+    #cardsMobile {
+      @include tablet {
+        width: 70%;
+        margin: 0 auto;
+      }
+    }
+
+    #cardsDesktop {
+      #cardsViewport {
+        margin: 2em 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2em;
+        .card {
+          width: 29%;
+        }
+      }
+    }
     #cardsViewport-mw {
       margin: 16px;
       .tns-item {
         width: calc(15.6667%);
         margin: 10px;
+        @include tablet {
+          margin-top: 1em;
+        }
       }
     }
     .tns-liveregion.tns-visually-hidden {
@@ -240,11 +356,22 @@ body {
     }
     button {
       margin: 0 auto;
+      @include tablet {
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 
   .pokeName {
     background-color: $lightYellow;
+
+    h2 {
+      @include tablet {
+        padding: 1em;
+        font-size: 40px;
+      }
+    }
   }
 
   .tipo {
@@ -294,14 +421,27 @@ body {
   .cardDetail {
     img {
       width: 100%;
+      @include desktop {
+        width: 50%;
+      }
     }
     div {
       margin-top: 1em;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @include desktop {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 1em;
+      }
       p {
         line-height: 25px;
+        @include tablet {
+          font-size: 30px;
+          line-height: 30px;
+        }
       }
       :first-child {
         display: flex;
@@ -310,6 +450,14 @@ body {
       span {
         margin: 0 5px;
       }
+    }
+    @include tablet {
+      width: 60%;
+      margin: 3em auto;
+    }
+    @include desktop {
+      display: flex;
+      gap: 2em;
     }
   }
 
@@ -326,6 +474,9 @@ body {
         }
         p {
           flex-basis: 65%;
+          @include tablet {
+            flex-basis: 76%;
+          }
         }
         p:last-child {
           flex-basis: 20%;
@@ -343,6 +494,10 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @include tablet {
+    top: 75%;
+  }
 
   .pokeball {
     width: 60px;
@@ -439,11 +594,9 @@ body {
   justify-content: center;
   border: 1px solid $darkBlue;
   border-radius: 24px;
-  h1{
+  h1 {
     color: $white;
   }
-
-
 }
 
 /* ----- Battles Activas ------- */
@@ -453,28 +606,51 @@ body {
     .widgetContent {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
       gap: 1em;
+      .userImg {
+        width: 110px;
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 100%;
+        border: 2px solid $darkBlue;
+        @include tablet {
+          width: 130px;
+          height: 130px;
+        }
+        @include desktop {
+          width: 50%;
+          height: 160px;
+        }
+        @include large {
+          width: 50%;
+          height: 163px;
+        }
+      }
 
       span {
         font-weight: 400;
         text-transform: capitalize;
         line-height: 1.5em;
+        text-transform: capitalize;
       }
       p {
         margin: 10px 0;
-      }
-      img {
-        border: 3px solid $yellow;
-        width: 30%;
-        clip-path: circle(45% at center);
-        float: left;
       }
     }
     hr {
       border: 1px solid $darkBlue;
       border-radius: 50px;
     }
+    @include desktop {
+      width: 40%;
+    }
+  }
+  @include desktop {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
 }
 

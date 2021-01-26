@@ -7,7 +7,7 @@
     {{#each combates1}}
     <div class="battle widget">
         <div class="widgetContent">
-            <img src="{{this.user2.imgUser}}" alt="">
+            <div class="userImg" style="background-image: url('{{this.user2.imgUser}}');"></div>
             <div>
                 <h3>Pokemon Trainer: <span>{{this.user2.username}}</span></h3>
                 <p>Type: <span class="tipo {{this.card2.tipo}}"></span> {{this.card2.tipo}}</p>
@@ -21,11 +21,11 @@
     {{#each combates2}}
     <div class="battle widget">
         <div class="widgetContent">
-            <img src="{{this.user1.imgUser}}" alt="">
+            <div class="userImg" style="background-image: url('{{this.user1.imgUser}}');"></div>
             <div>
                 <h3>Pokemon Trainer: <span>{{this.user1.username}}</span></h3>
                 <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
-                <p>Winner: {{this.vencedor.username}}</p>
+                <p>Winner: <span>{{this.vencedor.username}}</span></p>
             </div>
         </div>
     </div>
