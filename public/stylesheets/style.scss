@@ -427,6 +427,24 @@ body {
     border-radius: 24px;
   }
 }
+.result {
+  position: absolute;
+  top: 35%;
+  left: 10%;
+  background-color: $lightBlue;
+  height: 15%;
+  width: 300px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $darkBlue;
+  border-radius: 24px;
+  h1{
+    color: $white;
+  }
+
+
+}
 
 /* ----- Battles Activas ------- */
 
