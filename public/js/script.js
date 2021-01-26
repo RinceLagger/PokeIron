@@ -131,3 +131,8 @@ if (document.querySelector("#menuMobile")) {
   closeTrigger.addEventListener("click", menuDisplay);
   battlesTrigger.addEventListener("click", battlesDisplay);
 }
+
+
+
+
+

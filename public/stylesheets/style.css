@@ -590,3 +590,13 @@ body #mainProfile .cardsWidget div p:last-child {
   margin: 2em auto;
   bottom: 1em;
 }
+
+#chart {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+#chart p {
+  padding: 0.2em;
+}
