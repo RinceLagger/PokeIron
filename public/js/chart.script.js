@@ -14,6 +14,8 @@ let ctx = canvasElement.getContext('2d');
 
 let data ={};
 
+let options = {};
+
 if(playerWins==0 && playerLosses ==0){
 
     data = {
@@ -29,6 +31,15 @@ if(playerWins==0 && playerLosses ==0){
         ],
         
     };
+
+    options = {
+        rotation: 1 * Math.PI,
+        circumference: 1 * Math.PI,
+        legend: {
+            display: false
+        },tooltips: {enabled: false},
+        hover: {mode: null},
+    }
 
 }else{
 
@@ -46,6 +57,14 @@ if(playerWins==0 && playerLosses ==0){
         
     };
 
+    options = {
+        rotation: 1 * Math.PI,
+        circumference: 1 * Math.PI,
+        legend: {
+            display: false
+        },
+    }
+
 }
 
 
@@ -57,13 +76,7 @@ function printChart(){
     let myDoughnutChart = new Chart(ctx, {
         type: 'doughnut',
         data: data,
-        options: {
-            rotation: 1 * Math.PI,
-            circumference: 1 * Math.PI,
-            legend: {
-                display: false
-            },
-        }
+        options: options
     });
 }
 
