@@ -1,21 +1,28 @@
 {{> menu}}
-<section class="header">
+<section class="header-title">
     <h1 class="center">Created Battles</h1>
 </section>
 <section id="battlesList" class="wrapper">
+    {{#if combatesPropios}}
     {{#each combatesPropios}}
     <div class="battle widget">
 
         <div class="widgetContent">
-            <img src="{{this.card1.imgUser}}" alt="">
+            <img class="cardImg" src="{{this.card1.imgUser}}" alt="">
             <div>
                 <h4>Pokemon: {{this.card1.name}}</h4>
                 <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>
-                <p>HP {{this.card1.hp}}</p>
+                <p>HP: {{this.card1.hp}}</p>
             </div>
         </div>
         <a href="/deletecombat/{{_id}}" class="primary">Delete</a>
-
     </div>
     {{/each}}
+    {{else}}
+    <section class="empty wrapper">
+        <img src="/img/pika.gif" alt="">
+        <h3>Ups! It seems that you don't have any created Battle</h3>
+        <a href="/createBattle" class="primary">Create new Battle</a>
+    </section>
+    {{/if}}
 </section>
