@@ -108,7 +108,12 @@ class Game1 {
 
       this.ctx.fillStyle="#3D7DCA"; //fondo morado para las zonas no cubiertas
       this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+
+      if(this.canvas.width<this.canvas.height){
       this.ctx.drawImage(portada,0.1*this.canvas.width, this.canvas.height/2 - 0.2*this.canvas.width, 0.8*this.canvas.width, 0.4*this.canvas.width);
+      }else{
+        this.ctx.drawImage(portada,0.3*this.canvas.width, this.canvas.height/2 - 0.1*this.canvas.width, 0.4*this.canvas.width, 0.2*this.canvas.width);
+      }
 
     }
   
