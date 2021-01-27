@@ -14,15 +14,16 @@
     <input type="hidden" id="playerTipo" value="{{cardPlayer.tipo}}">
     <input type="hidden" id="cardOponentImg" value="{{cardOponent.imgUser}}">
     <input type="hidden" id="oponentTipo" value="{{cardOponent.tipo}}">
-</section>
-
-{{#if vencedor}}
-<div class="result" id = "win"><h1 >YOU WIN!</h1></div>
+    {{#if vencedor}}
+<div class="result" id = "win"><h1 >You win!</h1></div>
 
 {{else}}
-<div class="result" id = "lose"><h1> YOU LOSE!</h1></div>
+<div class="result" id = "lose"><h1> You lose!</h1></div>
 
 {{/if}}
+</section>
+
+
 <section class="logout wrapper">
     <a href="/dashboard" class="secondary">Back to Dashboard</a>
 </section>
