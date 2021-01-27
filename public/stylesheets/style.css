@@ -101,7 +101,6 @@ body .widget {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px -1px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   padding: 1em;
-  margin: 20px 0;
 }
 
 @media only screen and (min-width: 768px) {
@@ -199,6 +198,14 @@ body #menuDesktop ul li:hover ul {
 
 body #menuDesktop ul li ul {
   display: none;
+  position: absolute;
+  background-color: #003a70;
+  padding: 1em;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+
+body #menuDesktop ul li ul li {
+  display: block;
 }
 
 body #menuDesktop ul li a {
@@ -283,6 +290,7 @@ body .header .content {
   padding: 2em;
   align-items: center;
   gap: 1em;
+  max-width: 500px;
 }
 
 body .header .content .userImg {
@@ -297,31 +305,51 @@ body .header .content .userImg {
 @media only screen and (min-width: 768px) {
   body .header .content .userImg {
     width: 130px;
-    height: 100px;
+    height: 130px;
   }
 }
 
 @media only screen and (min-width: 992px) {
   body .header .content .userImg {
-    width: 200px;
+    width: 150px;
     height: 150px;
   }
 }
 
-body .header .content h3 {
+body .header .content .userInfo {
   flex-basis: 60%;
+}
+
+body .header .content .userInfo h3 {
   text-transform: capitalize;
 }
 
 @media only screen and (min-width: 768px) {
-  body .header .content h3 {
+  body .header .content .userInfo h3 {
     font-size: 30px;
   }
 }
 
+body .header .content .userInfo #fondo-rank {
+  margin-top: 10px;
+  background-color: #00000057;
+  height: 5px;
+  border-radius: 20px;
+  width: 100%;
+}
+
+body .header .content .userInfo #puntos {
+  margin-top: 10px;
+  background-color: #003a70;
+  height: 5px;
+  border-radius: 20px;
+  width: 100%;
+  transition: width 1s;
+}
+
 @media only screen and (min-width: 768px) {
   body .header .content {
-    width: fit-content;
+    width: 80%;
     margin: 0 auto;
   }
 }
