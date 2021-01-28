@@ -33,14 +33,14 @@ const randomCards = (arrayCards) => {
   //de todas las cartas devuelve un array con las coincidentes con los índices aleatorios
 
   const arrayRandom = getRandomArray();
-  console.log(arrayRandom);
+ 
   return arrayCards.filter((card, index) => arrayRandom.includes(index));
 };
 
 const signIn = async (req, res, next) => {
   try {
     const { username, password, email } = req.body;
-    //console.log(user,password,email);
+    
     const missingCredentials = !password || !email || !username;
 
     if (missingCredentials) return res.send("missing credentials");
@@ -49,7 +49,7 @@ const signIn = async (req, res, next) => {
       return renderMessage(res, "signIn", "Incorrect password format");
 
     const usuario = User.findOne({ username }).lean();
-    console.log("usuario", usuario);
+   
     if (!usuario) return renderMessage(res, "signIn", "user already exist"); //Esto no acaba de funcionar --> no es necesario al lanzar mongo un error
 
     const saltRounds = 10;
@@ -67,7 +67,7 @@ const signIn = async (req, res, next) => {
       username,
       imgUser: avatarImg,
     });
-    console.log(user);
+   
     req.session.currentUser = user;
     res.render("openingIntro");
   } catch (err) {
@@ -87,26 +87,25 @@ const signIn = async (req, res, next) => {
 const logIn = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    console.log(username, password);
+    
     const missingCredentials = !password || !username;
     if (missingCredentials) {
       return res.send("missing credentials");
     }
     const usuario = await User.findOne({ username }).lean();
-    if (!usuario) return renderMessage(res, "login", "user does not exist");
+    if (!usuario) return renderMessage(res, "logIn", "user does not exist");
 
     const { passwordHash, ...user } = usuario;
 
     const verifiedPassword = await bcrypt.compare(password, passwordHash);
-    if (!verifiedPassword) return renderMessage(res, "login", "Wrong password");
+    if (!verifiedPassword) return renderMessage(res, "logIn", "Wrong password");
 
-    console.log(user);
-    console.log(req.session);
+   
     req.session.currentUser = user;
     return res.redirect("/dashboard");
   } catch (err) {
     console.error(err);
-    return renderMessage(res, "login", "validation error: " + err.message);
+    return renderMessage(res, "logIn", "validation error: " + err.message);
   }
 };
 
@@ -114,13 +113,13 @@ const openFirst = async (req, res, next) => {
   try {
     //comprobamos que estamos ya logueados
     if (!req.session.currentUser)
-      return renderMessage(res, "login", "Please Login first");
-    console.log(req.session.currentUser);
+      return renderMessage(res, "logIn", "Please Login first");
+    
     const username = req.session.currentUser.username;
 
     //comprobamos a continuación que realmente sea la primera vez que entramos( no hay cartas en la DB)
     const { cards } = await User.findOne({ username }, { cards: 1, _id: 0 });
-    console.log("cartas", cards.length);
+    
     if (cards.length != 0) return res.redirect("/dashboard");
 
     //obtenemos las 6 cartas al azar
@@ -143,7 +142,7 @@ const openFirst = async (req, res, next) => {
 
     res.render("firstCards", { finalCards });
 
-    console.log(user);
+    
   } catch (err) {
     console.error(err);
   }
@@ -152,7 +151,7 @@ const openFirst = async (req, res, next) => {
 const mainProfile = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
 
     const usuario = await User.findOne({ username: datosUsuario.username }).lean();
     
@@ -170,14 +169,14 @@ const mainProfile = async (req, res) => {
 
 const userData = (req, res) => {
   if (!req.session.currentUser)
-    return renderMessage(res, "login", "Please Login first");
+    return renderMessage(res, "logIn", "Please Login first");
   res.render("editProfile", req.session.currentUser);
 };
 
 const changeUserData = async (req, res) => {
   try {
     if (!req.session.currentUser)
-      return renderMessage(res, "login", "Please Login first");
+      return renderMessage(res, "logIn", "Please Login first");
 
     const usernameSession = req.session.currentUser.username;
 
@@ -197,7 +196,7 @@ const changeUserData = async (req, res) => {
     ).lean();
 
     const { passwordHash, ...user } = usuario;
-    console.log(user);
+    
     req.session.currentUser = user;
     res.redirect("/userdata");
   } catch (err) {
@@ -208,7 +207,7 @@ const changeUserData = async (req, res) => {
 const cardsProfile = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const { username } = datosUsuario;
     const { cards } = await User.findOne({ username }).populate("cards");
     const datos = { ...datosUsuario, cards };
@@ -222,9 +221,9 @@ const cardDetail = async (req, res) => {
   try {
     const { id } = req.params;
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const card = await Card.findById(id);
-    console.log(card);
+   
     res.render("cardDetails", card);
   } catch (e) {
     console.log(e);
