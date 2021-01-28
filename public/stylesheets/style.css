@@ -1007,7 +1007,7 @@ body #mainProfile .cardsWidget div p:last-child {
 
 #battlesList .widget .widgetContent .userImg {
   width: 105px;
-  height: 100px;
+  aspect-ratio: 1/1;
   background-size: cover;
   background-position: center;
   border-radius: 100%;
@@ -1017,21 +1017,21 @@ body #mainProfile .cardsWidget div p:last-child {
 @media only screen and (min-width: 768px) {
   #battlesList .widget .widgetContent .userImg {
     width: 130px;
-    height: 130px;
+
   }
 }
 
 @media only screen and (min-width: 992px) {
   #battlesList .widget .widgetContent .userImg {
-    width: 100px;
-    height: 100px;
+    width: 10em;
+
   }
 }
 
 @media only screen and (min-width: 1200px) {
   #battlesList .widget .widgetContent .userImg {
-    width: 125px;
-    height: 125px;
+    width: 13em;
+
   }
 }
 
