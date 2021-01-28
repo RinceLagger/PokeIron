@@ -77,7 +77,7 @@ const createCombat = async () => {
     console.log(apiURL);
     await axios.post(apiURL);
 
-    window.location.replace(`/dashboard`);
+    window.location.replace(`/battle-created`);
   }
 };
 
@@ -103,31 +103,54 @@ if (document.querySelector("#navbar")) {
   }
 }
 
-// -------- Menu ------- //
-
-const menuDisplay = () => {
-  const content = document.querySelector(".hamburger");
-  if (content.style.display === "none") {
-    content.style.display = "flex";
-  } else {
-    content.style.display = "none";
+if (document.querySelector("#menuDesktop")) {
+  const currentPage = location.href;
+  const navItem = document.querySelectorAll("#menuDesktop a");
+  for (let i = 0; i < navItem.length; i++) {
+    if (navItem[i].href === currentPage)
+      navItem[i].classList.add("menu-active");
   }
-};
-
-const battlesDisplay = () => {
-  const content = document.querySelector("#battlesList");
-  if (content.style.display === "none") {
-    content.style.display = "block";
-  } else {
-    content.style.display = "none";
-  }
-};
+}
 
 if (document.querySelector("#menuMobile")) {
-  const menuTrigger = document.querySelector("#menuTrigger");
-  const closeTrigger = document.querySelector("#closeTrigger");
-  const battlesTrigger = document.querySelector("#battlesTrigger");
-  menuTrigger.addEventListener("click", menuDisplay);
-  closeTrigger.addEventListener("click", menuDisplay);
-  battlesTrigger.addEventListener("click", battlesDisplay);
+  const currentPage = location.href;
+  const navItem = document.querySelectorAll("#menuMobile a");
+  for (let i = 0; i < navItem.length; i++) {
+    if (navItem[i].href === currentPage)
+      navItem[i].classList.add("menu-active");
+  }
+}
+
+// -------- Menu ------- //
+
+if (
+  document.querySelector("#menuDesktop") ||
+  document.querySelector("#menuMobile")
+) {
+  const menuDisplay = () => {
+    const content = document.querySelector(".hamburger");
+    if (content.style.display === "none") {
+      content.style.display = "flex";
+    } else {
+      content.style.display = "none";
+    }
+  };
+
+  const battlesDisplay = () => {
+    const content = document.querySelector("#battlesList");
+    if (content.style.display === "none") {
+      content.style.display = "block";
+    } else {
+      content.style.display = "none";
+    }
+  };
+
+  if (document.querySelector("#menuMobile")) {
+    const menuTrigger = document.querySelector("#menuTrigger");
+    const closeTrigger = document.querySelector("#closeTrigger");
+    const battlesTrigger = document.querySelector("#battlesTrigger");
+    menuTrigger.addEventListener("click", menuDisplay);
+    closeTrigger.addEventListener("click", menuDisplay);
+    battlesTrigger.addEventListener("click", battlesDisplay);
+  }
 }

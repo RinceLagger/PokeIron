@@ -3,6 +3,17 @@
 @import "./mixins.scss";
 
 /* --------- Styles ---------*/
+
+.back {
+  a {
+    padding: 2em;
+    float: right;
+  }
+  img {
+    width: 1.5em;
+  }
+}
+
 body {
   overscroll-behavior-x: none;
   section#alert {
@@ -12,13 +23,34 @@ body {
     color: $white;
   }
 
+  .header-title {
+    background-color: $lightYellow;
+    padding: 3em 1em;
+  }
   .widget {
     background: $white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
       0px -1px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     padding: 1em;
-    margin: 20px 0;
+    margin: 0.5em 0;
+    @include tablet {
+      padding: 2em;
+    }
+  }
+
+  .empty {
+    text-align: center;
+    h3 {
+      line-height: 1.25em;
+      margin: 1em 0 1em 0;
+    }
+    img {
+      width: 100%;
+    }
+    @include tablet {
+      width: 75%;
+    }
   }
 
   .primary {
@@ -32,6 +64,13 @@ body {
   .wrapper {
     max-width: 1000px;
     padding: 1em;
+    margin: 0 auto;
+    @include tablet {
+      padding: 1em 3em;
+    }
+    @include desktop {
+      padding: 3em;
+    }
   }
 
   .logout {
@@ -46,15 +85,73 @@ body {
 
   /* ---- Partials ---- */
 
+  .menu-active {
+    color: $yellow;
+  }
+
   #menuDesktop {
     display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
+    background-color: $darkBlue;
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      width: 10%;
+      margin: 0;
+    }
+
+    ul {
+      li {
+        margin: 10px;
+        display: inline-block;
+        &:hover ul {
+          display: block;
+        }
+        &:hover img {
+          transform: rotate(180deg);
+        }
+        ul {
+          display: none;
+          position: absolute;
+          background-color: $darkBlue;
+          padding: 1em;
+          box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+          li {
+            display: block;
+          }
+        }
+        a {
+          color: $white;
+          img {
+            width: 1em;
+            transition: transform 0.5s ease-in-out;
+          }
+          &:hover {
+            color: $yellow;
+          }
+        }
+      }
+    }
+
+    @include desktop {
+      display: block;
+    }
   }
   #menuMobile {
+    padding: 1em;
     background-color: $darkBlue;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     img {
       float: right;
       width: 1.5em;
+      @include tablet {
+        width: 2em;
+      }
     }
     .hamburger {
       background-color: $darkBlue;
@@ -88,28 +185,72 @@ body {
         }
       }
     }
+    @include tablet {
+      padding: 1.5em;
+    }
+    @include desktop {
+      display: none;
+    }
   }
 
   .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
     background-color: $lightYellow;
-    align-items: center;
-    gap: 1em;
-    img {
-      border: 3px solid $yellow;
-      width: 40%;
-      clip-path: circle(45% at center);
-    }
-    h3 {
-      flex-basis: 60%;
-      text-transform: capitalize;
+    .content {
+      display: flex;
+      justify-content: space-between;
+      padding: 2em;
+      align-items: center;
+      gap: 1em;
+      max-width: 500px;
+      .userImg {
+        width: 100px;
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 100%;
+        border: 5px solid $yellow;
+        @include tablet {
+          width: 130px;
+          height: 130px;
+        }
+        @include desktop {
+          width: 150px;
+          height: 150px;
+        }
+      }
+      .userInfo {
+        flex-basis: 60%;
+        h3 {
+          text-transform: capitalize;
+          @include tablet {
+            font-size: 30px;
+          }
+        }
+
+        #fondo-rank {
+          margin-top: 10px;
+          background-color: #00000057;
+          height: 5px;
+          border-radius: 20px;
+          width: 100%;
+        }
+        #puntos {
+          background-color: $darkBlue;
+          height: 5px;
+          border-radius: 20px;
+          width: 100%;
+          transition: width 1s;
+        }
+      }
+
+      @include tablet {
+        width: 80%;
+        margin: 0 auto;
+      }
     }
   }
-
-  nav {
-    padding: 1em;
+  #navbar {
+    padding: 2em 0 1em 0;
     ul {
       display: flex;
       justify-content: space-around;
@@ -121,6 +262,7 @@ body {
         left: 50%;
         width: 40%;
         border: 2px solid $darkBlue;
+        background-color: $darkBlue;
         border-radius: 4px;
         box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
         transform: translateX(-50%);
@@ -129,6 +271,10 @@ body {
       a {
         position: relative;
       }
+    }
+    @include tablet {
+      width: 50%;
+      margin: 0 auto;
     }
   }
 
@@ -159,12 +305,19 @@ body {
     width: 65%;
     display: block;
     margin: 0 auto;
+    @include tablet {
+      width: 40%;
+    }
   }
 
   .buttons {
     display: flex;
     justify-content: space-around;
     margin: 1em 0;
+    @include tablet {
+      margin: 2em auto;
+      width: 50%;
+    }
   }
 
   #form {
@@ -173,12 +326,19 @@ body {
       margin: 0 0 1em 0;
     }
     h4 {
-      margin: 0 0 1em 0;
+      margin: 1em 0;
+      @include tablet {
+        margin: 2em 0 1em 0;
+      }
     }
     form {
       display: flex;
       flex-direction: column;
       width: 100%;
+      @include desktop {
+        width: 50%;
+        margin: 0 auto;
+      }
 
       input {
         margin: 10px 0;
@@ -187,6 +347,12 @@ body {
         border-radius: 14px;
         padding: 0.5em;
         font-size: 14px;
+        @include tablet {
+          font-size: 18px;
+          line-height: 22px;
+          border-radius: 18px;
+          padding: 0.5em 1em;
+        }
       }
 
       button {
@@ -197,6 +363,10 @@ body {
       ul {
         font-size: 14px;
         font-weight: 200;
+        @include tablet {
+          font-size: 18px;
+          line-height: 22px;
+        }
         li {
           margin: 5px 0;
         }
@@ -207,22 +377,52 @@ body {
   /* ------ Cards ------- */
 
   #firstOpening {
+    @include tablet {
+      width: 60%;
+      text-align: center;
+    }
     a {
       margin: 0 auto;
     }
     img {
       width: 100%;
       margin: 2em auto;
+      @include tablet {
+        width: unset;
+        height: 60vh;
+      }
     }
   }
 
   #firstCards {
     display: none;
+    #cardsMobile {
+      @include tablet {
+        width: 70%;
+        margin: 0 auto;
+      }
+    }
+
+    #cardsDesktop {
+      #cardsViewport {
+        margin: 2em 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2em;
+        padding: 1em;
+        .card {
+          width: 29%;
+        }
+      }
+    }
     #cardsViewport-mw {
       margin: 16px;
       .tns-item {
         width: calc(15.6667%);
         margin: 10px;
+        @include tablet {
+          margin-top: 1em;
+        }
       }
     }
     .tns-liveregion.tns-visually-hidden {
@@ -240,11 +440,22 @@ body {
     }
     button {
       margin: 0 auto;
+      @include tablet {
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 
   .pokeName {
     background-color: $lightYellow;
+
+    h2 {
+      @include tablet {
+        padding: 1em;
+        font-size: 40px;
+      }
+    }
   }
 
   .tipo {
@@ -294,14 +505,27 @@ body {
   .cardDetail {
     img {
       width: 100%;
+      @include desktop {
+        width: 50%;
+      }
     }
     div {
       margin-top: 1em;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      @include desktop {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 1em;
+      }
       p {
         line-height: 25px;
+        @include tablet {
+          font-size: 30px;
+          line-height: 30px;
+        }
       }
       :first-child {
         display: flex;
@@ -311,11 +535,24 @@ body {
         margin: 0 5px;
       }
     }
+    @include tablet {
+      width: 60%;
+      margin: 3em auto;
+    }
+    @include desktop {
+      display: flex;
+      gap: 2em;
+    }
   }
 
   /* ------- Main Profile --------- */
 
   #mainProfile {
+    #chart {
+      @include desktop {
+        width: 45%;
+      }
+    }
     .cardsWidget {
       div {
         display: flex;
@@ -326,12 +563,22 @@ body {
         }
         p {
           flex-basis: 65%;
+          @include tablet {
+            flex-basis: 76%;
+          }
         }
         p:last-child {
           flex-basis: 20%;
           text-align: right;
         }
       }
+      @include desktop {
+        width: 45%;
+      }
+    }
+    @include desktop {
+      display: flex;
+      gap: 1em;
     }
   }
 }
@@ -343,6 +590,10 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  @include tablet {
+    top: 75%;
+  }
 
   .pokeball {
     width: 60px;
@@ -410,34 +661,167 @@ body {
 
 /******Fight Animation ***/
 
-canvas {
+.fondo {
+  background-color: $lightYellow;
+
+  position: relative;
+
+  height: 100vh;
+}
+
+.fight-animation {
+
+  .descripcion {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    h3 {
+      text-transform: capitalize;
+    }
+  }
+
+  canvas {
+    margin: 1em auto;
+    border: 3px solid $darkBlue;
+    border-radius: 24px;
+  }
+}
+.result {
+  position: absolute;
+  top: 40%;
+  left: 20%;
+  background-color: $lightBlue;
+  height: 20%;
+  width: 60%;
+  display: none;
+  align-items: center;
+  justify-content: center;
   border: 1px solid $darkBlue;
+  border-radius: 24px;
+  h1 {
+    color: $white;
+  }
 }
 
 /* ----- Battles Activas ------- */
 
 #battlesList {
   .widget {
+    margin: 1em 0;
+    a {
+      margin-top: 1em;
+    }
     .widgetContent {
       display: flex;
       align-items: center;
-      margin-bottom: 20px;
       gap: 1em;
+      img.cardImg {
+        width: 25%;
+      }
+      .userImg {
+        width: 105px;
+        height: 100px;
+        background-size: cover;
+        background-position: center;
+        border-radius: 100%;
+        border: 2px solid $darkBlue;
+        @include tablet {
+          width: 130px;
+          height: 130px;
+        }
+        @include desktop {
+          width: 100px;
+          height: 100px;
+        }
+        @include large {
+          width: 125px;
+          height: 125px;
+        }
+      }
 
       span {
         font-weight: 400;
         text-transform: capitalize;
         line-height: 1.5em;
+        text-transform: capitalize;
       }
       p {
         margin: 10px 0;
       }
-      img {
-        border: 3px solid $yellow;
-        width: 30%;
-        clip-path: circle(45% at center);
-        float: left;
-      }
+    }
+    hr {
+      border: 1px solid $darkBlue;
+      border-radius: 50px;
+      margin: 1.5em 0 0.5em 0;
+    }
+    @include desktop {
+      width: 39%;
+      margin: 0.5em;
     }
   }
+  @include desktop {
+    display: flex;
+    gap: 1em;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+}
+
+/* --------------- Confirm ------------- */
+#confirm {
+  width: 100vw;
+  height: 100vh;
+  background-color: $lightYellow;
+  padding: 2em;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .primary {
+    margin: 2em auto;
+    bottom: 1em;
+  }
+}
+
+//-----------chart --------//
+
+#chart {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    padding: 0.2em;
+    color: #eb5757;
+    &:first-of-type {
+      color: #219653;
+    }
+  }
+}
+
+/* Create Battle */
+
+.newBattle {
+  .card-active {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px -1px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+    opacity: 1 !important;
+  }
+
+  .card {
+    opacity: 0.6;
+    transition: all 1s;
+  }
+}
+
+.loadingNew {
+  @include tablet {
+    top: 50% !important;
+  }
+}
+
+#battle-Card {
+  width: unset !important;
+  height: unset !important;
 }

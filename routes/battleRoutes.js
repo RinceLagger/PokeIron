@@ -11,7 +11,8 @@ const {
   fightBattle,
   winnerAnimation,
   deleteBattle,
-  showHistory
+  showHistory,
+  confirmBattle,
 } = require("../controllers/battle.controller");
 
 battleRouter
@@ -25,6 +26,7 @@ battleRouter
   .post("/fight-battle/:id/:battleID", fightBattle)
   .get("/battleAnimation/:battleID", winnerAnimation)
   .get("/deletecombat/:battleID", deleteBattle)
-  .get("/history", showHistory);
+  .get("/history", showHistory)
+  .get("/battle-created", confirmBattle);
 
 module.exports = battleRouter;

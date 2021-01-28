@@ -41,7 +41,7 @@ var slider = tns({
 document.querySelector("#cardsMobile").style.display = "none";
 document.querySelector("#cardsDesktop").style.display = "none";
 function placeSlider() {
-  if (window.innerWidth < 768) {
+  if (window.innerWidth < 900) {
     console.log("slider");
     document.querySelector("#cardsMobile").style.display = "block";
     document.querySelector("#cardsDesktop").style.display = "none";

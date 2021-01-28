@@ -1,3 +1,4 @@
+<div class="back"><a href="/active-battles"><img src="/img/blackClose.svg" alt="" class="close"></a></div>
 <section id="firstCards" class=" newBattle wrapper">
     <h1 class="center">Select your Pokemon for the Battle</h1>
     <article class="cards" id="cardsMobile">
@@ -17,9 +18,9 @@
         </div>
     </article>
     <input type="hidden" id="battleID" value="{{battleID}}">
-    <button class="primary" id="battle-Card">Create Battle</button>
+    <button class="primary" id="battle-Card">{{btnText}}</button>
 </section>
-<section id="loading">
+<section id="loading" class="loadingNew">
     <div class="pokeball">
     </div>
 </section>

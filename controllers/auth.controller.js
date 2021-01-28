@@ -153,9 +153,15 @@ const mainProfile = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
     if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
-    const { username } = datosUsuario;
+
+    const usuario = await User.findOne({ username: datosUsuario.username }).lean();
+    
+
+    const { passwordHash, ...user } = usuario;
+
+    const { username } = usuario;
     const { cards } = await User.findOne({ username }).populate("cards");
-    const datos = { ...datosUsuario, cards };
+    const datos = { ...usuario, cards };
     res.render("mainProfile", datos);
   } catch (e) {
     console.log(e);
