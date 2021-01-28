@@ -949,7 +949,11 @@ body #mainProfile .cardsWidget div p:last-child {
 /******Fight Animation ***/
 .fondo {
   background-color: rgba(255, 203, 5, 0.31);
+
+  position: relative;
+
   height: 100vh;
+
 }
 
 .fight-animation .descripcion {
@@ -970,11 +974,11 @@ body #mainProfile .cardsWidget div p:last-child {
 
 .result {
   position: absolute;
-  top: 35%;
-  left: 10%;
+  top: 40%;
+  left: 20%;
   background-color: #3d7dca;
-  height: 15%;
-  width: 300px;
+  height: 20%;
+  width: 60%;
   display: none;
   align-items: center;
   justify-content: center;

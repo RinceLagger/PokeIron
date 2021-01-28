@@ -1,3 +1,4 @@
+
 {{> menu}}
 <section class="fondo">
     <div class="back"><a href="/active-battles"><img src="/img/blackClose.svg" alt="" class="close"></a></div>
@@ -17,19 +18,21 @@
         <input type="hidden" id="playerTipo" value="{{cardPlayer.tipo}}">
         <input type="hidden" id="cardOponentImg" value="{{cardOponent.imgUser}}">
         <input type="hidden" id="oponentTipo" value="{{cardOponent.tipo}}">
-    </section>
-
-    {{#if vencedor}}
+        {{#if vencedor}}
     <div class="result" id="win">
-        <h1>YOU WIN!</h1>
+        <h1>You win!</h1>
     </div>
 
     {{else}}
     <div class="result" id="lose">
-        <h1> YOU LOSE!</h1>
+        <h1> You lose!</h1>
     </div>
 
     {{/if}}
+    </section>
+
+    
+
 </section>
 <script src="/js/loopAnimation.js"></script>
 <script src="/js/mainAnimation.js"></script>

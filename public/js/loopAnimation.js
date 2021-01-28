@@ -26,7 +26,7 @@ cardPlayer.src = `${imgCardPlayer}`;
 var cardOponent = new Image(); 
 cardOponent.src = `${imgCardOponent}`;
 var portada= new Image(); 
-portada.src = `/img/portada_fight.jpg`;
+portada.src = `/img/logo.png`;
 var golpe= new Image(); 
 golpe.src = `/img/energy-logo.png`;
 var lifeBarFull= new Image(); 
@@ -106,9 +106,14 @@ class Game1 {
 
     printIntro(){//pintamos la portada introductoria
 
-      this.ctx.fillStyle="#371482"; //fondo morado para las zonas no cubiertas
+      this.ctx.fillStyle="#3D7DCA"; //fondo morado para las zonas no cubiertas
       this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
-      this.ctx.drawImage(portada,this.canvas.width/2-2*this.canvas.height/6, 0, 2*this.canvas.height/3, this.canvas.height);
+
+      if(this.canvas.width<this.canvas.height){
+      this.ctx.drawImage(portada,0.1*this.canvas.width, this.canvas.height/2 - 0.2*this.canvas.width, 0.8*this.canvas.width, 0.4*this.canvas.width);
+      }else{
+        this.ctx.drawImage(portada,0.3*this.canvas.width, this.canvas.height/2 - 0.1*this.canvas.width, 0.4*this.canvas.width, 0.2*this.canvas.width);
+      }
 
     }
   
