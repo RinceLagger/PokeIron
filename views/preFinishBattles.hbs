@@ -1,12 +1,13 @@
 {{> menu}}
-<section class="header">
+<section class="header-title">
     <h1 class="center">Finished Battles</h1>
 </section>
 <section id="battlesList" class="wrapper">
+    {{#if combatesMostrar}}
     {{#each combatesMostrar}}
     <div class="battle widget">
         <div class="widgetContent">
-            <img src="{{this.user2.imgUser}}" alt="">
+            <div class="userImg" style="background-image: url('{{this.user2.imgUser}}');"></div>
             <div>
                 <h3>Oponent:</h3>
                 <p><span>{{this.user2.username}}</span></p>
@@ -15,7 +16,7 @@
         </div>
         <hr>
         <div class="widgetContent">
-            <img src="{{this.card1.imgUser}}" alt="">
+            <img class="cardImg" src="{{this.card1.imgUser}}" alt="">
             <div>
                 <h4>Your Pokemon:</h4>
                 <p><span>{{this.card1.name}}</span></p>
@@ -26,4 +27,11 @@
         <a href="/battleAnimation/{{_id}}" class="primary">Show Result</a>
     </div>
     {{/each}}
+    {{else}}
+    <section class="empty wrapper">
+        <img src="/img/ash.gif" alt="">
+        <h3>Ups! You don't have any result to discover. <br> What are you waiting for? Go and fight!</h3>
+        <a href="/createBattle" class="primary">Create new Battle</a>
+    </section>
+    {{/if}}
 </section>

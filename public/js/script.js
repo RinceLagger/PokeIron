@@ -103,6 +103,24 @@ if (document.querySelector("#navbar")) {
   }
 }
 
+if (document.querySelector("#menuDesktop")) {
+  const currentPage = location.href;
+  const navItem = document.querySelectorAll("#menuDesktop a");
+  for (let i = 0; i < navItem.length; i++) {
+    if (navItem[i].href === currentPage)
+      navItem[i].classList.add("menu-active");
+  }
+}
+
+if (document.querySelector("#menuMobile")) {
+  const currentPage = location.href;
+  const navItem = document.querySelectorAll("#menuMobile a");
+  for (let i = 0; i < navItem.length; i++) {
+    if (navItem[i].href === currentPage)
+      navItem[i].classList.add("menu-active");
+  }
+}
+
 // -------- Menu ------- //
 
 if (
@@ -136,8 +154,3 @@ if (
     battlesTrigger.addEventListener("click", battlesDisplay);
   }
 }
-
-
-
-
-

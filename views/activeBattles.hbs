@@ -1,12 +1,12 @@
 {{> menu}}
-<section class="header">
+<section class="header-title">
     <h1 class="center">Battles</h1>
 </section>
 <section id="battlesList" class="wrapper">
     {{#each combatesOponente}}
     <div class="battle widget">
         <div class="widgetContent">
-            <img src="{{this.user1.imgUser}}" alt="">
+            <div class="userImg" style="background-image: url('{{this.user1.imgUser}}');"></div>
             <div>
                 <h3>Pokemon Trainer: <span>{{this.user1.username}} </span></h3>
                 <p>Type: <span class="tipo {{this.card1.tipo}}"></span> {{this.card1.tipo}}</p>

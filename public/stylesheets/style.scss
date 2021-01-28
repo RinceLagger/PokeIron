@@ -3,6 +3,17 @@
 @import "./mixins.scss";
 
 /* --------- Styles ---------*/
+
+.back {
+  a {
+    padding: 2em;
+    float: right;
+  }
+  img {
+    width: 1.5em;
+  }
+}
+
 body {
   overscroll-behavior-x: none;
   section#alert {
@@ -12,14 +23,33 @@ body {
     color: $white;
   }
 
+  .header-title {
+    background-color: $lightYellow;
+    padding: 3em 1em;
+  }
   .widget {
     background: $white;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
       0px -1px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
     padding: 1em;
+    margin: 0.5em 0;
     @include tablet {
       padding: 2em;
+    }
+  }
+
+  .empty {
+    text-align: center;
+    h3 {
+      line-height: 1.25em;
+      margin: 1em 0 1em 0;
+    }
+    img {
+      width: 100%;
+    }
+    @include tablet {
+      width: 75%;
     }
   }
 
@@ -38,6 +68,9 @@ body {
     @include tablet {
       padding: 1em 3em;
     }
+    @include desktop {
+      padding: 3em;
+    }
   }
 
   .logout {
@@ -52,17 +85,35 @@ body {
 
   /* ---- Partials ---- */
 
+  .menu-active {
+    color: $yellow;
+  }
+
   #menuDesktop {
     display: none;
-    padding: 1em 1em;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1em 2em;
     background-color: $darkBlue;
+    div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      width: 10%;
+      margin: 0;
+    }
+
     ul {
-      float: right;
       li {
         margin: 10px;
         display: inline-block;
         &:hover ul {
           display: block;
+        }
+        &:hover img {
+          transform: rotate(180deg);
         }
         ul {
           display: none;
@@ -76,6 +127,13 @@ body {
         }
         a {
           color: $white;
+          img {
+            width: 1em;
+            transition: transform 0.5s ease-in-out;
+          }
+          &:hover {
+            color: $yellow;
+          }
         }
       }
     }
@@ -150,7 +208,7 @@ body {
         background-size: cover;
         background-position: center;
         border-radius: 100%;
-        border: 2px solid $darkBlue;
+        border: 5px solid $yellow;
         @include tablet {
           width: 130px;
           height: 130px;
@@ -177,7 +235,6 @@ body {
           width: 100%;
         }
         #puntos {
-          margin-top: 10px;
           background-color: $darkBlue;
           height: 5px;
           border-radius: 20px;
@@ -352,6 +409,7 @@ body {
         display: flex;
         flex-wrap: wrap;
         gap: 2em;
+        padding: 1em;
         .card {
           width: 29%;
         }
@@ -490,6 +548,11 @@ body {
   /* ------- Main Profile --------- */
 
   #mainProfile {
+    #chart {
+      @include desktop {
+        width: 45%;
+      }
+    }
     .cardsWidget {
       div {
         display: flex;
@@ -509,6 +572,13 @@ body {
           text-align: right;
         }
       }
+      @include desktop {
+        width: 45%;
+      }
+    }
+    @include desktop {
+      display: flex;
+      gap: 1em;
     }
   }
 }
@@ -591,9 +661,16 @@ body {
 
 /******Fight Animation ***/
 
-.fight-animation {
+.fondo {
   background-color: $lightYellow;
+
   position: relative;
+
+  height: 100vh;
+}
+
+.fight-animation {
+
   .descripcion {
     display: flex;
     justify-content: space-around;
@@ -604,8 +681,8 @@ body {
   }
 
   canvas {
-    margin: 0 auto;
-    border: 1px solid $darkBlue;
+    margin: 1em auto;
+    border: 3px solid $darkBlue;
     border-radius: 24px;
   }
 }
@@ -630,12 +707,19 @@ body {
 
 #battlesList {
   .widget {
+    margin: 1em 0;
+    a {
+      margin-top: 1em;
+    }
     .widgetContent {
       display: flex;
       align-items: center;
       gap: 1em;
+      img.cardImg {
+        width: 25%;
+      }
       .userImg {
-        width: 110px;
+        width: 105px;
         height: 100px;
         background-size: cover;
         background-position: center;
@@ -646,12 +730,12 @@ body {
           height: 130px;
         }
         @include desktop {
-          width: 50%;
-          height: 160px;
+          width: 100px;
+          height: 100px;
         }
         @include large {
-          width: 50%;
-          height: 163px;
+          width: 125px;
+          height: 125px;
         }
       }
 
@@ -668,9 +752,11 @@ body {
     hr {
       border: 1px solid $darkBlue;
       border-radius: 50px;
+      margin: 1.5em 0 0.5em 0;
     }
     @include desktop {
-      width: 40%;
+      width: 39%;
+      margin: 0.5em;
     }
   }
   @include desktop {
@@ -690,6 +776,7 @@ body {
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   .primary {
     margin: 2em auto;
     bottom: 1em;
@@ -702,7 +789,39 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
   p {
     padding: 0.2em;
+    color: #eb5757;
+    &:first-of-type {
+      color: #219653;
+    }
   }
+}
+
+/* Create Battle */
+
+.newBattle {
+  .card-active {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+      0px -1px 4px rgba(0, 0, 0, 0.25);
+    transform: scale(1.05);
+    opacity: 1 !important;
+  }
+
+  .card {
+    opacity: 0.6;
+    transition: all 1s;
+  }
+}
+
+.loadingNew {
+  @include tablet {
+    top: 50% !important;
+  }
+}
+
+#battle-Card {
+  width: unset !important;
+  height: unset !important;
 }
