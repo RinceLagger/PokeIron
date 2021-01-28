@@ -16,9 +16,8 @@ const findWinner = (hp1, hp2) => {
 const winnerAnimation = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const { battleID } = req.params;
-    console.log("datos usuario", datosUsuario);
 
     //obtenemos el combate que hay que animar mediante el id enviado por parámetro
 
@@ -44,7 +43,6 @@ const winnerAnimation = async (req, res) => {
         { status1: "acabado" },
         { new: true }
       ).lean();
-      //console.log(combate);
       namePlayer = user1.username;
       cardPlayer = card1;
       cardOponent = card2;
@@ -64,14 +62,8 @@ const winnerAnimation = async (req, res) => {
     //comprobamos si el jugador actual es el vencedor para pasarlo como parámetro
 
     if (datosUsuario["_id"] == vencedor) {
-      //console.log("VICTORIAAAA")
       datosCombate.vencedor = "jugador";
     }
-    //console.log("usuario ID", datosUsuario["_id"]);
-    //console.log("vencedor ID", vencedor);
-
-    //console.log(datosCombate);
-
     res.render("animation", datosCombate);
   } catch (e) {
     console.error(e);
@@ -92,7 +84,7 @@ const fightBattle = async (req, res) => {
     //comprobamos que estamos ya logueados
     const datosUsuario = req.session.currentUser;
     if (!req.session.currentUser)
-      return renderMessage(res, "login", "Please Login first");
+      return renderMessage(res, "logIn", "Please Login first");
 
     const { id, battleID } = req.params;
     const { username } = datosUsuario;
@@ -125,8 +117,6 @@ const fightBattle = async (req, res) => {
 
       //actualizamos victorias y derrotas (winner,Loser)
       updateWinLose(usuario1.username, datosUsuario.username);
-
-      //console.log(combate);
     } else if (winner === "user2") {
       const combate = await Battle.findOneAndUpdate(
         { _id: battleID },
@@ -194,15 +184,12 @@ const fightBattle = async (req, res) => {
 const joinBattle = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
-    //console.log(req.params);
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const { id: battleID } = req.params;
-    //console.log("id de batalla en join battle", battleID);
     const { username } = datosUsuario;
     const { cards } = await User.findOne({ username }).populate("cards");
     const btnText = "Join Battle";
     const datos = { ...datosUsuario, cards, battleID, btnText };
-    //console.log(datos);
     res.render("newBattle", datos);
   } catch (e) {
     console.error(e);
@@ -212,7 +199,7 @@ const joinBattle = async (req, res) => {
 const battleMain = (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     res.render("battleMain");
   } catch (e) {
     console.error(e);
@@ -223,12 +210,11 @@ const ownBattlesPage = async (req, res) => {
   // mis combates creados no iniciados
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const combatesPropios = await Battle.find({
       user1: datosUsuario["_id"],
       status1: "espera",
     }).populate("card1");
-    //console.log(combatesPropios);
     res.render("myBattles", { combatesPropios });
   } catch (e) {
     console.error(e);
@@ -239,7 +225,7 @@ const showHistory = async (req, res) => {
   //combates a los que puedo unir
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     // {user2, card2, vencedor}
     const combates1 = await Battle.find({
       user1: datosUsuario["_id"],
@@ -256,9 +242,6 @@ const showHistory = async (req, res) => {
       .populate("user1")
       .populate("card1")
       .populate("vencedor");
-
-    console.log("combates1", combates1);
-    console.log("combates2", combates2);
 
     const combates = { combates1, combates2, ...datosUsuario };
 
@@ -291,14 +274,13 @@ const activesBattlePage = async (req, res) => {
   //combates a los que puedo unir
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const combatesOponente = await Battle.find({
       user1: { $ne: datosUsuario["_id"] },
       status1: "espera",
     })
       .populate("card1")
       .populate("user1");
-    //console.log(combatesOponente);
     res.render("activeBattles", { combatesOponente });
   } catch (e) {
     console.error(e);
@@ -310,7 +292,7 @@ const preFinishBattlePage = async (req, res) => {
   //combates a los que puedo unir
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const combatesMostrar = await Battle.find({
       user1: datosUsuario["_id"],
       status1: "mostrar",
@@ -326,7 +308,7 @@ const preFinishBattlePage = async (req, res) => {
 const battlePage = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
     const { username } = datosUsuario;
     const { cards } = await User.findOne({ username }).populate("cards");
     const btnText = "Create Battle";
@@ -340,7 +322,7 @@ const battlePage = async (req, res) => {
 const createBattle = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
 
     const { id } = req.params;
 
@@ -363,7 +345,6 @@ const createBattle = async (req, res) => {
     const { passwordHash, ...user } = usuario;
     req.session.currentUser = user;
     res.send("combate creado");
-    console.log(battleId, usuario);
   } catch (e) {
     console.log(e);
   }
@@ -372,7 +353,7 @@ const createBattle = async (req, res) => {
 const deleteBattle = async (req, res) => {
   try {
     const datosUsuario = req.session.currentUser;
-    if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+    if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
 
     const { battleID } = req.params;
 
@@ -383,7 +364,6 @@ const deleteBattle = async (req, res) => {
     );
 
     res.redirect("/my-battles");
-    //console.log("eliminado", eliminadoComb, eliminado);
   } catch (e) {
     console.log(e);
   }
@@ -391,10 +371,10 @@ const deleteBattle = async (req, res) => {
 
 const confirmBattle = (req, res) => {
   const datosUsuario = req.session.currentUser;
-  if (!datosUsuario) return renderMessage(res, "login", "Please Login first");
+  if (!datosUsuario) return renderMessage(res, "logIn", "Please Login first");
 
-  res.render("combateCreado")
-}
+  res.render("combateCreado");
+};
 
 module.exports = {
   battlePage,
@@ -408,5 +388,5 @@ module.exports = {
   winnerAnimation,
   deleteBattle,
   showHistory,
-  confirmBattle
+  confirmBattle,
 };

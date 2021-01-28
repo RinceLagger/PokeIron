@@ -314,6 +314,7 @@ body {
     display: flex;
     justify-content: space-around;
     margin: 1em 0;
+    overflow: unset;
     @include tablet {
       margin: 2em auto;
       width: 50%;
@@ -564,7 +565,7 @@ body {
         p {
           flex-basis: 65%;
           @include tablet {
-            flex-basis: 76%;
+            flex-basis: 71%;
           }
         }
         p:last-child {
@@ -670,7 +671,6 @@ body {
 }
 
 .fight-animation {
-
   .descripcion {
     display: flex;
     justify-content: space-around;
@@ -810,8 +810,10 @@ body {
   }
 
   .card {
-    opacity: 0.6;
-    transition: all 1s;
+    @include tablet {
+      opacity: 0.6;
+      transition: all 1s;
+    }
   }
 }
 
