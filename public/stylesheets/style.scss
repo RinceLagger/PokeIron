@@ -86,7 +86,7 @@ body {
   /* ---- Partials ---- */
 
   .menu-active {
-    color: $yellow;
+    color: $yellow!important;
   }
 
   #menuDesktop {
@@ -204,18 +204,18 @@ body {
       max-width: 500px;
       .userImg {
         width: 100px;
-        height: 100px;
+        aspect-ratio: 1/1;
         background-size: cover;
         background-position: center;
         border-radius: 100%;
         border: 5px solid $yellow;
         @include tablet {
           width: 130px;
-          height: 130px;
+          
         }
         @include desktop {
-          width: 150px;
-          height: 150px;
+          width: 10em;
+          
         }
       }
       .userInfo {
