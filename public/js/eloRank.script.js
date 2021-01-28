@@ -4,7 +4,7 @@
 
 //------gráfico rank ----------//
 
-
+if(document.querySelector(".header")){
 const playerWins = document.querySelector("#winNumber").value;
 const playerLosses= document.querySelector("#loseNumber").value;
 const eloRating= document.querySelector("#eloRating");
@@ -35,4 +35,6 @@ if(points<0)points=0;
 const rank= document.querySelector("#puntos");
 
 
-rank.style.width = `${points}%`
+rank.style.width = `${points}%`;
+
+}
