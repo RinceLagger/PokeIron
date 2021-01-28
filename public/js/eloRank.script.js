@@ -15,7 +15,6 @@ let points = playerWins;
 if(playerWins<20){
     
     eloRating.innerHTML = "Rookie";
-    console.log(eloRating)
 
 }else if(playerWins<50){
 
