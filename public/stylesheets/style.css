@@ -228,7 +228,7 @@ body .nav-active {
 }
 
 body .menu-active {
-  color: #ffcb05;
+  color: #ffcb05 !important;
 }
 
 body #menuDesktop {
@@ -371,7 +371,7 @@ body .header .content {
 
 body .header .content .userImg {
   width: 100px;
-  height: 100px;
+  aspect-ratio: 1/1;
   background-size: cover;
   background-position: center;
   border-radius: 100%;
@@ -381,14 +381,12 @@ body .header .content .userImg {
 @media only screen and (min-width: 768px) {
   body .header .content .userImg {
     width: 130px;
-    height: 130px;
   }
 }
 
 @media only screen and (min-width: 992px) {
   body .header .content .userImg {
-    width: 150px;
-    height: 150px;
+    width: 10em;
   }
 }
 
@@ -496,6 +494,7 @@ body .buttons {
   display: flex;
   justify-content: space-around;
   margin: 1em 0;
+  overflow: unset;
 }
 
 @media only screen and (min-width: 768px) {
@@ -824,7 +823,7 @@ body #mainProfile .cardsWidget div p {
 
 @media only screen and (min-width: 768px) {
   body #mainProfile .cardsWidget div p {
-    flex-basis: 76%;
+    flex-basis: 71%;
   }
 }
 
@@ -949,11 +948,8 @@ body #mainProfile .cardsWidget div p:last-child {
 /******Fight Animation ***/
 .fondo {
   background-color: rgba(255, 203, 5, 0.31);
-
   position: relative;
-
   height: 100vh;
-
 }
 
 .fight-animation .descripcion {
@@ -1112,9 +1108,11 @@ body #mainProfile .cardsWidget div p:last-child {
   opacity: 1 !important;
 }
 
-.newBattle .card {
-  opacity: 0.6;
-  transition: all 1s;
+@media only screen and (min-width: 768px) {
+  .newBattle .card {
+    opacity: 0.6;
+    transition: all 1s;
+  }
 }
 
 @media only screen and (min-width: 768px) {
