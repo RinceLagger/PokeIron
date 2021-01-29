@@ -86,7 +86,7 @@ body {
   /* ---- Partials ---- */
 
   .menu-active {
-    color: $yellow!important;
+    color: $yellow !important;
   }
 
   #menuDesktop {
@@ -100,9 +100,12 @@ body {
       justify-content: space-between;
       align-items: center;
     }
-    .logo {
+    a {
       width: 10%;
       margin: 0;
+      img {
+        width: 90%;
+      }
     }
 
     ul {
@@ -211,11 +214,9 @@ body {
         border: 5px solid $yellow;
         @include tablet {
           width: 130px;
-          
         }
         @include desktop {
           width: 10em;
-          
         }
       }
       .userInfo {
@@ -430,6 +431,8 @@ body {
       display: none;
     }
     .tns-controls {
+      width: -webkit-fit-content;
+      -moz-width: 20px;
       width: fit-content;
       margin: 20px auto;
       button {
@@ -604,6 +607,7 @@ body {
     position: relative;
     overflow: hidden;
     border: 3px solid;
+    -webkit-animation: frames 0.8s linear 0s infinite;
     animation: frames 0.8s linear 0s infinite;
 
     &:after {
@@ -651,6 +655,14 @@ body {
 }
 
 /* AnimationFrames */
+@-webkit-keyframes frames {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @keyframes frames {
   0% {
     transform: rotate(0deg);
@@ -720,22 +732,22 @@ body {
       }
       .userImg {
         width: 105px;
-        height: 100px;
+        aspect-ratio: 1/1;
         background-size: cover;
         background-position: center;
         border-radius: 100%;
         border: 2px solid $darkBlue;
         @include tablet {
           width: 130px;
-          height: 130px;
+          aspect-ratio: 1/1;
         }
         @include desktop {
           width: 100px;
-          height: 100px;
+          aspect-ratio: 1/1;
         }
         @include large {
           width: 125px;
-          height: 125px;
+          haspect-ratio: 1/1;
         }
       }
 
@@ -826,4 +838,48 @@ body {
 #battle-Card {
   width: unset !important;
   height: unset !important;
+}
+
+// Firefox code
+
+@supports (-moz-appearance: none) {
+  .userImg {
+    border-radius: 24px !important;
+    width: 130px;
+    height: 130px;
+  }
+  .primary,
+  .secondary {
+    width: min-content;
+  }
+}
+
+// Safari code
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .userImg {
+      border-radius: 24px !important;
+      width: 130px;
+      height: 130px;
+      margin-right: 1em;
+    }
+    .widget {
+      margin: 1em !important;
+    }
+    canvas {
+      display: none;
+    }
+    #cardsViewport .card {
+      width: 29%;
+      height: min-intrinsic;
+      margin: 1em;
+    }
+    .cardDetail img {
+      margin-right: 1em;
+    }
+    .cardImg {
+      margin-right: 1em;
+    }
+  }
 }
