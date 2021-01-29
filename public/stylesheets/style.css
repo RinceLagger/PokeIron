@@ -1029,6 +1029,7 @@ body #mainProfile .cardsWidget div p:last-child {
 
 @media only screen and (min-width: 992px) {
   #battlesList .widget .widgetContent .userImg {
+
     width: 100px;
     aspect-ratio: 1/1;
   }
@@ -1036,8 +1037,10 @@ body #mainProfile .cardsWidget div p:last-child {
 
 @media only screen and (min-width: 1200px) {
   #battlesList .widget .widgetContent .userImg {
+
     width: 125px;
-    haspect-ratio: 1/1;
+    aspect-ratio: 1/1;
+
   }
 }
 
