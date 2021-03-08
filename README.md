@@ -1,4 +1,4 @@
-# Proyecto2_Ironhack
+# PokeIron
 
 [Link to the App](http://pokeiron.herokuapp.com/)
 
