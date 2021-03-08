@@ -1,5 +1,7 @@
 # Proyecto2_Ironhack
 
+[Link to the App](http://pokeiron.herokuapp.com/)
+
 ## Description
 
 An application in which you can get your favourite pokémon, fight against other trainers and become the number 1.
